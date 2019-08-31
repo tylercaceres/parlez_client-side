@@ -10,6 +10,7 @@ import ContactButton from "../src/components/ContactList/ContactButton";
 import ForumRoundedIcon from "@material-ui/icons/ForumRounded";
 import RecentActorsRoundedIcon from "@material-ui/icons/RecentActorsRounded";
 import RoundSettingsButton from "../src/components/ContactList/RoundSettingsButton";
+import UserHeader from "./sub-stories/user-header";
 
 storiesOf("Welcome", module).add("to Storybook", () => (
   <Welcome showApp={linkTo("Button")} />
@@ -74,3 +75,5 @@ storiesOf("ChatSettingButton", module)
   .add("Settings_Selected", () => (
     <RoundSettingsButton selected></RoundSettingsButton>
   ));
+
+UserHeader();
