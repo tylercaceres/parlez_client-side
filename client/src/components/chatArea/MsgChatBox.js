@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
@@ -24,15 +24,22 @@ const MsgChatBox = () => {
 			display: 'flex',
 			alignItems: 'center',
 			margin: '0'
+		},
+		emoji: {
+			padding: '1em'
 		}
 	}));
 	const classes = useStyles();
 
 	return (
 		<Box className={classes.container}>
-			<MsgEmojiIcon></MsgEmojiIcon>
+			<Box className={classes.emoji}>
+				<MsgEmojiIcon></MsgEmojiIcon>
+			</Box>
 			<MsgInputField></MsgInputField>
-			<MsgSubmitBtn></MsgSubmitBtn>
+			<Box className={classes.emoji}>
+				<MsgSubmitBtn></MsgSubmitBtn>
+			</Box>
 		</Box>
 	);
 };
