@@ -23,7 +23,7 @@ const MsgChatBox = () => {
 		container: {
 			display: 'flex',
 			alignItems: 'center',
-			margin: '0 auto'
+			margin: '0'
 		}
 	}));
 	const classes = useStyles();
