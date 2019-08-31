@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Send from '@material-ui/icons/Send';
+import TagFaces from '@material-ui/icons/TagFaces';
 import Fab from '@material-ui/core/Fab';
 
 const useStyles = makeStyles(theme => ({
@@ -21,8 +21,9 @@ const useStyles = makeStyles(theme => ({
 const MsgSubmitBtn = ({onClick,disabled})  => {
   const classes = useStyles();
   return (
-      <Fab onClick={onClick} disabled={disabled} size="medium" color="primary" aria-label="add" className={classes.margin}>
-        <Send />
+    // <IconButton><TagFaces></TagFaces></IconButton>
+      <Fab onClick={onClick} size="small" color="primary" aria-label="add" className={classes.margin}>
+        <TagFaces />
       </Fab>
       )
 }

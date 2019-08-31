@@ -6,23 +6,23 @@ import { linkTo } from '@storybook/addon-links';
 
 import { Button, Welcome } from '@storybook/react/demo';
 
-import MsgSubmitBtn from '../src/components/chatArea/MsgSubmitBtn'
+import MsgInputFieldStory from './sub-stories/message-input-field'
+import MsgSubmitButtonStory from './sub-stories/message-submit-button'
+import MsgEmojiIconStory from './sub-stories/message-emoji-icon'
 
-storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
-storiesOf('Button', module)
-  .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
-  .add('with some emoji', () => (
-    <Button onClick={action('clicked')}>
-      <span role="img" aria-label="so cool">
-        😀 😎 👍 💯
-      </span>
-    </Button>
-  ));
+// storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
-  storiesOf('Submit Chat Button', module)
-  .add('default', () => <MsgSubmitBtn onClick={action('clicked')}></MsgSubmitBtn>)
-  .add('disabled', () => (
-    <MsgSubmitBtn disabled >
-    </ MsgSubmitBtn >
-  ));
+// storiesOf('Button', module)
+//   .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
+//   .add('with some emoji', () => (
+//     <Button onClick={action('clicked')}>
+//       <span role="img" aria-label="so cool">
+//         😀 😎 👍 💯
+//       </span>
+//     </Button>
+//   ));
+
+  MsgSubmitButtonStory();
+  MsgInputFieldStory();
+  MsgEmojiIconStory();
