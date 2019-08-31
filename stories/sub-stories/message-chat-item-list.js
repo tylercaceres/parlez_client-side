@@ -4,6 +4,12 @@ import {storiesOf} from '@storybook/react';
 
 const messages = [
 	{
+		id: 0,
+		creator: 'tyler',
+		content: 'what whattt',
+		created_at: '20 sep 2019 5pm'
+	},
+	{
 		id: 1,
 		creator: 'bob',
 		content: 'hello there',
@@ -32,17 +38,19 @@ const messages = [
 		creator: 'selin',
 		content: '*sigh*',
 		created_at: '20 sep 2019 6pm'
+	},
+	{
+		id: 6,
+		creator: 'bot',
+		content: 'have some juice my guyyyy, you look thirsty',
+		created_at: '20 sep 2019 5pm'
 	}
 ];
 
 const story = () => {
-	storiesOf('Message Chat Item List', module)
-		.add('some messages', () => (
-			<MsgChatItemList user='galeontiger' messages={messages}></MsgChatItemList>
-		))
-		.add('0 messages', () => (
-			<MsgChatItemList user='galeontiger'></MsgChatItemList>
-		));
+	storiesOf('Message Chat Item List', module).add('some messages', () => (
+		<MsgChatItemList user='tyler' messages={messages}></MsgChatItemList>
+	));
 };
 
 export default story;

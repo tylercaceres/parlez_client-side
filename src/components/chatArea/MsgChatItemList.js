@@ -7,6 +7,7 @@ const MsgChatItemList = ({messages = [], user}) => {
 		return (
 			<MsgChatItem
 				key={msg.id}
+				id={msg.id}
 				displayName={user}
 				createdTimeStamp={msg.created_at}
 				creator={msg.creator}>
@@ -14,7 +15,7 @@ const MsgChatItemList = ({messages = [], user}) => {
 			</MsgChatItem>
 		);
 	});
-	console.log(chatItems);
+
 	return <>{chatItems}</>;
 };
 

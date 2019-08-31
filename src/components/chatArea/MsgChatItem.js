@@ -11,10 +11,12 @@ import {red} from '@material-ui/core/colors';
 
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+import Container from '@material-ui/core/Container';
+
 const MsgChatItem = ({displayName, createdTimeStamp, creator, children}) => {
 	const useStyles = makeStyles((theme) => ({
 		card: {
-			width: '50%',
+			width: '60%',
 			float:
 				creator === displayName ? 'right' : creator === 'bot' ? '' : 'left',
 			margin: '0 auto'
@@ -30,9 +32,6 @@ const MsgChatItem = ({displayName, createdTimeStamp, creator, children}) => {
 					? 'green'
 					: 'pink',
 			color: 'black'
-		},
-		test: {
-			margin: theme.spacing(0)
 		}
 	}));
 	const classes = useStyles();
