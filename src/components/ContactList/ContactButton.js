@@ -5,7 +5,7 @@ const ContactButton = props => {
   return (
     <Button
       color="primary"
-      size="lg"
+      size="large"
       onClick={props.onClick}
       disabled={props.selected}
     >
