@@ -1,33 +1,26 @@
-import React from "react";
+//tyler imports **********
+import MsgInputFieldStory from './sub-stories/message-input-field';
+import MsgSubmitButtonStory from './sub-stories/message-submit-button';
+import MsgEmojiIconStory from './sub-stories/message-emoji-icon';
+import MsgChatItemStory from './sub-stories/message-chat-item';
+import MsgChatItemListStory from './sub-stories/message-chat-item-list';
+import MsgChatBoxStory from './sub-stories/message-chat-box';
 
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
-
-import { Button, Welcome } from "@storybook/react/demo";
-
+//selin imports **********
 import ContactButton from "../src/components/ContactList/ContactButton";
 import ForumRoundedIcon from "@material-ui/icons/ForumRounded";
 import RecentActorsRoundedIcon from "@material-ui/icons/RecentActorsRounded";
 import RoundSettingsButton from "../src/components/ContactList/RoundSettingsButton";
-import UserHeader from "./sub-stories/user-header";
 
-storiesOf("Welcome", module).add("to Storybook", () => (
-  <Welcome showApp={linkTo("Button")} />
-));
+// tyler stories **********
+MsgSubmitButtonStory();
+MsgInputFieldStory();
+MsgEmojiIconStory();
+MsgChatItemStory();
+MsgChatItemListStory();
+MsgChatBoxStory();
 
-storiesOf("Button", module)
-  .add("with text", () => (
-    <Button onClick={action("clicked")}>Hello Button</Button>
-  ))
-  .add("with some emoji", () => (
-    <Button onClick={action("clicked")}>
-      <span role="img" aria-label="so cool">
-        😀 😎 👍 💯
-      </span>
-    </Button>
-  ));
-
+//selin stories **********
 // Contact Buttons
 storiesOf("ContactButton", module)
   .addParameters({
@@ -76,4 +69,8 @@ storiesOf("ChatSettingButton", module)
     <RoundSettingsButton selected></RoundSettingsButton>
   ));
 
+// anchen imports **********
+import UserHeader from "./sub-stories/user-header";
+
+// ancen stories **********
 UserHeader();
