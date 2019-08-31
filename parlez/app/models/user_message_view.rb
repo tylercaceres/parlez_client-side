@@ -1,0 +1,2 @@
+class UserMessageView < ApplicationRecord
+end
