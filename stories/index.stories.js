@@ -9,6 +9,7 @@ import { Button, Welcome } from "@storybook/react/demo";
 import ContactButton from "../src/components/ContactList/ContactButton";
 import ForumRoundedIcon from "@material-ui/icons/ForumRounded";
 import RecentActorsRoundedIcon from "@material-ui/icons/RecentActorsRounded";
+import RoundSettingsButton from "../src/components/ContactList/RoundSettingsButton";
 
 storiesOf("Welcome", module).add("to Storybook", () => (
   <Welcome showApp={linkTo("Button")} />
@@ -60,4 +61,16 @@ storiesOf("ContactButton", module)
     <ContactButton selected onClick={action("button-clicked")}>
       <RecentActorsRoundedIcon />
     </ContactButton>
+  ));
+
+// Chat Settings Popup Button:
+storiesOf("ChatSettingButton", module)
+  .add("Settings_SingleChat", () => (
+    <RoundSettingsButton chatType="single"></RoundSettingsButton>
+  ))
+  .add("Settings_GroupChat", () => (
+    <RoundSettingsButton chatType="group"></RoundSettingsButton>
+  ))
+  .add("Settings_Selected", () => (
+    <RoundSettingsButton selected></RoundSettingsButton>
   ));
