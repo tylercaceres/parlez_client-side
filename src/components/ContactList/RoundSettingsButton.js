@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -8,8 +8,8 @@ const RoundSettingsButton = props => {
   const singleChatOptions = ["Delete Chat", "Close"];
   const groupChatOptions = ["Leave Group", "Delete Chat", "Close"];
 
-  const [popupElementSingle, setPopupElementSingle] = React.useState(false);
-  const [popupElementGroup, setPopupElementGroup] = React.useState(false);
+  const [popupElementSingle, setPopupElementSingle] = useState(false);
+  const [popupElementGroup, setPopupElementGroup] = useState(false);
   const openSingle = Boolean(popupElementSingle); // sets popupElement to true
   const openGroup = Boolean(popupElementGroup);
 
