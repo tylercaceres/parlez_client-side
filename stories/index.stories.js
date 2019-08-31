@@ -6,6 +6,8 @@ import { linkTo } from '@storybook/addon-links';
 
 import { Button, Welcome } from '@storybook/react/demo';
 
+import MsgSubmitBtn from '../src/components/chatArea/MsgSubmitBtn'
+
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
 storiesOf('Button', module)
@@ -16,4 +18,11 @@ storiesOf('Button', module)
         😀 😎 👍 💯
       </span>
     </Button>
+  ));
+
+  storiesOf('Submit Chat Button', module)
+  .add('default', () => <MsgSubmitBtn onClick={action('clicked')}></MsgSubmitBtn>)
+  .add('disabled', () => (
+    <MsgSubmitBtn disabled >
+    </ MsgSubmitBtn >
   ));
