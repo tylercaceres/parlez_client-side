@@ -1,7 +1,7 @@
 class CreateChatrooms < ActiveRecord::Migration[5.2]
   def change
     create_table :chatrooms do |t|
-      t.string :type
+      t.string :chatroom_type
       t.string :name
       t.string :avatar
 

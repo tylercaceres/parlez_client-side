@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_01_004546) do
+ActiveRecord::Schema.define(version: 2019_08_31_230358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,9 +37,10 @@ ActiveRecord::Schema.define(version: 2019_09_01_004546) do
   end
 
   create_table "friendlists", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_friendlists_on_user_id"
   end
 
   create_table "friends", force: :cascade do |t|
@@ -70,21 +71,26 @@ ActiveRecord::Schema.define(version: 2019_09_01_004546) do
   end
 
   create_table "user_message_views", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "message_id"
+    t.bigint "user_id"
+    t.bigint "message_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_user_message_views_on_message_id"
+    t.index ["user_id"], name: "index_user_message_views_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.string "password"
-    t.string "username"
+    t.string "email", null: false
+    t.string "password", null: false
+    t.string "username", null: false
     t.string "avatar"
     t.string "status"
-    t.boolean "is_active"
+    t.boolean "is_active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "friendlists", "users"
+  add_foreign_key "user_message_views", "messages"
+  add_foreign_key "user_message_views", "users"
 end
