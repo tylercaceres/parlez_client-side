@@ -1,0 +1,25 @@
+.optionBtn {
+	opacity: 0;
+}
+
+.dateFormat {
+	color: grey;
+}
+
+.content-box {
+	display: flex;
+	justify-content: space-between;
+	.icon-box {
+		display: flex;
+		justify-content: space-evenly;
+
+		.delete-icon {
+			opacity: 0;
+			color: red;
+		}
+		.edit-icon {
+			opacity: 0;
+			color: green;
+		}
+	}
+}
