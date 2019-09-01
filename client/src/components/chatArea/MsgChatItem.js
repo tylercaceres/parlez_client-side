@@ -10,18 +10,21 @@ import Typography from '@material-ui/core/Typography';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Box from '@material-ui/core/Box';
 
+import './MsgChatItem.scss';
+
 const MsgChatItem = ({displayName, createdTimeStamp, creator, children}) => {
 	const useStyles = makeStyles((theme) => ({
 		card: {
-			width: '50%',
-			// float:
-			// 	creator === displayName ? 'right' : creator === 'bot' ? '' : 'left',
+			maxWidth: '60%',
 			marginTop: '0.25em',
-			marginBottom: '0.25em'
+			marginBottom: '0.25em',
+			'&:hover .optionBtn': {opacity: '1.0'}
 		},
 		header: {
 			paddingTop: '0em',
 			paddingBottom: '0em',
+			paddingRight: '0.5em',
+			paddingLeft: '0.5em',
 			background:
 				creator === displayName
 					? 'orange'
@@ -31,9 +34,19 @@ const MsgChatItem = ({displayName, createdTimeStamp, creator, children}) => {
 			color: 'black'
 		},
 		outer: {
-			display: 'flex'
-
-			// marginTop: '50px'
+			display: 'flex',
+			justifyContent:
+				creator === displayName
+					? 'flex-end'
+					: creator === 'bot'
+					? 'center'
+					: 'flex-start'
+		},
+		root: {
+			'&:last-child': {
+				paddingBottom: '0em'
+			},
+			padding: '0.25em'
 		}
 	}));
 	const classes = useStyles();
@@ -44,15 +57,15 @@ const MsgChatItem = ({displayName, createdTimeStamp, creator, children}) => {
 				<CardHeader
 					className={classes.header}
 					action={
-						<IconButton aria-label='settings'>
+						<IconButton className='optionBtn'>
 							<MoreVertIcon />
 						</IconButton>
 					}
 					title={creator}
 					subheader={createdTimeStamp}
 				/>
-				<CardContent>
-					<Typography variant='body1' color='textPrimary'>
+				<CardContent className={classes.root}>
+					<Typography variant='subtitle2' color='textPrimary'>
 						{children}
 					</Typography>
 				</CardContent>
