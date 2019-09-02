@@ -18,12 +18,9 @@
 		min-width: 25%;
 		padding: 0.25em 0.25em;
 		margin: 0.25em 0.25em;
-		border-bottom-right-radius: 25px;
-		border-bottom-left-radius: 25px;
 
 		&--mine {
 			border: 1px solid orange;
-			// border-top-right-radius: px;
 		}
 
 		&--theirs {
@@ -47,20 +44,17 @@
 		.header-box {
 			display: flex;
 			justify-content: space-between;
-			border: 5px solid red;
 			padding: 0.25em;
 		}
 
 		.content-box {
 			display: flex;
-			border: 5px solid pink;
 			padding: 0.25em;
 		}
 
 		.footer-box {
 			display: flex;
 			justify-content: flex-end;
-			border: 5px solid green;
 		}
 	}
 }

@@ -21,6 +21,7 @@ const MsgChatItem = ({displayName, createdTimeStamp, creator, children}) => {
 
 	return (
 		<div className={outerBoxClass}>
+			<div className='box2'>something here</div>
 			<div className={innerBoxClass}>
 				<div className='header-box'>
 					<span className='display-name'>{creator}</span>
