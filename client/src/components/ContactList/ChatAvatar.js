@@ -10,7 +10,7 @@ const ChatAvatar = props => {
     <section>
       <img
         style={avatarStyle}
-        src="user_avatar/avatar_user_two.png"
+        src="avatar/two.png"
         alt={"Chat Avatar"}
         onClick={props.onClick}
       ></img>

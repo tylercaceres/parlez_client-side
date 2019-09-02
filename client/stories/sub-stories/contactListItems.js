@@ -3,15 +3,6 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import ContactListItems from "../../src/components/ContactList/ContactListItems";
 
-const chatrooms = [
-  {
-    id: 1,
-    type: "Single",
-    name: "Single Chat",
-    avatar: "image/path"
-  }
-];
-
 const story = () => {
   storiesOf("ContactListItems", module)
     .addParameters({
@@ -19,12 +10,33 @@ const story = () => {
     })
     .add("ContactCard_groupChat", () => (
       <ContactListItems
-        chatName={chatrooms.name}
+        chatName="Anchen/Tyler/Selin"
         chatType="group"
+        recentMessage="Most recent message."
       ></ContactListItems>
     ))
     .add("ContactCard_singleChat", () => (
-      <ContactListItems chatType={chatrooms.type}></ContactListItems>
+      <ContactListItems
+        chatName="Anchen"
+        recentMessage="Most recent message."
+        chatType="single"
+      ></ContactListItems>
+    ))
+    .add("ContactCard_clickable", () => (
+      <ContactListItems
+        chatName="Anchen"
+        chatType="single"
+        recentMessage="Most recent message."
+        onClick={action("Clicked!")}
+      ></ContactListItems>
+    ))
+    .add("ContactCard_selected", () => (
+      <ContactListItems
+        chatName="Anchen"
+        chatType="single"
+        recentMessage="Most recent message."
+        selected
+      ></ContactListItems>
     ));
 };
 

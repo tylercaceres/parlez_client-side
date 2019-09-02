@@ -2,45 +2,28 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import SearchBar from "../../src/components/ContactList/SearchBar";
-import Paper from "@material-ui/core/Paper";
 
-// please keep this here for now...
-// const renderSuggestionsContainer = options => {
-//   return (
-//     <Paper onClick={action("clicked!")} {...options.containerProps} square>
-//       {options.children}
-//     </Paper>
-//   );
-// };
+const chatrooms = [
+  {
+    id: 1,
+    type: "Single",
+    name: "Single Chat",
+    avatar: "image/path"
+  },
+  {
+    id: 2,
+    type: "Group",
+    name: "Group Chat",
+    avatar: "image/path"
+  }
+];
 
 const story = () => {
   // Chat Search Bar:
   storiesOf("SearchBar", module)
-    .add("SearchBar", () => (
-      <SearchBar
-        renderSuggestionsContainer={options => {
-          return (
-            <Paper {...options.containerProps} square>
-              {options.children}
-            </Paper>
-          );
-        }}
-      ></SearchBar>
-    ))
+    .add("SearchBar", () => <SearchBar chatrooms={chatrooms}></SearchBar>)
     .add("SearchBar_clickable", () => (
-      <SearchBar
-        renderSuggestionsContainer={options => {
-          return (
-            <Paper
-              onClick={action("clicked!")}
-              {...options.containerProps}
-              square
-            >
-              {options.children}
-            </Paper>
-          );
-        }}
-      ></SearchBar>
+      <SearchBar onClick={action("clicked!")} chatrooms={chatrooms}></SearchBar>
     ));
 };
 

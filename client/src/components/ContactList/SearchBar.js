@@ -6,115 +6,103 @@ import parse from "autosuggest-highlight/parse";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
-
-const chatrooms = [
-  {
-    id: 1,
-    type: "Single",
-    name: "Single Chat",
-    avatar: "image/path"
-  },
-  {
-    id: 2,
-    type: "Group",
-    name: "Group Chat",
-    avatar: "image/path"
-  }
-];
-
-function renderInputComponent(inputProps) {
-  const { classes, inputRef = () => {}, ref, ...other } = inputProps;
-
-  return (
-    <TextField
-      fullWidth
-      InputProps={{
-        inputRef: node => {
-          ref(node);
-          inputRef(node);
-        },
-        classes: {
-          input: classes.input
-        }
-      }}
-      {...other}
-    />
-  );
-}
-
-function renderSuggestion(chatroom, { query, isHighlighted }) {
-  const matches = match(chatroom.name, query);
-  const parts = parse(chatroom.name, matches);
-
-  return (
-    <MenuItem selected={isHighlighted} component="div">
-      <div>
-        {parts.map(part => (
-          <span
-            key={part.text}
-            style={{ fontWeight: part.highlight ? 500 : 400 }}
-          >
-            {part.text}
-          </span>
-        ))}
-      </div>
-    </MenuItem>
-  );
-}
-
-function getChatrooms(value) {
-  const inputValue = deburr(value.trim()).toLowerCase();
-  const inputLength = inputValue.length;
-  let count = 0;
-
-  return inputLength === 0
-    ? []
-    : chatrooms.filter(chatroom => {
-        const keep =
-          count < 5 &&
-          chatroom.name.slice(0, inputLength).toLowerCase() === inputValue;
-
-        if (keep) {
-          count += 1;
-        }
-
-        return keep;
-      });
-}
-
-function getSuggestionValue(chatroom) {
-  return chatroom.name;
-}
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    height: 250,
-    flexGrow: 1
-  },
-  container: {
-    position: "relative"
-  },
-  suggestionsContainerOpen: {
-    position: "absolute",
-    zIndex: 1,
-    marginTop: theme.spacing(1),
-    left: 0,
-    right: 0
-  },
-  suggestion: {
-    display: "block"
-  },
-  suggestionsList: {
-    margin: 0,
-    padding: 0,
-    listStyleType: "none"
-  },
-  divider: {
-    height: theme.spacing(2)
-  }
-}));
+import Paper from "@material-ui/core/Paper";
 
 const SearchBar = props => {
+  let chatrooms = props.chatrooms;
+
+  function renderInputComponent(inputProps) {
+    const { classes, inputRef = () => {}, ref, ...other } = inputProps;
+
+    return (
+      <TextField
+        fullWidth
+        InputProps={{
+          inputRef: node => {
+            ref(node);
+            inputRef(node);
+          },
+          classes: {
+            input: classes.input
+          }
+        }}
+        {...other}
+      />
+    );
+  }
+
+  function renderSuggestion(chatroom, { query, isHighlighted }) {
+    const matches = match(chatroom.name, query);
+    const parts = parse(chatroom.name, matches);
+
+    return (
+      <MenuItem selected={isHighlighted} component="div">
+        <div>
+          {parts.map(part => (
+            <span
+              key={part.text}
+              style={{ fontWeight: part.highlight ? 500 : 400 }}
+            >
+              {part.text}
+            </span>
+          ))}
+        </div>
+      </MenuItem>
+    );
+  }
+
+  function getChatrooms(value) {
+    const inputValue = deburr(value.trim()).toLowerCase();
+    const inputLength = inputValue.length;
+    let count = 0;
+
+    return inputLength === 0
+      ? []
+      : chatrooms.filter(chatroom => {
+          const keep =
+            count < 5 &&
+            chatroom.name.slice(0, inputLength).toLowerCase() === inputValue;
+
+          if (keep) {
+            count += 1;
+          }
+
+          return keep;
+        });
+  }
+
+  function getSuggestionValue(chatroom) {
+    return chatroom.name;
+  }
+
+  const useStyles = makeStyles(theme => ({
+    root: {
+      height: 250,
+      flexGrow: 1
+    },
+    container: {
+      position: "relative"
+    },
+    suggestionsContainerOpen: {
+      position: "absolute",
+      zIndex: 1,
+      marginTop: theme.spacing(1),
+      left: 0,
+      right: 0
+    },
+    suggestion: {
+      display: "block"
+    },
+    suggestionsList: {
+      margin: 0,
+      padding: 0,
+      listStyleType: "none"
+    },
+    divider: {
+      height: theme.spacing(2)
+    }
+  }));
+
   const classes = useStyles();
   const [state, setState] = useState({
     single: ""
@@ -163,7 +151,14 @@ const SearchBar = props => {
         suggestionsList: classes.suggestionsList,
         suggestion: classes.suggestion
       }}
-      renderSuggestionsContainer={props.renderSuggestionsContainer}
+      renderSuggestionsContainer={options => {
+        // console.log("options", options); // options.query = selected value
+        return (
+          <Paper onClick={props.onClick} {...options.containerProps} square>
+            {options.children}
+          </Paper>
+        );
+      }}
     />
   );
 };
