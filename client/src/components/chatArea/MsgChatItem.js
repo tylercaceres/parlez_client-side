@@ -75,8 +75,12 @@ const MsgChatItem = ({displayName, createdTimeStamp, creator, children}) => {
 						</Typography>
 						{displayName === creator && (
 							<Box className='icon-box'>
-								<Edit className='edit-icon'></Edit>
-								<Delete className='delete-icon'></Delete>
+								<Edit
+									className='edit-icon'
+									onClick={() => console.log('edit button clicked')}></Edit>
+								<Delete
+									className='delete-icon'
+									onClick={() => console.log('delete button clicked')}></Delete>
 							</Box>
 						)}
 					</Box>
