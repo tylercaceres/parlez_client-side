@@ -20,7 +20,8 @@ const MsgChatItemList = ({messages = [], user}) => {
 				key={msg.id}
 				displayName={user}
 				createdTimeStamp={msg.created_at}
-				creator={msg.creator}>
+				creator={msg.creator}
+				deleted={msg.deleted}>
 				{msg.content}
 			</MsgChatItem>
 		);
