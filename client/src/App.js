@@ -1,8 +1,8 @@
 import React from "react";
-import LoginPage from "../src/views/LoginPage";
+import LoginPage from "../src/components/login/LoginPage";
 
 function App() {
-  return <div>hi</div>;
+  return <LoginPage />;
 }
 
 export default App;
