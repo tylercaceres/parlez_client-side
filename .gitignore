@@ -17,6 +17,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-server/tmp
+/server/tmp/*
 client/node_modules
 .gitignore
