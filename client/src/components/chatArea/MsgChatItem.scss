@@ -1,25 +1,60 @@
-.optionBtn {
-	opacity: 0;
-}
-
-.dateFormat {
-	color: grey;
-}
-
-.content-box {
+.outer-box {
 	display: flex;
-	justify-content: space-between;
-	.icon-box {
-		display: flex;
-		justify-content: space-evenly;
+
+	&--mine {
+		justify-content: flex-end;
+	}
+
+	&--theirs {
+		justify-content: flex-start;
+	}
+
+	&--bot {
+		justify-content: center;
+	}
+
+	.inner-box {
+		max-width: 60%;
+		min-width: 25%;
+		padding: 0.25em 0.25em;
+		margin: 0.25em 0.25em;
+
+		&--mine {
+			border: 1px solid orange;
+		}
+
+		&--theirs {
+			border: 1px solid pink;
+		}
+
+		&--bot {
+			border: 1px solid green;
+		}
+
+		&:hover .delete-icon {
+			opacity: 1;
+			cursor: pointer;
+		}
 
 		.delete-icon {
 			opacity: 0;
 			color: red;
 		}
-		.edit-icon {
-			opacity: 0;
-			color: green;
+
+		.header-box {
+			display: flex;
+			justify-content: space-between;
+			padding: 0.25em;
+		}
+
+		.content-box {
+			display: flex;
+			padding: 0.25em;
+		}
+
+		.footer-box {
+			display: flex;
+			justify-content: flex-end;
 		}
 	}
 }
