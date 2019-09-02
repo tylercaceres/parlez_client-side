@@ -2,83 +2,81 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import { red } from "@material-ui/core/colors";
 import ChatAvatar from "./ChatAvatar";
 import ChatSettingsButton from "./RoundSettingsButton";
-import clsx from "clsx";
-import CardActions from "@material-ui/core/CardActions";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import Badge from "@material-ui/core/Badge";
+import { Typography } from "@material-ui/core";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
 
-const chatrooms = [
-  {
-    id: 1,
-    type: "Single",
-    name: "Single Chat",
-    avatar: "image/path"
-  }
-];
-
+// const color = "rgba(0, 0, 255, .2)";
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345
-  },
-  media: {
-    height: 0,
-    paddingTop: "56.25%" // 16:9
-  },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest
-    })
-  },
-  expandOpen: {
-    transform: "rotate(180deg)"
-  },
-  avatar: {
-    backgroundColor: red[500]
+    maxWidth: 345,
+    "&:hover": {
+      boxShadow: "0 4px 8px 0 grey"
+    }
   }
 }));
 
-const ContactCard = props => {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+// const theme = createMuiTheme({
+//   overrides: {
+//     // Style sheet name
+//     MuiCardHeader: {
+//       // Name of the rule
+//       action: {
+//         // Some CSS
+//         opacity: "0"
+//       }
+//     },
+//     MuiCard: {
+//       "&:hover": {
+//         MuiCardHeader: {
+//           // Name of the rule
+//           action: {
+//             // Some CSS
+//             opacity: "1"
+//           }
+//         }
+//       }
+//     }
+//   }
+// });
 
-  function handleExpandClick() {
-    setExpanded(!expanded);
+const useStyles_two = makeStyles(theme => ({
+  card: {
+    maxWidth: 345,
+    backgroundColor: "lightGrey"
   }
+}));
+
+const listStyle = {
+  listStyle: "none"
+};
+
+const ContactListItem = props => {
+  const classes = useStyles();
+  const classes_two = useStyles_two();
 
   return (
-    <li>
-      <Card className={classes.card}>
+    <li onClick={props.onClick} style={listStyle}>
+      <Card className={props.selected ? classes_two.card : classes.card}>
+        {/* <ThemeProvider theme={theme}> */}
         <CardHeader
-          avatar={<ChatAvatar></ChatAvatar>}
+          // disableTypography
+          avatar={
+            <Badge badgeContent={11} color="secondary">
+              <ChatAvatar avatar={props.chatAvatar} />
+            </Badge>
+          }
           action={<ChatSettingsButton chatType={props.chatType} />}
-          action={<ChatSettingsButton chatType={props.chatType} />}
-          title={props.chatName}
-          subheader="Most recent message in this chat"
+          title={<Typography varaiant="h1">{props.chatName}</Typography>}
+          subheader={props.recentMessage}
         />
-        <CardActions disableSpacing>
-          <IconButton
-            className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded
-            })}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </CardActions>
+        {/* </ThemeProvider> */}
       </Card>
     </li>
   );
 };
 
-export default ContactCard;
+export default ContactListItem;
