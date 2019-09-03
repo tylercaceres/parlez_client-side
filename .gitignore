@@ -22,3 +22,5 @@ server/tmp
 # serverv2
 server2/tmp*
 server2/tmp
+
+serverv2/tmp
