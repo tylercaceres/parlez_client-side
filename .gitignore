@@ -24,3 +24,5 @@ server2/tmp*
 server2/tmp
 
 serverv2/tmp
+
+client/node_modules
