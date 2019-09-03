@@ -1,0 +1,1 @@
+Rails.application.config.session_store :cookie_store, key: "_caceres_app", domain: "jdh-authentication-app-api.herokuapp.com"
