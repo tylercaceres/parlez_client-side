@@ -1,0 +1,29 @@
+.layout {
+  display: flex;
+  flex-direction: row;
+
+  .contacts {
+    justify-content: flex-start;
+    border: 5px red solid;
+    padding: 0;
+    justify-content: flex-start;
+  }
+
+  .chatBox {
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
+
+    .chatArea {
+      justify-content: flex-start;
+      border: 5px pink solid;
+      width: 1000px;
+    }
+
+    .chatInput {
+      border: 5px blue solid;
+      padding: 0;
+      justify-content: flex-end;
+    }
+  }
+}
