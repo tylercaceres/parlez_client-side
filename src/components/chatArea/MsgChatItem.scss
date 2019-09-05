@@ -1,80 +1,82 @@
 .outer-box {
-	display: flex;
+  display: flex;
+  // scroll-behavior: auto;
+  // overflow: auto;
 
-	&--mine {
-		justify-content: flex-end;
-	}
+  &--mine {
+    justify-content: flex-end;
+  }
 
-	&--theirs {
-		justify-content: flex-start;
-	}
+  &--theirs {
+    justify-content: flex-start;
+  }
 
-	&--bot {
-		justify-content: center;
-	}
+  &--bot {
+    justify-content: center;
+  }
 
-	.inner-box {
-		max-width: 60%;
-		min-width: 25%;
-		padding: 0.25em 1em;
-		margin: 0.25em 0.25em;
-		border-radius: 2em;
-		border: 2px solid black;
+  .inner-box {
+    max-width: 60%;
+    min-width: 25%;
+    padding: 0.25em 1em;
+    margin: 0.25em 0.25em;
+    border-radius: 2em;
+    border: 2px solid black;
 
-		&--mine {
-			background-color: lightgreen;
-		}
+    &--mine {
+      background-color: lightgreen;
+    }
 
-		&--theirs {
-		}
+    // &--theirs {
+    // }
 
-		&--bot {
-			background-color: lightblue;
-		}
+    &--bot {
+      background-color: lightblue;
+    }
 
-		&:hover .delete-icon {
-			opacity: 1;
-			cursor: pointer;
-		}
+    &:hover .delete-icon {
+      opacity: 1;
+      cursor: pointer;
+    }
 
-		.delete-icon {
-			opacity: 0;
-			color: red;
-		}
+    .delete-icon {
+      opacity: 0;
+      color: red;
+    }
 
-		.header-box {
-			display: flex;
-			justify-content: space-between;
-			padding: 0.25em;
+    .header-box {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.25em;
 
-			&--mine {
-				color: red;
-			}
+      &--mine {
+        color: red;
+      }
 
-			&--theirs {
-				color: purple;
-			}
+      &--theirs {
+        color: purple;
+      }
 
-			&--bot {
-				color: black;
-			}
-		}
+      &--bot {
+        color: black;
+      }
+    }
 
-		.content-box {
-			display: flex;
-			padding: 0.25em;
-		}
-		&--deleted {
-			color: grey;
-			font-style: italic;
-			text-decoration: overline underline;
-		}
+    .content-box {
+      display: flex;
+      padding: 0.25em;
+    }
+    &--deleted {
+      color: grey;
+      font-style: italic;
+      text-decoration: overline underline;
+    }
 
-		.footer-box {
-			display: flex;
-			justify-content: flex-end;
-			font-size: 0.75em;
-			font-style: italic;
-		}
-	}
+    .footer-box {
+      display: flex;
+      justify-content: flex-end;
+      font-size: 0.75em;
+      font-style: italic;
+    }
+  }
 }
