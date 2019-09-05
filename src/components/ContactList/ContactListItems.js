@@ -12,11 +12,12 @@ import { ThemeProvider } from "@material-ui/styles";
 // const color = "rgba(0, 0, 255, .2)";
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345,
+    maxWidth: 500,
     "&:hover": {
       boxShadow: "0 4px 8px 0 grey"
     }
-  }
+  },
+  root: {}
 }));
 
 // const theme = createMuiTheme({
@@ -45,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 
 const useStyles_two = makeStyles(theme => ({
   card: {
-    maxWidth: 345,
+    maxWidth: 500,
     backgroundColor: "lightGrey"
   }
 }));
