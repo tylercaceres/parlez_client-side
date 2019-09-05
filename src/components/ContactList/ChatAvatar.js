@@ -1,8 +1,8 @@
 import React from "react";
 
 const avatarStyle = {
-  border: "5px solid pink",
-  borderRadius: "40%"
+  borderRadius: "50%",
+  height: "60px"
 };
 
 const ChatAvatar = props => {
@@ -10,7 +10,7 @@ const ChatAvatar = props => {
     <section>
       <img
         style={avatarStyle}
-        src="avatar/two.png"
+        src={props.avatar}
         alt={"Chat Avatar"}
         onClick={props.onClick}
       ></img>
