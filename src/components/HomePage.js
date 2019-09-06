@@ -7,6 +7,12 @@ import MsgChatItemList from "./chatArea/MsgChatItemList";
 import ChatNameContainer from "./chatHeader/ChatNameContainer";
 import UserHeaderContainer from "./userHeader/UserHeaderContainer";
 import "./HomePage.scss";
+let socket = require("socket.io-client")("ws://localhost:8080");
+
+socket.emit("create messages", 2);
+socket.on("load messages", msg => {
+  console.log("SERVER", msg);
+});
 
 const chatrooms = [
   {
@@ -229,16 +235,25 @@ const HomePage = () => {
       <div className="leftSideContainer">
  
       <header className="header"></header>
-      <div className="contacts">
-        <ChatHeader />
-        <SearchBar chatrooms={chatrooms} />
-        <ContactList
-          recentMessage={recentMessage}
-          chats={chatrooms}
-          setActiveChat={setActiveChat}
-          selected={selected}
-        />
-</div>
+
+      <div className="contactsArea">
+        <div className="chatHeader">
+          <ChatHeader />
+          <SearchBar
+            onClick={() => console.log("CLICKED!")}
+            chatrooms={chatrooms}
+            setActiveChat={setActiveChat}
+          />
+        </div>
+        <div className="contacts">
+          <ContactList
+            recentMessage={recentMessage}
+            chats={chatrooms}
+            setActiveChat={setActiveChat}
+            selected={selected}
+          />
+        </div>
+
       </div>
       <div className="chatBox">
         <div className="chatArea">

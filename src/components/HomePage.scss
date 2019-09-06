@@ -14,13 +14,27 @@
   }
 
   border: black solid 2px;
+  height: 55.6vmax;
+  width: 98.7vmax;
 
 
-  .contacts {
+  .contactsArea {
+
     justify-content: flex-start;
-    border: 5px red solid;
-    padding: 0;
-    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+
+    .chatHeader {
+      justify-content: flex-start;
+    }
+
+    .contacts {
+      justify-content: flex-start;
+      border: 5px red solid;
+      padding: 0;
+      height: 85vh;
+      overflow: auto;
+    }
   }
 
   .chatBox {
@@ -31,6 +45,11 @@
     .chatArea {
       justify-content: flex-start;
       border: 5px pink solid;
+
+      width: 72vmax;
+      height: 76vmax;
+      overflow: auto;
+
     }
 
     .chatInput {
