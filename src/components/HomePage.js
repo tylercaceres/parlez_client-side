@@ -4,6 +4,8 @@ import SearchBar from "./ContactList/SearchBar";
 import ChatHeader from "./ContactList/ChatHeader";
 import MsgChatBox from "./chatArea/MsgChatBox";
 import MsgChatItemList from "./chatArea/MsgChatItemList";
+import ChatNameContainer from "./chatHeader/ChatNameContainer";
+import UserHeaderContainer from "./userHeader/UserHeaderContainer";
 import "./HomePage.scss";
 
 const chatrooms = [
@@ -223,6 +225,9 @@ const HomePage = () => {
 
   return (
     <main className="layout">
+
+      <div className="leftSideContainer">
+ 
       <header className="header"></header>
       <div className="contacts">
         <ChatHeader />
@@ -233,15 +238,25 @@ const HomePage = () => {
           setActiveChat={setActiveChat}
           selected={selected}
         />
+</div>
       </div>
       <div className="chatBox">
         <div className="chatArea">
           {active ? (
             <MsgChatItemList user="tyler" messages={active.messages} />
           ) : null}
+
         </div>
-        <div className="chatInput">
-          <MsgChatBox />
+      </div>
+      <div className="rightSideContainer">
+        <div className="chatBox">
+          <ChatNameContainer />
+          <div className="chatArea">
+            <MsgChatItemList user="tyler" messages={messages} />
+          </div>
+          <div className="chatInput">
+            <MsgChatBox />
+          </div>
         </div>
       </div>
     </main>

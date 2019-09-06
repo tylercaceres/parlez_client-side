@@ -6,6 +6,10 @@ import "./ChatNameContainer.scss";
 import VideoCallButton from "./VideoCallButton";
 import VoiceCallButton from "./VoiceCallButton";
 
+// const chatrooms =[{
+
+// }]
+
 const chatRoom = props => {
   if (props.type === "single") {
     return (
