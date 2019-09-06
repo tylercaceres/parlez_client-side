@@ -4,8 +4,6 @@ import SearchBar from "./ContactList/SearchBar";
 import ChatHeader from "./ContactList/ChatHeader";
 import MsgChatBox from "./chatArea/MsgChatBox";
 import MsgChatItemList from "./chatArea/MsgChatItemList";
-import ChatNameContainer from "./chatHeader/ChatNameContainer";
-import UserHeaderContainer from "./userHeader/UserHeaderContainer";
 import "./HomePage.scss";
 let socket = require("socket.io-client")("ws://localhost:8080");
 
@@ -231,11 +229,7 @@ const HomePage = () => {
 
   return (
     <main className="layout">
-
-      <div className="leftSideContainer">
- 
       <header className="header"></header>
-
       <div className="contactsArea">
         <div className="chatHeader">
           <ChatHeader />
@@ -253,25 +247,15 @@ const HomePage = () => {
             selected={selected}
           />
         </div>
-
       </div>
       <div className="chatBox">
         <div className="chatArea">
           {active ? (
             <MsgChatItemList user="tyler" messages={active.messages} />
           ) : null}
-
         </div>
-      </div>
-      <div className="rightSideContainer">
-        <div className="chatBox">
-          <ChatNameContainer />
-          <div className="chatArea">
-            <MsgChatItemList user="tyler" messages={messages} />
-          </div>
-          <div className="chatInput">
-            <MsgChatBox />
-          </div>
+        <div className="chatInput">
+          <MsgChatBox />
         </div>
       </div>
     </main>
