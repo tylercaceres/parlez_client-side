@@ -4,8 +4,9 @@ import Button from "@material-ui/core/Button";
 const ContactButton = props => {
   return (
     <Button
-      color="primary"
+      color="secondary"
       size="large"
+      fullWidth={true}
       onClick={props.onClick}
       disabled={props.selected}
     >

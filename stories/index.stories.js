@@ -5,6 +5,7 @@ import ChatSearchBar from "./sub-stories/chatSearchBar";
 import ChatAvatar from "./sub-stories/chatAvatar";
 import ContactListItems from "./sub-stories/contactListItems";
 import ContactList from "./sub-stories/contactList";
+import FriendListItem from "./sub-stories/friendListItems";
 
 ContactButton();
 ChatSettingsButton();
@@ -12,6 +13,7 @@ ChatSearchBar();
 ChatAvatar();
 ContactListItems();
 ContactList();
+FriendListItem();
 // selin **********
 
 // tyler **********
