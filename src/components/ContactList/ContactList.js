@@ -19,7 +19,7 @@ const ContactList = props => {
 
   return (
     <section>
-      <ul>{ContactListItems}</ul>
+      <ul style={{ padding: 0 }}>{ContactListItems}</ul>
     </section>
   );
 };
