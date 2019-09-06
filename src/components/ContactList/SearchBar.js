@@ -10,7 +10,6 @@ import Paper from "@material-ui/core/Paper";
 
 const SearchBar = props => {
   let chatrooms = props.chatrooms;
-  console.log("SEARCH_BAR", props);
 
   function renderInputComponent(inputProps) {
     const { classes, inputRef = () => {}, ref, ...other } = inputProps;
@@ -134,14 +133,6 @@ const SearchBar = props => {
     getSuggestionValue,
     renderSuggestion
   };
-
-  // const onSuggestionSelected = (
-  //   event,
-  //   { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }
-  // ) => {
-  //   //Here you do whatever you want with the values
-  //   console.log(suggestionValue); //For example alert the selected value
-  // };
 
   return (
     <Autosuggest

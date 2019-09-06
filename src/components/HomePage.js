@@ -1,16 +1,42 @@
 import React, { useState } from "react";
 import ContactList from "./ContactList/ContactList";
+import FriendList from "./ContactList/FriendList";
 import SearchBar from "./ContactList/SearchBar";
 import ChatHeader from "./ContactList/ChatHeader";
 import MsgChatBox from "./chatArea/MsgChatBox";
 import MsgChatItemList from "./chatArea/MsgChatItemList";
 import "./HomePage.scss";
+
 let socket = require("socket.io-client")("ws://localhost:8080");
 
 socket.emit("create messages", 2);
 socket.on("load messages", msg => {
   console.log("SERVER", msg);
 });
+
+const friends = [
+  {
+    id: 1,
+    email: "friend_1@email.com",
+    username: "Friend_1",
+    avatar: "/avatar/one.png",
+    status: "busy"
+  },
+  {
+    id: 2,
+    email: "friend_2@email.com",
+    username: "Friend_2",
+    avatar: "/avatar/two.png",
+    status: "busy"
+  },
+  {
+    id: 3,
+    email: "friend_3@email.com",
+    username: "Friend_3",
+    avatar: "/avatar/three.png",
+    status: "busy"
+  }
+];
 
 const chatrooms = [
   {
@@ -240,6 +266,7 @@ const HomePage = () => {
           />
         </div>
         <div className="contacts">
+          <FriendList friends={friends} />
           <ContactList
             recentMessage={recentMessage}
             chats={chatrooms}
