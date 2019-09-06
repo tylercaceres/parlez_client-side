@@ -1,20 +1,20 @@
 import React from "react";
-// import LoginPage from "../src/components/login/LoginPage";
+import { Route, Switch, Redirect } from "react-router-dom";
+import LoginPage from "../src/components/login/LoginPage";
 import HomePage from "../src/components/HomePage";
-// import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-function App() {
+export default function App() {
+  const state = {
+    auth: true
+  };
+
   return (
-    <HomePage />
-    // <div>
-    //   <BrowserRouter>
-    //     <Switch>
-    //       <Route exact path={"/login"} render={<LoginPage />}></Route>
-    //       <Route exact path={"/"} render={<HomePage />}></Route>
-    //     </Switch>
-    //   </BrowserRouter>
-    // </div>
+    <div>
+      <Switch>
+        {state.auth ? <Route path="/chat" component={HomePage} /> : null}
+        <Route path="/login" component={LoginPage} />
+        <Redirect from="/" to="/login" />
+      </Switch>
+    </div>
   );
 }
-
-export default App;
