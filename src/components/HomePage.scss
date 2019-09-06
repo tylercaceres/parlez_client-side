@@ -1,11 +1,25 @@
 .layout {
   display: flex;
   flex-direction: row;
+
+  width: 100%;
+  border: red 5px dotted;
+
+  .leftSideContainer {
+    border: red 3px solid;
+  }
+
+  .rightSideContainer {
+    border: red 3px solid;
+  }
+
   border: black solid 2px;
   height: 55.6vmax;
   width: 98.7vmax;
 
+
   .contactsArea {
+
     justify-content: flex-start;
     display: flex;
     flex-direction: column;
@@ -31,9 +45,11 @@
     .chatArea {
       justify-content: flex-start;
       border: 5px pink solid;
+
       width: 72vmax;
       height: 76vmax;
       overflow: auto;
+
     }
 
     .chatInput {
