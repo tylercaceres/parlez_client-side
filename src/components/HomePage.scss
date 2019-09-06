@@ -1,6 +1,7 @@
 .layout {
   display: flex;
   flex-direction: row;
+
   width: 100%;
   border: red 5px dotted;
 
@@ -11,6 +12,9 @@
   .rightSideContainer {
     border: red 3px solid;
   }
+
+  border: black solid 2px;
+
 
   .contacts {
     justify-content: flex-start;

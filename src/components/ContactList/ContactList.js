@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ContactListItem from "./ContactListItems";
 
 const ContactList = props => {
-  const [select, setSelect] = useState({});
   const ContactListItems = props.chats.map(chat => {
     return (
       <ContactListItem
@@ -11,9 +10,9 @@ const ContactList = props => {
         chatType={chat.type}
         chatName={chat.name}
         chatAvatar={chat.avatar}
-        onClick={() => setSelect({ [chat.id]: true })}
-        selected={select[chat.id]}
-        recentMessage={props.recentMessage}
+        setActiveChat={props.setActiveChat}
+        selected={props.selected(chat.id)}
+        recentMessage={props.recentMessage(chat.messages[0].content)}
       />
     );
   });
