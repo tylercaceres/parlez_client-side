@@ -240,11 +240,13 @@ const getActiveChat = (id, chatArr) => {
 /***************************** HOME PAGE ********************************/
 
 const HomePage = () => {
+  const [friendsView, setFriendsView] = useState(false);
   const [select, setSelect] = useState({});
   const activeChat = Number(Object.keys(select));
 
   const setActiveChat = chat_id => {
     setSelect({ [chat_id]: true });
+    setFriendsView(false);
   };
 
   const selected = chat_id => {
@@ -258,7 +260,10 @@ const HomePage = () => {
       <header className="header"></header>
       <div className="contactsArea">
         <div className="chatHeader">
-          <ChatHeader />
+          <ChatHeader
+            ChatOnClick={() => setFriendsView(false)}
+            FriendOnClick={() => setFriendsView(!false)}
+          />
           <SearchBar
             onClick={() => console.log("CLICKED!")}
             chatrooms={chatrooms}
@@ -266,13 +271,16 @@ const HomePage = () => {
           />
         </div>
         <div className="contacts">
-          <FriendList friends={friends} />
-          <ContactList
-            recentMessage={recentMessage}
-            chats={chatrooms}
-            setActiveChat={setActiveChat}
-            selected={selected}
-          />
+          {friendsView ? (
+            <FriendList friends={friends} />
+          ) : (
+            <ContactList
+              recentMessage={recentMessage}
+              chats={chatrooms}
+              setActiveChat={setActiveChat}
+              selected={selected}
+            />
+          )}
         </div>
       </div>
       <div className="chatBox">

@@ -4,16 +4,16 @@ import ForumRoundedIcon from "@material-ui/icons/ForumRounded";
 import RecentActorsRoundedIcon from "@material-ui/icons/RecentActorsRounded";
 import "./ChatHeader.scss";
 
-const ChatHeader = () => {
+const ChatHeader = props => {
   return (
     <div className="chat_header">
       <div className="chat_button">
-        <ContactButton>
+        <ContactButton onClick={props.ChatOnClick}>
           <ForumRoundedIcon />
         </ContactButton>
       </div>
       <div className="contacts_button">
-        <ContactButton>
+        <ContactButton onClick={props.FriendOnClick}>
           <RecentActorsRoundedIcon />
         </ContactButton>
       </div>

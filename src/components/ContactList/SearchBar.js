@@ -152,7 +152,6 @@ const SearchBar = props => {
         suggestion: classes.suggestion
       }}
       renderSuggestionsContainer={options => {
-        console.log("options", options); // options.query = selected value
         return (
           <Paper onClick={props.onClick} {...options.containerProps} square>
             {options.children}
