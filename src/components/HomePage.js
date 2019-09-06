@@ -258,10 +258,8 @@ const HomePage = () => {
           ) : null}
         </div>
       </div>
-      <div className="rightSideContainer">
-        <div className="chatInput">
-          <MsgChatBox />
-        </div>
+      <div className="chatInput">
+        <MsgChatBox />
       </div>
     </main>
   );
