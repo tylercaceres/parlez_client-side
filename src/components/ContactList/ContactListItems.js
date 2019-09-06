@@ -60,7 +60,7 @@ const ContactListItem = props => {
   const classes_two = useStyles_two();
 
   return (
-    <li onClick={props.onClick} style={listStyle}>
+    <li onClick={() => props.setActiveChat(props.id)} style={listStyle}>
       <Card className={props.selected ? classes_two.card : classes.card}>
         {/* <ThemeProvider theme={theme}> */}
         <CardHeader

@@ -1,6 +1,7 @@
 .layout {
   display: flex;
   flex-direction: row;
+  border: black solid 2px;
 
   .contacts {
     justify-content: flex-start;
