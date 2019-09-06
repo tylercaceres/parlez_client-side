@@ -231,9 +231,6 @@ const HomePage = () => {
 
   return (
     <main className="layout">
-
-      <div className="leftSideContainer">
- 
       <header className="header"></header>
 
       <div className="contactsArea">
@@ -253,25 +250,17 @@ const HomePage = () => {
             selected={selected}
           />
         </div>
-
       </div>
       <div className="chatBox">
         <div className="chatArea">
           {active ? (
             <MsgChatItemList user="tyler" messages={active.messages} />
           ) : null}
-
         </div>
       </div>
       <div className="rightSideContainer">
-        <div className="chatBox">
-          <ChatNameContainer />
-          <div className="chatArea">
-            <MsgChatItemList user="tyler" messages={messages} />
-          </div>
-          <div className="chatInput">
-            <MsgChatBox />
-          </div>
+        <div className="chatInput">
+          <MsgChatBox />
         </div>
       </div>
     </main>
