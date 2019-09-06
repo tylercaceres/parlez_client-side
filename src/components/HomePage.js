@@ -4,6 +4,8 @@ import SearchBar from "./ContactList/SearchBar";
 import ChatHeader from "./ContactList/ChatHeader";
 import MsgChatBox from "./chatArea/MsgChatBox";
 import MsgChatItemList from "./chatArea/MsgChatItemList";
+import ChatNameContainer from "./chatHeader/ChatNameContainer";
+import UserHeaderContainer from "./userHeader/UserHeaderContainer";
 import "./HomePage.scss";
 
 const chatrooms = [
@@ -255,21 +257,28 @@ const messages = [
 const HomePage = () => {
   return (
     <main className="layout">
-      <header className="header"></header>
-      <div className="contacts">
-        <ChatHeader />
-        <SearchBar chatrooms={chatrooms} />
-        <ContactList
-          recentMessage={showMessage(conciseMessage)}
-          chats={chatrooms}
-        />
-      </div>
-      <div className="chatBox">
-        <div className="chatArea">
-          <MsgChatItemList user="tyler" messages={messages} />
+      <div className="leftSideContainer">
+        <header className="header">
+          <UserHeaderContainer />
+        </header>
+        <div className="contacts">
+          <ChatHeader />
+          <SearchBar chatrooms={chatrooms} />
+          <ContactList
+            recentMessage={showMessage(conciseMessage)}
+            chats={chatrooms}
+          />
         </div>
-        <div className="chatInput">
-          <MsgChatBox />
+      </div>
+      <div className="rightSideContainer">
+        <div className="chatBox">
+          <ChatNameContainer />
+          <div className="chatArea">
+            <MsgChatItemList user="tyler" messages={messages} />
+          </div>
+          <div className="chatInput">
+            <MsgChatBox />
+          </div>
         </div>
       </div>
     </main>
