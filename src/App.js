@@ -13,29 +13,28 @@ export default function App() {
     auth: true
   };
 
-
   return (
-
-    <ChatViewProvider>
-      <HomePage />
-    </ChatViewProvider>
-    // <div>
+    <>
+      <ChatViewProvider>
+        <HomePage />
+      </ChatViewProvider>
+      {/* // <div>
     //   <BrowserRouter>
     //     <Switch>
     //       <Route exact path={"/login"} render={<LoginPage />}></Route>
     //       <Route exact path={"/"} render={<HomePage />}></Route>
     //     </Switch>
     //   </BrowserRouter>
-    // </div>
+    // </div> */}
 
-    <div>
-      <Switch>
-        {state.auth ? <Route path="/chat" component={HomePage} /> : null}
-        <Route path="/login" component={LoginPage} />
-        <Route path="/signup" exact component={SignUpPage} />
-        <Redirect from="/" to="/login" />
-      </Switch>
-    </div>
-
+      <div>
+        <Switch>
+          {state.auth ? <Route path="/chat" component={HomePage} /> : null}
+          <Route path="/login" component={LoginPage} />
+          <Route path="/signup" exact component={SignUpPage} />
+          <Redirect from="/" to="/login" />
+        </Switch>
+      </div>
+    </>
   );
 }
