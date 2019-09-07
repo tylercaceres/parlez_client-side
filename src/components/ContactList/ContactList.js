@@ -18,6 +18,11 @@ const ContactList = () => {
   const { masterState, dispatch } = useContext(ChatViewContext);
 
   const ContactListItems = masterState.chatrooms.map(chat => {
+    // console.log("message_time", chat.messages[0].created_at);
+    const recentMessageTime = `${recentMessage(chat.messages[0].content)}
+    ${chat.messages[0].created_at}`;
+    // console.log("message + time", recentMessageTime);
+
     return (
       <ContactListItem
         key={chat.id}
@@ -26,13 +31,14 @@ const ContactList = () => {
         chatName={chat.name}
         chatAvatar={chat.avatar}
         selected={masterState.activeChat === chat.id}
-        recentMessage={recentMessage(chat.messages[0].content)}
+        recentMessage={recentMessageTime}
         onClick={() =>
           dispatch({
             type: "ACTIVATE_CHAT",
             id: chat.id
           })
         }
+        hover={masterState.hover === chat.id}
       />
     );
   });

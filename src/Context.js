@@ -3,6 +3,7 @@ import React, { useReducer } from "react";
 const initialState = {
   friendsView: false,
   activeChat: null,
+  hover: null,
   friends: [
     {
       id: 1,
@@ -212,6 +213,10 @@ let reducer = (state, action) => {
       return { ...state, friendsView: true };
     case "ACTIVATE_CHAT":
       return { ...state, friendsView: false, activeChat: action.id };
+    case "HOVER_ON":
+      return { ...state, hover: action.id };
+    case "HOVER_OFF":
+      return { ...state, hover: null };
     default:
       throw new Error(`Unsupported action type: ${action.type}`);
   }
