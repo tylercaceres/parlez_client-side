@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import deburr from "lodash/deburr";
 import Autosuggest from "react-autosuggest";
 import match from "autosuggest-highlight/match";
@@ -7,11 +7,14 @@ import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import { ChatViewContext } from "../../Context";
 
 const SearchBar = props => {
-  let chatrooms = props.chatrooms;
+  const { masterState, dispatch } = useContext(ChatViewContext);
 
-  function renderInputComponent(inputProps) {
+  let chatrooms = masterState.chatrooms;
+
+  const renderInputComponent = inputProps => {
     const { classes, inputRef = () => {}, ref, ...other } = inputProps;
 
     return (
@@ -29,9 +32,9 @@ const SearchBar = props => {
         {...other}
       />
     );
-  }
+  };
 
-  function renderSuggestion(chatroom, { query, isHighlighted }) {
+  const renderSuggestion = (chatroom, { query, isHighlighted }) => {
     const matches = match(chatroom.name, query);
     const parts = parse(chatroom.name, matches);
 
@@ -49,9 +52,9 @@ const SearchBar = props => {
         </div>
       </MenuItem>
     );
-  }
+  };
 
-  function getChatrooms(value) {
+  const getChatrooms = value => {
     const inputValue = deburr(value.trim()).toLowerCase();
     const inputLength = inputValue.length;
     let count = 0;
@@ -69,11 +72,11 @@ const SearchBar = props => {
 
           return keep;
         });
-  }
+  };
 
-  function getSuggestionValue(chatroom) {
+  const getSuggestionValue = chatroom => {
     return chatroom.name;
-  }
+  };
 
   const useStyles = makeStyles(theme => ({
     root: {
@@ -134,6 +137,13 @@ const SearchBar = props => {
     renderSuggestion
   };
 
+  const handleSelect = chat_id => {
+    dispatch({
+      type: "ACTIVATE_CHAT",
+      id: chat_id
+    });
+  };
+
   return (
     <Autosuggest
       {...autosuggestProps}
@@ -159,7 +169,7 @@ const SearchBar = props => {
         );
       }}
       onSuggestionSelected={(e, { suggestion }) => {
-        props.setActiveChat(suggestion.id);
+        handleSelect(suggestion.id);
       }}
     />
   );

@@ -2,10 +2,13 @@ import React from "react";
 // import LoginPage from "../src/components/login/LoginPage";
 import HomePage from "../src/components/HomePage";
 // import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { ChatViewProvider } from "./Context";
 
 function App() {
   return (
-    <HomePage />
+    <ChatViewProvider>
+      <HomePage />
+    </ChatViewProvider>
     // <div>
     //   <BrowserRouter>
     //     <Switch>

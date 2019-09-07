@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -9,7 +9,6 @@ import { Typography } from "@material-ui/core";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 
-// const color = "rgba(0, 0, 255, .2)";
 const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: 500,
@@ -60,7 +59,7 @@ const ContactListItem = props => {
   const classes_two = useStyles_two();
 
   return (
-    <li onClick={() => props.setActiveChat(props.id)} style={listStyle}>
+    <li onClick={props.onClick} style={listStyle}>
       <Card className={props.selected ? classes_two.card : classes.card}>
         {/* <ThemeProvider theme={theme}> */}
         <CardHeader
