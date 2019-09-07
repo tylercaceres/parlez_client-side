@@ -7,6 +7,7 @@ import MsgChatBox from './chatArea/MsgChatBox';
 import MsgChatItemList from './chatArea/MsgChatItemList';
 import './HomePage.scss';
 import {ChatViewContext} from '../Context';
+import {handleClick} from '../App';
 // const {masterState, dispatch} = useContext(ChatViewContext);
 
 // let socket = require('socket.io-client')('ws://localhost:8080');
@@ -25,9 +26,11 @@ const HomePage = () => {
 
 	const {masterState, dispatch} = useContext(ChatViewContext);
 
-	console.log('STATE', masterState);
+	// console.log('STATE', masterState);
 
-	let socket = require('socket.io-client')('ws://localhost:8080');
+	// let socket = require('socket.io-client')('ws://localhost:8080');
+	// socket.emit('provide username', masterState.userId);
+
 	// socket.on('initial data', (data) => {
 	// 	console.log('DATA', data);
 
@@ -39,21 +42,34 @@ const HomePage = () => {
 	// 	console.log('STATE 2', masterState);
 	// });
 
-	useEffect(() => {
-		socket.on('initial data', (data) => {
-			console.log('DATA', data);
+	// useEffect(() => {
+	// 	const loadInitialData = (data) => {
+	// 		console.log('DATA', data);
+	// 		console.log('STATE 2', masterState);
+	// 		dispatch({
+	// 			type: 'LOAD_INITIAL_DATA',
+	// 			data
+	// 		});
+	// 	};
 
-			dispatch({
-				type: 'LOAD_INITIAL_DATA',
-				data
-			});
+	// 	socket.on('initial data', loadInitialData);
+	// 	return () => {
+	// 		/**
+	// 		 * TODO: ensure this event listener gets removed
+	// 		 */
+	// 		socket.removeEventListener('initial data', loadInitialData);
+	// 	};
+	// }, []);
 
-			console.log('STATE 2', masterState);
-		});
-		return () => {
-			socket.removeEventListener('initial data');
-		};
-	}, [masterState.chatrooms]);
+	// const handleClick = () => {
+	// 	socket.emit('create new room', {
+	// 		type: 'single',
+	// 		name: 'new chat',
+	// 		creatorUserId: masterState.userId,
+	// 		usersArr: [1, 2, 3, 4, 5],
+	// 		avatar: ''
+	// 	});
+	// };
 
 	return (
 		<main className='layout'>
@@ -62,6 +78,7 @@ const HomePage = () => {
 				<div className='chatHeader'>
 					<ChatHeader />
 					<SearchBar />
+					<button onClick={handleClick}>New Chatroom</button>
 				</div>
 				<div className='contacts'>{masterState.friendsView ? <FriendList /> : <ContactList />}</div>
 			</div>
