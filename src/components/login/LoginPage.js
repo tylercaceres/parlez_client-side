@@ -1,6 +1,7 @@
 import React from "react";
 import "./LoginPage.scss";
 import { Formik } from "formik";
+import { NavLink } from "react-router-dom";
 
 import * as Yup from "yup";
 import Button from "@material-ui/core/Button";
@@ -95,9 +96,9 @@ const ValidatedLoginForm = () => (
               <Button type="submit" disabled={isSubmitting}>
                 Login
               </Button>
-              <Button type="submit" disabled={isSubmitting}>
-                Sign Up
-              </Button>
+              <NavLink to="/signup" className="link">
+                <Button>Sign up</Button>
+              </NavLink>
             </div>
           </form>
         </div>
