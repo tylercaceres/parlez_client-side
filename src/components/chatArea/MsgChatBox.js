@@ -68,7 +68,7 @@ const MsgChatBox = () => {
         <span
           style={{
             position: "absolute",
-            bottom: 110
+            bottom: 107
           }}
         >
           <Picker
@@ -76,7 +76,8 @@ const MsgChatBox = () => {
             emojiTooltip={true}
             showSkinTones={false}
             showPreview={false}
-            title="weChat"
+            color="#2952a3"
+            autoFocus={true}
           />
         </span>
       ) : null}
