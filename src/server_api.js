@@ -14,9 +14,8 @@ const loadInitialData = cb => {
 };
 export { loadInitialData };
 
+// send newly generated message:
 const sendMessage = msg => {
   socket.emit("send message", msg);
 };
 export { sendMessage };
-
-// send newly generated message:

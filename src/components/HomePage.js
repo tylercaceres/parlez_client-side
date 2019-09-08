@@ -1,18 +1,20 @@
 import React, { useContext, useEffect } from "react";
 import ContactList from "./ContactList/ContactList";
 import FriendList from "./ContactList/FriendList";
+import FriendProfile from "./ContactList/FriendProfile";
 import SearchBar from "./ContactList/SearchBar";
 import ChatHeader from "./ContactList/ChatHeader";
 import MsgChatBox from "./chatArea/MsgChatBox";
 import MsgChatItemList from "./chatArea/MsgChatItemList";
 import "./HomePage.scss";
-import { ChatViewContext } from "../Context";
+import { ChatViewContext, FriendContext } from "../Context";
 import { loadInitialData } from "../server_api";
 
 /***************************** HOME PAGE ********************************/
 
 const HomePage = () => {
   const { masterState, dispatch } = useContext(ChatViewContext);
+  const { friendState } = useContext(FriendContext);
 
   useEffect(() => {
     loadInitialData(data => {
@@ -38,14 +40,20 @@ const HomePage = () => {
         </div>
       </div>
       <div className="chatBox">
-        <div className="chatArea">
-          {masterState.activeChat && masterState.chatrooms.length > 0 ? (
-            <MsgChatItemList />
-          ) : null}
-        </div>
-        <div className="chatInput">
-          <MsgChatBox />
-        </div>
+        {masterState.activeChat &&
+        masterState.chatrooms.length > 0 &&
+        !masterState.friendsView ? (
+          <>
+            <div className="chatArea">
+              <MsgChatItemList />
+            </div>
+            <div className="chatInput">
+              <MsgChatBox />
+            </div>
+          </>
+        ) : masterState.friendsView && friendState.selectedFriend ? (
+          <FriendProfile />
+        ) : null}
       </div>
     </main>
   );

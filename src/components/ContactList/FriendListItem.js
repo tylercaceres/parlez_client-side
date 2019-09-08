@@ -6,7 +6,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 
 const FriendListItem = props => {
   return (
-    <li>
+    <li onClick={props.onClick}>
       <ListItem button>
         <ListItemAvatar>
           <ChatAvatar avatar={props.avatar} />
