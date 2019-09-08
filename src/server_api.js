@@ -12,5 +12,11 @@ const loadInitialData = cb => {
   //   });
   // };
 };
-
 export { loadInitialData };
+
+const sendMessage = msg => {
+  socket.emit("send message", msg);
+};
+export { sendMessage };
+
+// send newly generated message:

@@ -40,7 +40,7 @@ const ContactList = () => {
                   id: chat.id
                 })
               }
-              hover={masterState.hover === chat.id}
+              // hover={masterState.hover === chat.id}
             />
           );
         })
