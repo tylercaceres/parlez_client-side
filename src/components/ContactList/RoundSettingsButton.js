@@ -21,7 +21,10 @@ const RoundSettingsButton = props => {
     setPopupElementGroup(event.currentTarget);
   };
 
-  const handleCloseSingle = () => {
+  const handleCloseSingle = option => {
+    if (option === "Delete Chat") {
+      console.log("DELETE");
+    }
     setPopupElementSingle(false);
   };
 
@@ -43,7 +46,7 @@ const RoundSettingsButton = props => {
         }}
       >
         {singleChatOptions.map(option => (
-          <MenuItem key={option} onClick={handleCloseSingle}>
+          <MenuItem key={option} onClick={() => handleCloseSingle(option)}>
             {option}
           </MenuItem>
         ))}

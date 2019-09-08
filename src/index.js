@@ -1,15 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { ChatViewProvider, MsgProvider } from "./Context";
+import { ChatViewProvider, FriendProvider, MsgProvider } from "./Context";
 
 let socket = require("socket.io-client")("ws://localhost:8080");
 
 ReactDOM.render(
   <ChatViewProvider>
-    <MsgProvider>
-      <App />
-    </MsgProvider>
+    <FriendProvider>
+      <MsgProvider>
+        <App />
+      </MsgProvider>
+    </FriendProvider>
   </ChatViewProvider>,
   document.getElementById("root")
 );

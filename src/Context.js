@@ -5,32 +5,7 @@ const initialMasterState = {
   userId: 4,
   friendsView: false,
   activeChat: null,
-  hover: null,
-  // newMessage: "",
-  // msgInputCharCount: 0,
-  friends: [
-    {
-      id: 1,
-      email: "friend_1@email.com",
-      username: "Friend_1",
-      avatar: "/avatar/one.png",
-      status: "busy"
-    },
-    {
-      id: 2,
-      email: "friend_2@email.com",
-      username: "Friend_2",
-      avatar: "/avatar/two.png",
-      status: "busy"
-    },
-    {
-      id: 3,
-      email: "friend_3@email.com",
-      username: "Friend_3",
-      avatar: "/avatar/three.png",
-      status: "busy"
-    }
-  ],
+  // hover: null,
   chatrooms: []
 };
 
@@ -73,7 +48,55 @@ const ChatViewProvider = props => {
   );
 };
 
-// export { ChatViewContext, ChatViewProvider };
+/********************************* FRIENDS CONTEXT ***********************************/
+
+const initialFriendState = {
+  selectedFriend: null,
+  friends: [
+    {
+      id: 1,
+      email: "friend_1@email.com",
+      username: "Friend_1",
+      avatar: "/avatar/one.png",
+      status: "busy"
+    },
+    {
+      id: 2,
+      email: "friend_2@email.com",
+      username: "Friend_2",
+      avatar: "/avatar/two.png",
+      status: "busy"
+    },
+    {
+      id: 3,
+      email: "friend_3@email.com",
+      username: "Friend_3",
+      avatar: "/avatar/three.png",
+      status: "busy"
+    }
+  ]
+};
+
+let friendReducer = (state, action) => {
+  switch (action.type) {
+    case "SELECT_FRIEND":
+      return { ...state, selectedFriend: action.data };
+    default:
+      throw new Error(`Unsupported action type: ${action.type}`);
+  }
+};
+
+const FriendContext = React.createContext(initialFriendState);
+
+const FriendProvider = props => {
+  const [friendState, dispatch] = useReducer(friendReducer, initialFriendState);
+
+  return (
+    <FriendContext.Provider value={{ friendState, dispatch }}>
+      {props.children}
+    </FriendContext.Provider>
+  );
+};
 
 /********************************* NEW MSG CONTEXT ***********************************/
 
@@ -120,4 +143,11 @@ const MsgProvider = props => {
   );
 };
 
-export { ChatViewContext, ChatViewProvider, MsgContext, MsgProvider };
+export {
+  ChatViewContext,
+  ChatViewProvider,
+  FriendContext,
+  FriendProvider,
+  MsgContext,
+  MsgProvider
+};
