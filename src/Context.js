@@ -25,12 +25,6 @@ let masterReducer = (state, action) => {
       return { ...state, hover: action.id };
     case "HOVER_OFF":
       return { ...state, hover: null };
-    // case "NEW_MESSAGE":
-    //   return { ...state, newMessage: action.data };
-    // case "MESSAGE_SENT":
-    //   return { ...state, newMessage: "" };
-    // case "UPDATE_COUNT":
-    //   return { ...state, msgInputCharCount: action.data };
     default:
       throw new Error(`Unsupported action type: ${action.type}`);
   }
@@ -103,6 +97,7 @@ const FriendProvider = props => {
 const initialMsgState = {
   newMessage: "",
   charCount: 0,
+  showEmoji: false,
   msgBtnStatus: true,
   countDisplay: "0 characters"
 };
@@ -111,6 +106,10 @@ let msgReducer = (state, action) => {
   switch (action.type) {
     case "NEW_MESSAGE":
       return { ...state, newMessage: action.data };
+    case "MSG_AND_EMOJI":
+      return { ...state, newMessage: action.data };
+    case "SHOW_EMOJI":
+      return { ...state, showEmoji: !state.showEmoji };
     case "MESSAGE_SENT":
       return {
         ...state,
@@ -123,8 +122,12 @@ let msgReducer = (state, action) => {
     case "UPDATE_COUNT":
       return {
         ...state,
-        charCount: action.data,
-        countDisplay: `${action.data.toString()} characters`
+        charCount: action.data
+      };
+    case "DISPLAY_COUNT":
+      return {
+        ...state,
+        countDisplay: `${state.charCount.toString()} characters`
       };
     default:
       throw new Error(`Unsupported action type: ${action.type}`);
