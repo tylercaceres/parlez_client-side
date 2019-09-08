@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
 
 import MsgEmojiIcon from "./MsgEmojiIcon";
 import MsgSubmitBtn from "./MsgSubmitBtn";
@@ -10,7 +12,7 @@ import { ChatViewContext, MsgContext } from "../../Context";
 import { sendMessage } from "../../server_api";
 
 const MsgChatBox = () => {
-  const { masterState} = useContext(ChatViewContext);
+  const { masterState } = useContext(ChatViewContext);
   const { msgState, dispatch } = useContext(MsgContext);
 
   const message = {
@@ -44,12 +46,40 @@ const MsgChatBox = () => {
   }));
   const classes = useStyles();
 
+  const addEmoji = e => {
+    console.log("COUNT", msgState.charCount);
+    dispatch({ type: "MSG_AND_EMOJI", data: msgState.newMessage + e.native });
+    dispatch({ type: "UPDATE_COUNT", data: msgState.charCount + 1 });
+    dispatch({ type: "DISPLAY_COUNT" });
+    dispatch({ type: "CHECK_COUNT" });
+  };
+
   return (
     <Box className={classes.container}>
       <Box className={classes.emoji}>
-        <MsgEmojiIcon></MsgEmojiIcon>
+        <MsgEmojiIcon
+          onClick={() => {
+            dispatch({ type: "SHOW_EMOJI" });
+          }}
+        ></MsgEmojiIcon>
       </Box>
       <MsgInputField></MsgInputField>
+      {msgState.showEmoji ? (
+        <span
+          style={{
+            position: "absolute",
+            bottom: 110
+          }}
+        >
+          <Picker
+            onSelect={addEmoji}
+            emojiTooltip={true}
+            showSkinTones={false}
+            showPreview={false}
+            title="weChat"
+          />
+        </span>
+      ) : null}
       <Box className={classes.emoji}>
         <MsgSubmitBtn
           disabled={msgState.msgBtnStatus}

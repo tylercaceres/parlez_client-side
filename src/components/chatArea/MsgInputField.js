@@ -32,6 +32,7 @@ const MsgInputField = () => {
     // setValues(event.target.value);
     dispatch({ type: "NEW_MESSAGE", data: event.target.value });
     dispatch({ type: "UPDATE_COUNT", data: event.target.value.length });
+    dispatch({ type: "DISPLAY_COUNT" });
     if (msgState.charCount !== 0) {
       dispatch({ type: "CHECK_COUNT" });
     }
