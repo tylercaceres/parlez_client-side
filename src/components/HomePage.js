@@ -8,7 +8,7 @@ import MsgChatBox from "./chatArea/MsgChatBox";
 import MsgChatItemList from "./chatArea/MsgChatItemList";
 import "./HomePage.scss";
 import { ChatViewContext, FriendContext } from "../Context";
-import { loadInitialData } from "../server_api";
+import { initialize, loadInitialData } from "../server_api";
 
 /***************************** HOME PAGE ********************************/
 
@@ -16,14 +16,18 @@ const HomePage = () => {
   const { masterState, dispatch } = useContext(ChatViewContext);
   const { friendState } = useContext(FriendContext);
 
-  useEffect(() => {
-    loadInitialData(data => {
-      dispatch({
-        type: "LOAD_INITIAL_DATA",
-        data
-      });
+  // useEffect(() => {
+  // emits userId to retrieve user's data
+  initialize(masterState.userId);
+
+  // loads user's chatrooms/friends
+  loadInitialData(data => {
+    dispatch({
+      type: "LOAD_INITIAL_DATA",
+      data
     });
   });
+  // });
 
   console.log("HOOME_PG:", masterState);
 

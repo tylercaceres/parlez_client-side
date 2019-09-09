@@ -11,8 +11,6 @@ const initialMasterState = {
 
 let masterReducer = (state, action) => {
   switch (action.type) {
-    // case 'LOAD_INITIAL_DATA':
-    //   return {...state, chatrooms: '5'};
     case "LOAD_INITIAL_DATA":
       return { ...state, chatrooms: action.data };
     case "CHAT_VIEW":
