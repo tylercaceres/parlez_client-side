@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./SignUpPage.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import picbox from "../../assets/img/signup-image.jpg";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import axios from "axios";
+import { ChatViewContext } from "../../Context";
+import history from "../../history";
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -24,6 +25,8 @@ const SignUpPage = () => {
   //   email: email,
   //   password: password
   // };
+
+  const { masterState, dispatch } = useContext(ChatViewContext);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -45,20 +48,41 @@ const SignUpPage = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    const data = {
-      name: name,
-      email: email,
-      password: password
-    };
     axios
-      .post("/signup", data)
+      .post(
+        "http://localhost:3003/auth/register",
+        {
+          username: name,
+          email: email,
+          password: password,
+          confirmPassword: password
+        },
+        { withCredentials: true }
+      )
       .then(response => {
-        console.log(response);
-        this.props.history.push("/chat");
+        console.log("CHECKING ON SIGN UP PAGE TO SEE RESPONSE", response.data);
+
+        if (response.data["email"] === email) {
+          history.push("/chat");
+        }
+        if (response.data["email"] !== email) {
+          alert("Email does not exist");
+        }
+        /**************************** TYLERS CODE ****************************/
+        // if (
+        //   response.data.logged_in &&
+        //   masterState.loggedInStatus === "NOT_LOGGED_IN"
+        // ) {
+        //   //set state with user:res.data.user_id and loggedInStatus: true
+        // } else if (
+        //   !response.data.logged_in &&
+        //   masterState.loggedInStatus === "LOGGED_IN"
+        // ) {
+        // }
+        //set state with loggedInStatus: false, user: null
+        /**************************** TYLERS CODE ****************************/
       })
-      .catch(error => {
-        console.log("this is the error", error);
-      });
+      .catch(err => console.log("error:", err));
   };
 
   return (
@@ -68,9 +92,7 @@ const SignUpPage = () => {
           <h1>Sign up</h1>
           <div className={classes.margin}>
             <Grid container spacing={1} alignItems="flex-end">
-              <Grid item>
-                <AccountCircle />
-              </Grid>
+              <Grid item></Grid>
               <Grid item>
                 <TextField
                   id="input-with-icon-grid"
@@ -85,9 +107,7 @@ const SignUpPage = () => {
           </div>
           <div className={classes.margin}>
             <Grid container spacing={1} alignItems="flex-end">
-              <Grid item>
-                <AccountCircle />
-              </Grid>
+              <Grid item></Grid>
               <Grid item>
                 <TextField
                   id="input-with-icon-grid"
@@ -102,9 +122,7 @@ const SignUpPage = () => {
           </div>
           <div className={classes.margin}>
             <Grid container spacing={1} alignItems="flex-end">
-              <Grid item>
-                <AccountCircle />
-              </Grid>
+              <Grid item></Grid>
               <Grid item>
                 <TextField
                   id="input-with-icon-grid"
@@ -119,9 +137,7 @@ const SignUpPage = () => {
           </div>
           <div className={classes.margin}>
             <Grid container spacing={1} alignItems="flex-end">
-              <Grid item>
-                <AccountCircle />
-              </Grid>
+              <Grid item></Grid>
               <Grid item>
                 <TextField id="input-with-icon-grid" label="Repeat Password" />
               </Grid>

@@ -4,6 +4,8 @@ import ForumRoundedIcon from "@material-ui/icons/ForumRounded";
 import RecentActorsRoundedIcon from "@material-ui/icons/RecentActorsRounded";
 import "./ChatHeader.scss";
 import { ChatViewContext } from "../../Context";
+import ChatBubble from "../../assets/img/chatbubble.png";
+import Contacts from "../../assets/img/contacts1.png";
 
 const ChatHeader = () => {
   const { dispatch } = useContext(ChatViewContext);
@@ -20,12 +22,12 @@ const ChatHeader = () => {
     <div className="chat_header">
       <div className="chat_button">
         <ContactButton onClick={handleChatClick}>
-          <ForumRoundedIcon />
+          <img src={ChatBubble} className="chatImg" />
         </ContactButton>
       </div>
       <div className="contacts_button">
         <ContactButton onClick={handleFriendsClick}>
-          <RecentActorsRoundedIcon />
+          <img src={Contacts} className="chatImg" />
         </ContactButton>
       </div>
     </div>

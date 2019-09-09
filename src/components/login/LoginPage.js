@@ -1,110 +1,104 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./LoginPage.scss";
-import { Formik } from "formik";
 import { NavLink } from "react-router-dom";
-
-import * as Yup from "yup";
 import Button from "@material-ui/core/Button";
+import axios from "axios";
+import { ChatViewContext } from "../../Context";
+import history from "../../history";
 
-const ValidatedLoginForm = () => (
-  <Formik
-    initialValues={{ email: "", password: "" }}
-    onSubmit={(values, { setSubmitting }) => {
-      setTimeout(() => {
-        console.log("Logging in", values);
-        setSubmitting(false);
-      }, 500);
-    }}
-    validationSchema={Yup.object().shape({
-      email: Yup.string()
-        .email()
-        .required("Required"),
-      password: Yup.string()
-        .required("No password provided.")
-        .min(8, "Password is too short - should be 8 chars minimum.")
-        .matches(/(?=.*[0-9])/, "Password must contain a number.")
-    })}
+const ValidatedLoginForm = props => {
+  const { masterState, dispatch } = useContext(ChatViewContext);
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
 
-    //This would be the manual way of setting up validation checks for email and password.
-    /*validate={values => {
-      let errors = {};
-      if (!values.email) {
-        errors.email = "Required";
-      } else if (!EmailValidator.validate(values.email)) {
-        errors.email = "Invalid email address";
-      }
+  const onChangeLoginEmail = e => {
+    setLoginEmail(e.target.value);
+  };
 
-      const passwordRegex = /(?=.*[0-9])/;
-      if (!values.password) {
-        errors.password = "Required";
-      } else if (values.password.length < 8) {
-        errors.password = "Password must be 8 characters long.";
-      } else if (!passwordRegex.test(values.password)) {
-        errors.password = "Invalida password. Must contain one number";
-      }
+  const onChangeLoginPassword = e => {
+    setLoginPassword(e.target.value);
+  };
 
-      return errors;
-    }}*/
-  >
-    {props => {
-      const {
-        values,
-        touched,
-        errors,
-        isSubmitting,
-        handleChange,
-        handleBlur,
-        handleSubmit
-      } = props;
+  const handleLoginSubmit = e => {
+    e.preventDefault();
+    axios
+      .post(
+        "http://localhost:3003/auth/login",
+        {
+          email: loginEmail,
+          password: loginPassword
+        },
+        { withCredentials: true }
+      )
+      .then(response => {
+        console.log(
+          "POST HERE TO CHECK ON LOGIN PAGE TO SEE RESPONSE",
+          response.data
+        );
 
-      return (
-        <div className="container">
-          <form onSubmit={handleSubmit} className="form-container">
-            <div className="title">Parlez</div>
-            <div className="inputWithIcon">
-              <input
-                name="email"
-                type="text"
-                placeholder="Email..."
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className={errors.email && touched.email && "error"}
-              />
-              <i className="iconWithEmail" />
-            </div>
-            {errors.email && touched.email && (
-              <div className="input-feedback">{errors.email}</div>
-            )}
+        if (response.data["user_id"] === loginEmail) {
+          history.push("/chat");
+        }
+        if (response.data["user_id"] !== loginEmail) {
+          alert("Email does not exist");
+        }
 
-            <div className="inputWithIcon">
-              <input
-                name="password"
-                type="password"
-                placeholder="Password..."
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className={errors.password && touched.password && "error"}
-              />
-              <i className="iconWithPassword" />
-            </div>
-            {errors.password && touched.password && (
-              <div className="input-feedback">{errors.password}</div>
-            )}
-            <div className="btn-container">
-              <Button type="submit" disabled={isSubmitting}>
-                Login
-              </Button>
-              <NavLink to="/signup" className="link">
-                <Button>Sign up</Button>
-              </NavLink>
-            </div>
-          </form>
+        /**************************** TYLERS CODE ****************************/
+        // if (!response.data === "Error. Credentials are incorrect.") {
+        //   console.log("checking the response data here", response.data);
+        //   setAuth(true);
+        // } else if (
+        //   response.data.logged_in &&
+        //   masterState.loggedInStatus === "NOT_LOGGED_IN"
+        // ) {
+        //   //set state with user:res.data.user_id and loggedInStatus: true
+        // } else if (
+        //   !response.data.logged_in &&
+        //   masterState.loggedInStatus === "LOGGED_IN"
+        // ) {
+        // }
+        //set state with loggedInStatus: false, user: null
+        /**************************** TYLERS CODE ****************************/
+      })
+      .catch(err => console.log("error:", err));
+  };
+
+  return (
+    <div className="container">
+      <form onSubmit={handleLoginSubmit} className="form-container">
+        <div className="title">Parlez</div>
+        <div className="inputWithIcon">
+          <input
+            name="email"
+            type="text"
+            placeholder="Email..."
+            value={loginEmail}
+            onChange={onChangeLoginEmail}
+          />
+          <i className="iconWithEmail" />
         </div>
-      );
-    }}
-  </Formik>
-);
+
+        <div className="inputWithIcon">
+          <input
+            name="password"
+            type="password"
+            placeholder="Password..."
+            value={loginPassword}
+            onChange={onChangeLoginPassword}
+          />
+          <i className="iconWithPassword" />
+        </div>
+
+        <div className="btn-container">
+          <Button type="submit">Login</Button>
+
+          <NavLink to="/signup" className="link">
+            <Button>Sign up</Button>
+          </NavLink>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 export default ValidatedLoginForm;
