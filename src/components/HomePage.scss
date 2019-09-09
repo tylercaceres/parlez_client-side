@@ -1,46 +1,63 @@
 .layout {
   display: flex;
   flex-direction: row;
-  border: black solid 2px;
-  height: 55.6vmax;
-  width: 98.7vmax;
+  border: solid 1.5px black;
+  height: 930px;
+}
 
-  .contactsArea {
-    justify-content: flex-start;
-    display: flex;
-    flex-direction: column;
+.userHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 5px;
+  border-bottom: 1px black solid;
+}
 
-    .chatHeader {
-      justify-content: flex-start;
-    }
+.contactsArea {
+  display: flex;
+  justify-items: center;
+  flex-direction: column;
+  width: 300px;
+  border-right: 1px black solid;
+}
 
-    .contacts {
-      justify-content: flex-start;
-      border: 5px red solid;
-      padding: 0;
-      height: 85vmax;
-      width: 25.3vmax;
-      overflow: auto;
-    }
-  }
+.chatHeader {
+  justify-content: flex-start;
+}
 
-  .chatBox {
-    justify-content: flex-end;
-    display: flex;
-    flex-direction: column;
+.contacts {
+  justify-content: flex-start;
+  border: 1px solid black;
+  padding: 0;
+  height: 85vmax;
+  width: 25.3vmax;
+  overflow: auto;
+}
 
-    .chatArea {
-      justify-content: flex-start;
-      border: 5px pink solid;
-      width: 72vmax;
-      height: 76vmax;
-      overflow: auto;
-    }
+.chatBox {
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: column;
+}
 
-    .chatInput {
-      border: 5px blue solid;
-      padding: 0;
-      justify-content: flex-end;
-    }
-  }
+.chatArea {
+  justify-content: flex-start;
+
+  width: 72vmax;
+  height: 76vmax;
+  overflow: auto;
+}
+
+.chatInput {
+  padding: 0;
+  justify-content: flex-end;
+}
+
+.emptyChat {
+  display: flex;
+  flex-direction: row;
+  width: 1580px;
+  height: 430px;
+  padding-top: 500px;
+  justify-content: center;
 }
