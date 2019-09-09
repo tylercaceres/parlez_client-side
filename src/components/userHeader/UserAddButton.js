@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 import AddFriend from "./AddFriend/AddFriend";
+import AddButton from "../../assets/img/plus.png";
+import "./UserAddButton.scss";
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -60,9 +61,9 @@ export default function SimpleMenu() {
       <Button
         aria-controls="simple-menu"
         aria-haspopup="true"
-        onClick={handleClick}
+        onMouseOver={handleClick}
       >
-        <AddCircleIcon />
+        <img src={AddButton} className="addButton" />
       </Button>
       <Menu
         id="simple-menu"

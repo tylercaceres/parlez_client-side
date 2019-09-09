@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./UserAvatar.scss";
-import Avatar from "@material-ui/core/Avatar";
 import pic from "../../../src/assets/img/Image-1.png";
 
 export default function ImageAvatars(props) {
@@ -8,10 +7,10 @@ export default function ImageAvatars(props) {
 
   return (
     <div>
-      <Avatar
-        alt="Remy Sharp"
+      <img
+        alt={"avatar"}
         src={newAvatar}
-        className="bigAvatar"
+        className="avatar"
         onClick={() => {
           props.onClick(setNewAvatar);
         }}
