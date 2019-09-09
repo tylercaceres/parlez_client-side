@@ -8,9 +8,7 @@ import MsgChatBox from "./chatArea/MsgChatBox";
 import MsgChatItemList from "./chatArea/MsgChatItemList";
 import "./HomePage.scss";
 import { ChatViewContext, FriendContext } from "../Context";
-import { initialize, loadInitialData } from "../server_api";
-
-/***************************** HOME PAGE ********************************/
+import { loadInitialData } from "../server_api";
 import UserAvatar from "./userHeader/UserAvatar";
 import UserButton from "./userHeader/UserAddButton";
 import Divider from "@material-ui/core/Divider";
@@ -24,17 +22,17 @@ const HomePage = () => {
   const { masterState, dispatch } = useContext(ChatViewContext);
   const { friendState } = useContext(FriendContext);
 
-  // useEffect(() => {
-  // emits userId to retrieve user's data
-  initialize(masterState.userId);
+  console.log("HOME_PG", masterState);
 
-  // loads user's chatrooms/friends
-  loadInitialData(data => {
-    dispatch({
-      type: "LOAD_INITIAL_DATA",
-      data
-    });
-  });
+  console.log("FRIEND_STATE", friendState);
+
+  // useEffect(() => {
+  //   loadInitialData(data => {
+  //     dispatch({
+  //       type: "LOAD_INITIAL_DATA",
+  //       data
+  //     });
+  //   });
   // });
 
   return (

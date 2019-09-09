@@ -1,8 +1,8 @@
 import React, { useReducer } from "react";
 
 const initialMasterState = {
-  username: "rparlot3",
-  userId: 4,
+  userId: null,
+  isLoggedIn: false,
   friendsView: false,
   activeChat: null,
   // hover: null,
@@ -11,6 +11,8 @@ const initialMasterState = {
 
 let masterReducer = (state, action) => {
   switch (action.type) {
+    case "SIGNUP":
+      return { ...state, userId: action.id, isLoggedIn: action.data };
     case "LOAD_INITIAL_DATA":
       return { ...state, chatrooms: action.data };
     case "CHAT_VIEW":
@@ -23,6 +25,18 @@ let masterReducer = (state, action) => {
       return { ...state, hover: action.id };
     case "HOVER_OFF":
       return { ...state, hover: null };
+    case "ADD_MESSAGE":
+      const temp = state.chatrooms.map(chatroom => {
+        if (chatroom.id === action.data.chatroom) {
+          return {
+            ...chatroom,
+            messages: [...chatroom.messages, action.data.message]
+          };
+        } else {
+          return { ...chatroom };
+        }
+      });
+      return { ...state, chatrooms: temp };
     default:
       throw new Error(`Unsupported action type: ${action.type}`);
   }
@@ -44,35 +58,15 @@ const ChatViewProvider = props => {
 
 const initialFriendState = {
   selectedFriend: null,
-  friends: [
-    {
-      id: 1,
-      email: "friend_1@email.com",
-      username: "Friend_1",
-      avatar: "/avatar/one.png",
-      status: "busy"
-    },
-    {
-      id: 2,
-      email: "friend_2@email.com",
-      username: "Friend_2",
-      avatar: "/avatar/two.png",
-      status: "busy"
-    },
-    {
-      id: 3,
-      email: "friend_3@email.com",
-      username: "Friend_3",
-      avatar: "/avatar/three.png",
-      status: "busy"
-    }
-  ]
+  friends: []
 };
 
 let friendReducer = (state, action) => {
   switch (action.type) {
     case "SELECT_FRIEND":
       return { ...state, selectedFriend: action.data };
+    case "LOAD_FRIENDS":
+      return { ...state, friends: action.data };
     default:
       throw new Error(`Unsupported action type: ${action.type}`);
   }
@@ -81,10 +75,13 @@ let friendReducer = (state, action) => {
 const FriendContext = React.createContext(initialFriendState);
 
 const FriendProvider = props => {
-  const [friendState, dispatch] = useReducer(friendReducer, initialFriendState);
+  const [friendState, dispatchFriend] = useReducer(
+    friendReducer,
+    initialFriendState
+  );
 
   return (
-    <FriendContext.Provider value={{ friendState, dispatch }}>
+    <FriendContext.Provider value={{ friendState, dispatchFriend }}>
       {props.children}
     </FriendContext.Provider>
   );
