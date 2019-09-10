@@ -26,3 +26,5 @@ server2/tmp
 serverv2/tmp
 
 client/node_modules
+.vscode
+.gitignore
