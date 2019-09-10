@@ -37,6 +37,17 @@ let masterReducer = (state, action) => {
         }
       });
       return { ...state, chatrooms: temp };
+    case "DELETE_MESSAGE":
+      const temp2 = state.chatrooms.map(chatroom => {
+        if (chatroom.id === action.chatroom_id) {
+          let msgIndex = chatroom.messages.findIndex(msg => msg.id === action.message_id);
+          let newMsgArr = chatroom.messages.splice(msgIndex, 1);
+          return { ...chatroom, messages: [...newMsgArr] };
+        } else {
+          return { ...chatroom };
+        }
+      });
+      return { ...state, chatroom: temp2 };
     default:
       throw new Error(`Unsupported action type: ${action.type}`);
   }
@@ -47,11 +58,7 @@ const ChatViewContext = React.createContext(initialMasterState);
 const ChatViewProvider = props => {
   const [masterState, dispatch] = useReducer(masterReducer, initialMasterState);
 
-  return (
-    <ChatViewContext.Provider value={{ masterState, dispatch }}>
-      {props.children}
-    </ChatViewContext.Provider>
-  );
+  return <ChatViewContext.Provider value={{ masterState, dispatch }}>{props.children}</ChatViewContext.Provider>;
 };
 
 /********************************* FRIENDS CONTEXT ***********************************/
@@ -75,16 +82,9 @@ let friendReducer = (state, action) => {
 const FriendContext = React.createContext(initialFriendState);
 
 const FriendProvider = props => {
-  const [friendState, dispatchFriend] = useReducer(
-    friendReducer,
-    initialFriendState
-  );
+  const [friendState, dispatchFriend] = useReducer(friendReducer, initialFriendState);
 
-  return (
-    <FriendContext.Provider value={{ friendState, dispatchFriend }}>
-      {props.children}
-    </FriendContext.Provider>
-  );
+  return <FriendContext.Provider value={{ friendState, dispatchFriend }}>{props.children}</FriendContext.Provider>;
 };
 
 /********************************* NEW MSG CONTEXT ***********************************/
@@ -134,18 +134,7 @@ const MsgContext = React.createContext(initialMsgState);
 const MsgProvider = props => {
   const [msgState, dispatch] = useReducer(msgReducer, initialMsgState);
 
-  return (
-    <MsgContext.Provider value={{ msgState, dispatch }}>
-      {props.children}
-    </MsgContext.Provider>
-  );
+  return <MsgContext.Provider value={{ msgState, dispatch }}>{props.children}</MsgContext.Provider>;
 };
 
-export {
-  ChatViewContext,
-  ChatViewProvider,
-  FriendContext,
-  FriendProvider,
-  MsgContext,
-  MsgProvider
-};
+export { ChatViewContext, ChatViewProvider, FriendContext, FriendProvider, MsgContext, MsgProvider };
