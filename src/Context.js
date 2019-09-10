@@ -41,11 +41,10 @@ let masterReducer = (state, action) => {
     case "DELETE_MESSAGE":
       const temp2 = state.chatrooms.map(chatroom => {
         if (chatroom.id === action.chatroom_id) {
-          let msgIndex = chatroom.messages.findIndex(
-            msg => msg.id === action.message_id
-          );
-          let newMsgArr = chatroom.messages.splice(msgIndex, 1);
-          return { ...chatroom, messages: [...newMsgArr] };
+          let msgIndex = chatroom.messages.findIndex(msg => msg.id === action.message_id);
+          let MsgArr = chatroom.messages;
+          MsgArr.splice(msgIndex, 1);
+          return { ...chatroom, messages: [...MsgArr] };
         } else {
           return { ...chatroom };
         }
@@ -54,9 +53,7 @@ let masterReducer = (state, action) => {
     case "UPDATE_DELETE_MESSAGE":
       const temp3 = state.chatrooms.map(chatroom => {
         if (chatroom.id === action.chatroom_id) {
-          let msgIndex = chatroom.messages.findIndex(
-            msg => msg.id === action.message_id
-          );
+          let msgIndex = chatroom.messages.findIndex(msg => msg.id === action.message_id);
           let newMsgArr = chatroom.messages.splice(msgIndex, 1, action.message);
           return { ...chatroom, messages: [...newMsgArr] };
         } else {
@@ -67,9 +64,7 @@ let masterReducer = (state, action) => {
     case "DELETE_CHATROOM":
       debugger;
       let tempChatrooms = state.chatrooms;
-      let chatIndex = tempChatrooms.findIndex(
-        chat => chat.id === action.chatroom_id
-      );
+      let chatIndex = tempChatrooms.findIndex(chat => chat.id === action.chatroom_id);
       tempChatrooms.splice(chatIndex, 1);
       return { ...state, chatrooms: tempChatrooms };
     default:
@@ -82,11 +77,7 @@ const ChatViewContext = React.createContext(initialMasterState);
 const ChatViewProvider = props => {
   const [masterState, dispatch] = useReducer(masterReducer, initialMasterState);
 
-  return (
-    <ChatViewContext.Provider value={{ masterState, dispatch }}>
-      {props.children}
-    </ChatViewContext.Provider>
-  );
+  return <ChatViewContext.Provider value={{ masterState, dispatch }}>{props.children}</ChatViewContext.Provider>;
 };
 
 /********************************* FRIENDS CONTEXT ***********************************/
@@ -112,16 +103,9 @@ let friendReducer = (state, action) => {
 const FriendContext = React.createContext(initialFriendState);
 
 const FriendProvider = props => {
-  const [friendState, dispatchFriend] = useReducer(
-    friendReducer,
-    initialFriendState
-  );
+  const [friendState, dispatchFriend] = useReducer(friendReducer, initialFriendState);
 
-  return (
-    <FriendContext.Provider value={{ friendState, dispatchFriend }}>
-      {props.children}
-    </FriendContext.Provider>
-  );
+  return <FriendContext.Provider value={{ friendState, dispatchFriend }}>{props.children}</FriendContext.Provider>;
 };
 
 /********************************* NEW MSG CONTEXT ***********************************/
@@ -171,18 +155,7 @@ const MsgContext = React.createContext(initialMsgState);
 const MsgProvider = props => {
   const [msgState, dispatch] = useReducer(msgReducer, initialMsgState);
 
-  return (
-    <MsgContext.Provider value={{ msgState, dispatch }}>
-      {props.children}
-    </MsgContext.Provider>
-  );
+  return <MsgContext.Provider value={{ msgState, dispatch }}>{props.children}</MsgContext.Provider>;
 };
 
-export {
-  ChatViewContext,
-  ChatViewProvider,
-  FriendContext,
-  FriendProvider,
-  MsgContext,
-  MsgProvider
-};
+export { ChatViewContext, ChatViewProvider, FriendContext, FriendProvider, MsgContext, MsgProvider };
