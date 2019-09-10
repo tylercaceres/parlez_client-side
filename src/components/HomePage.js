@@ -82,6 +82,26 @@ const HomePage = () => {
         message_id: message_id
       });
     });
+
+    socket.on("delete owner message", data => {
+      let chatroom_id = data.chatroom;
+      let message_id = data.message.id;
+      let message = data.message;
+      dispatch({
+        type: "UPDATE_DELETE_MESSAGE",
+        chatroom_id: chatroom_id,
+        message_id: message_id,
+        message: message
+      });
+    });
+
+    socket.on("delete viewable messages", data => {
+      let chatroom_id = data;
+      dispatch({
+        type: "DELETE_CHATROOM",
+        chatroom_id: chatroom_id
+      });
+    });
   }, []);
 
   return (

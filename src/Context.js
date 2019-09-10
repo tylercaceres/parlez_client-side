@@ -5,7 +5,6 @@ const initialMasterState = {
   isLoggedIn: false,
   friendsView: false,
   activeChat: null,
-  // hover: null,
   chatrooms: []
 };
 
@@ -21,6 +20,8 @@ let masterReducer = (state, action) => {
       return { ...state, friendsView: true };
     case "ACTIVATE_CHAT":
       return { ...state, friendsView: false, activeChat: action.id };
+    case "ACTIVATE_SETTINGS":
+      return { ...state, activeChat: null };
     case "HOVER_ON":
       return { ...state, hover: action.id };
     case "HOVER_OFF":
@@ -47,7 +48,24 @@ let masterReducer = (state, action) => {
           return { ...chatroom };
         }
       });
-      return { ...state, chatroom: temp2 };
+      return { ...state, chatrooms: temp2 };
+    case "UPDATE_DELETE_MESSAGE":
+      const temp3 = state.chatrooms.map(chatroom => {
+        if (chatroom.id === action.chatroom_id) {
+          let msgIndex = chatroom.messages.findIndex(msg => msg.id === action.message_id);
+          let newMsgArr = chatroom.messages.splice(msgIndex, 1, action.message);
+          return { ...chatroom, messages: [...newMsgArr] };
+        } else {
+          return { ...chatroom };
+        }
+      });
+      return { ...state, chatrooms: temp3 };
+    case "DELETE_CHATROOM":
+      debugger;
+      let tempChatrooms = state.chatrooms;
+      let chatIndex = tempChatrooms.findIndex(chat => chat.id === action.chatroom_id);
+      tempChatrooms.splice(chatIndex, 1);
+      return { ...state, chatrooms: tempChatrooms };
     default:
       throw new Error(`Unsupported action type: ${action.type}`);
   }
