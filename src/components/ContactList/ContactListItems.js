@@ -58,8 +58,9 @@ const ContactListItem = props => {
   const classes_two = useStyles_two();
 
   return (
-    <li onClick={props.onClick} style={listStyle}>
-      <Card className={props.selected ? classes_two.card : classes.card}>
+    <li style={listStyle}>
+      <ChatSettingsButton chatType={props.chatType} chatId={props.id} />
+      <Card onClick={props.onClick} className={props.selected ? classes_two.card : classes.card}>
         <ThemeProvider theme={theme}>
           <CardHeader
             avatar={
@@ -67,7 +68,6 @@ const ContactListItem = props => {
                 <ChatAvatar avatar={props.chatAvatar} />
               </Badge>
             }
-            action={<ChatSettingsButton chatType={props.chatType} />}
             title={<Typography varaiant="h1">{props.chatName}</Typography>}
             subheader={props.recentMessage}
           />

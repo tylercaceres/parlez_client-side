@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { socket } from "../../server_api";
+import { ChatViewContext } from "../../Context";
 
 const RoundSettingsButton = props => {
+  const { masterState, dispatch } = useContext(ChatViewContext);
+
   const singleChatOptions = ["Delete Chat", "Close"];
   const groupChatOptions = ["Leave Group", "Delete Chat", "Close"];
 
@@ -12,6 +16,12 @@ const RoundSettingsButton = props => {
   const [popupElementGroup, setPopupElementGroup] = useState(false);
   const openSingle = Boolean(popupElementSingle); // sets popupElement to true
   const openGroup = Boolean(popupElementGroup);
+
+  const handleClick = id => {
+    console.log("Clicked with id", id);
+    dispatch({ type: "ACTIVATE_SETTINGS" });
+    console.log("check clicked", masterState);
+  };
 
   const handleClickSingle = event => {
     setPopupElementSingle(event.currentTarget);
@@ -21,14 +31,22 @@ const RoundSettingsButton = props => {
     setPopupElementGroup(event.currentTarget);
   };
 
-  const handleCloseSingle = option => {
+  const handleCloseSingle = (option, id) => {
+    console.log("CLICKED THIS ID:", id);
     if (option === "Delete Chat") {
       console.log("DELETE");
+      socket.emit("delete chatroom button", id);
+    } else {
+      setPopupElementSingle(false);
     }
-    setPopupElementSingle(false);
   };
 
-  const handleCloseGroup = () => {
+  const handleCloseGroup = (option, id) => {
+    console.log("CLICKED THIS ID:", id);
+
+    if (option === "Leave Group") {
+      console.log("Leave Group");
+    }
     setPopupElementGroup(false);
   };
 
@@ -46,7 +64,7 @@ const RoundSettingsButton = props => {
         }}
       >
         {singleChatOptions.map(option => (
-          <MenuItem key={option} onClick={() => handleCloseSingle(option)}>
+          <MenuItem key={option} onClick={() => handleCloseSingle(option, props.chatId)}>
             {option}
           </MenuItem>
         ))}
@@ -63,7 +81,7 @@ const RoundSettingsButton = props => {
         }}
       >
         {groupChatOptions.map(option => (
-          <MenuItem key={option} onClick={handleCloseGroup}>
+          <MenuItem key={option} onClick={() => handleCloseGroup(option, props.chatId)}>
             {option}
           </MenuItem>
         ))}
@@ -73,14 +91,8 @@ const RoundSettingsButton = props => {
 
   return (
     <div>
-      <IconButton
-        onClick={
-          props.chatType === "group" ? handleClickGroup : handleClickSingle
-        }
-        disabled={props.selected}
-        // chatType={props.chatType}
-      >
-        <MoreVertIcon />
+      <IconButton onClick={props.chatType === "group" ? handleClickGroup : handleClickSingle} disabled={props.selected}>
+        <MoreVertIcon onClick={() => handleClick(props.chatId)} />
       </IconButton>
 
       {renderMenu}

@@ -16,14 +16,12 @@ const recentMessage = message => {
 
 const ContactList = () => {
   const { masterState, dispatch } = useContext(ChatViewContext);
-  // console.log(masterState.chatrooms);
+
   const ContactListItems =
     masterState.chatrooms.length > 0
       ? masterState.chatrooms.map(chat => {
-          // console.log("message_time", chat.messages[0].created_at);
           const recentMessageTime = `${recentMessage(chat.messages[0].content)}
     ${chat.messages[0].created_at}`;
-          // console.log("message + time", recentMessageTime);
 
           return (
             <ContactListItem
@@ -40,7 +38,6 @@ const ContactList = () => {
                   id: chat.id
                 })
               }
-              // hover={masterState.hover === chat.id}
             />
           );
         })
