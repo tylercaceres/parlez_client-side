@@ -55,6 +55,12 @@ const MsgChatBox = () => {
     dispatch({ type: "CHECK_COUNT" });
   };
 
+  // const handleEnterKeyPress = event => {
+  //   if (event.key === "Enter") {
+  //     console.log("enter press here! ");
+  //   }
+  // };
+
   return (
     <Box className={classes.container}>
       <Box className={classes.emoji}>
