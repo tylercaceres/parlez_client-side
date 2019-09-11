@@ -48,31 +48,37 @@ const SideList = side => {
     socket.on("updated username data", data => {
       dispatchProfile({ type: "UPDATED_USERNAME", data });
       console.log("CHECKING FRONT END FOR RECEIVING DATA BACK", data);
-      console.log(
-        "CHECKING FRONT END FOR RECEIVING DATA.username BACK",
-        data.username
-      );
+      console.log("CHECKING FRONT END FOR RECEIVING DATA.username BACK", data.username);
+    });
+    socket.on("updated avatar data", data => {
+      dispatchProfile({ type: "UPDATED_AVATAR", data });
+      console.log("FRONT END SIDE FOR DATA", data);
+    });
+    socket.on("updated status data", data => {
+      dispatchProfile({ type: "UPDATED_STATUS", data });
     });
   }, []);
 
   const urlHandler = () => {
-    //set name here
+    console.log("URL HANDLER DATA");
+    socket.emit("change url", {
+      creatorUserId: masterState.userId,
+      avatar: changeAvatar
+    });
   };
 
   const statusHandler = () => {
-    //set name here
+    socket.emit("change status", {
+      creatorUserId: masterState.userId,
+      status: changeStatus
+    });
   };
 
   return (
     <div className="sideDrawerBox" role="presentation">
       <div>
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-          className="testGrid"
-        >
-          <img alt="anchen" src={pic} className="bigAvatarBox" />
+        <Grid container justify="center" alignItems="center" className="testGrid">
+          <img alt="anchen" src={profileState.avatar} className="bigAvatarBox" />
         </Grid>
       </div>
       <div className="profileInfoBox">
@@ -89,12 +95,7 @@ const SideList = side => {
             }}
             margin="normal"
           />
-          <button
-            color="secondary"
-            aria-label="edit"
-            className="fab"
-            onClick={nameHandler}
-          >
+          <button color="secondary" aria-label="edit" className="fab" onClick={nameHandler}>
             <EditIcon />
           </button>
         </div>
@@ -111,12 +112,7 @@ const SideList = side => {
             }}
             margin="normal"
           />
-          <button
-            color="secondary"
-            aria-label="edit"
-            className="fab"
-            onClick={urlHandler}
-          >
+          <button color="secondary" aria-label="edit" className="fab" onClick={urlHandler}>
             <EditIcon />
           </button>
         </div>
@@ -134,12 +130,7 @@ const SideList = side => {
             }}
             margin="normal"
           />
-          <button
-            color="secondary"
-            aria-label="edit"
-            className="fab"
-            onClick={statusHandler}
-          >
+          <button color="secondary" aria-label="edit" className="fab" onClick={statusHandler}>
             <EditIcon className="editBtnIcon" />
           </button>
         </div>
