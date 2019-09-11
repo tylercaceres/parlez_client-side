@@ -20,26 +20,27 @@ const ContactList = () => {
   const ContactListItems =
     masterState.chatrooms.length > 0
       ? masterState.chatrooms.map(chat => {
-          const recentMessageTime = `${recentMessage(chat.messages[0].content)}
-    ${chat.messages[0].created_at}`;
-
-          return (
-            <ContactListItem
-              key={chat.id}
-              id={chat.id}
-              chatType={chat.type}
-              chatName={chat.name}
-              chatAvatar={chat.avatar}
-              selected={masterState.activeChat === chat.id}
-              recentMessage={recentMessageTime}
-              onClick={() =>
-                dispatch({
-                  type: "ACTIVATE_CHAT",
-                  id: chat.id
-                })
-              }
-            />
-          );
+          if (chat.messages.length > 0) {
+            let recentMessageTime = `${recentMessage(chat.messages[0].content)}
+          ${chat.messages[0].created_at}`;
+            return (
+              <ContactListItem
+                key={chat.id}
+                id={chat.id}
+                chatType={chat.type}
+                chatName={chat.name}
+                chatAvatar={chat.avatar}
+                selected={masterState.activeChat === chat.id}
+                recentMessage={recentMessageTime}
+                onClick={() =>
+                  dispatch({
+                    type: "ACTIVATE_CHAT",
+                    id: chat.id
+                  })
+                }
+              />
+            );
+          }
         })
       : [];
 

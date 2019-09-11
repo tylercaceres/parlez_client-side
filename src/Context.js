@@ -27,17 +27,23 @@ let masterReducer = (state, action) => {
     case "HOVER_OFF":
       return { ...state, hover: null };
     case "ADD_MESSAGE":
-      const temp = state.chatrooms.map(chatroom => {
-        if (chatroom.id === action.data.chatroom) {
-          return {
-            ...chatroom,
-            messages: [...chatroom.messages, action.data.message]
-          };
-        } else {
-          return { ...chatroom };
-        }
-      });
-      return { ...state, chatrooms: temp };
+      console.log("ADD MESSAGE HAS BEEN FIRED", state);
+      let matchChat = state.chatrooms.findIndex(chat => chat.id === action.data.id);
+      if (matchChat != -1) {
+        const temp = state.chatrooms.map(chatroom => {
+          if (chatroom.id === action.data.id) {
+            return {
+              ...chatroom,
+              messages: [...chatroom.messages, action.data.messages[0]]
+            };
+          } else {
+            return { ...chatroom };
+          }
+        });
+        return { ...state, chatrooms: temp };
+      } else {
+        return { ...state, chatrooms: [...state.chatrooms, action.data] };
+      }
     case "DELETE_MESSAGE":
       const temp2 = state.chatrooms.map(chatroom => {
         if (chatroom.id === action.chatroom_id) {
@@ -54,7 +60,8 @@ let masterReducer = (state, action) => {
       const temp3 = state.chatrooms.map(chatroom => {
         if (chatroom.id === action.chatroom_id) {
           let msgIndex = chatroom.messages.findIndex(msg => msg.id === action.message_id);
-          let newMsgArr = chatroom.messages.splice(msgIndex, 1, action.message);
+          let newMsgArr = chatroom.messages;
+          newMsgArr.splice(msgIndex, 1, action.message);
           return { ...chatroom, messages: [...newMsgArr] };
         } else {
           return { ...chatroom };
@@ -62,7 +69,6 @@ let masterReducer = (state, action) => {
       });
       return { ...state, chatrooms: temp3 };
     case "DELETE_CHATROOM":
-      debugger;
       let tempChatrooms = state.chatrooms;
       let chatIndex = tempChatrooms.findIndex(chat => chat.id === action.chatroom_id);
       tempChatrooms.splice(chatIndex, 1);

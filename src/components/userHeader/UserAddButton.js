@@ -6,6 +6,7 @@ import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 import AddFriend from "./AddFriend/AddFriend";
 import AddButton from "../../assets/img/plus.png";
+import CreateChat from "../userHeader/NewChat/CreateChat";
 import "./UserAddButton.scss";
 
 function rand() {
@@ -47,6 +48,15 @@ export default function SimpleMenu() {
   }
 
   const [modalShow, setModalShow] = React.useState(false);
+  const [chatModal, setChatModal] = React.useState(false);
+
+  const handleChatModalClose = () => {
+    setChatModal(false);
+  };
+
+  const handleChatModalOpen = () => {
+    setChatModal(true);
+  };
 
   function handleModalOpen() {
     setModalShow(true);
@@ -58,24 +68,16 @@ export default function SimpleMenu() {
 
   return (
     <div>
-      <Button
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        onMouseOver={handleClick}
-      >
+      <Button aria-controls="simple-menu" aria-haspopup="true" onMouseOver={handleClick}>
         <img src={AddButton} className="addButton" />
       </Button>
-      <Menu
-        id="simple-menu"
-        anchorEl={addButton}
-        keepMounted
-        open={Boolean(addButton)}
-        onClose={handleClose}
-      >
+      <Menu id="simple-menu" anchorEl={addButton} keepMounted open={Boolean(addButton)} onClose={handleClose}>
         <MenuItem onClick={handleModalOpen} onClose={handleModalClose}>
           Add New Friends
         </MenuItem>
-        <MenuItem onClick={handleClose}>Create New Chat</MenuItem>
+        <MenuItem onClick={handleChatModalOpen} onClose={handleChatModalClose}>
+          Create New Chat
+        </MenuItem>
       </Menu>
 
       <Modal
@@ -86,6 +88,17 @@ export default function SimpleMenu() {
       >
         <div style={modalStyle} className={classes.paper}>
           <AddFriend />
+        </div>
+      </Modal>
+
+      <Modal
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        open={chatModal}
+        onClose={handleChatModalClose}
+      >
+        <div style={modalStyle} className={classes.paper}>
+          <CreateChat />
         </div>
       </Modal>
     </div>
