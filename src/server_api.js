@@ -1,6 +1,3 @@
-// import React, {useContext} from 'react';
-// import {ChatViewContext, FriendContext} from './Context';
-// const {friendState, dispatchFriend} = useContext(FriendContext);
 let socket = require("socket.io-client")("ws://localhost:8080");
 
 const sendUserId = user_id => {
@@ -32,18 +29,4 @@ const sendMessage = msg => {
   socket.emit("send message", msg);
 };
 
-const receiveMessage = cb => {
-  socket.on("new chatroom message", msg => {
-    console.log("MSG_RECEIVED", msg);
-    cb(msg);
-  });
-};
-
-export {
-  sendUserId,
-  loadInitialChatroomsData,
-  loadInitialFriendsData,
-  sendMessage,
-  receiveMessage,
-  socket
-};
+export { sendUserId, loadInitialChatroomsData, loadInitialFriendsData, sendMessage, socket };

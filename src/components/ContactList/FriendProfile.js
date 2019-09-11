@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -12,7 +12,8 @@ import KeyboardVoiceIcon from "@material-ui/icons/KeyboardVoice";
 import VideocamIcon from "@material-ui/icons/Videocam";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 
-import { FriendContext } from "../../Context";
+import { FriendContext, ChatViewContext } from "../../Context";
+import { socket } from "../../server_api";
 
 const useStyles = makeStyles({
   card: {
@@ -23,18 +24,42 @@ const useStyles = makeStyles({
 });
 
 const FriendProfile = () => {
-  const { friendState } = useContext(FriendContext);
+  const { friendState, dispatchFriend } = useContext(FriendContext);
+  const { masterState } = useContext(ChatViewContext);
 
+  let id = "";
   let username = "";
   let avatar = "";
   let status = "";
 
   friendState.friends.map(friend => {
     if (friend.id === friendState.selectedFriend) {
+      id = friend.id;
       username = friend.username;
       avatar = friend.avatar;
       status = friend.status;
     }
+  });
+
+  const handleSubmit = (friend_id, friend_username, friend_avatar) => {
+    socket.emit("create single chat", {
+      type: "single",
+      name: friend_username,
+      creatorUserId: masterState.userId,
+      usersArr: [friend_id, masterState.userId],
+      avatar: friend_avatar
+    });
+  };
+
+  const handleDelete = friend_id => {
+    socket.emit("delete friend", friend_id);
+  };
+
+  useEffect(() => {
+    socket.on("friendlist data", data => {
+      dispatchFriend({ type: "LOAD_FRIENDS", data });
+      dispatchFriend({ type: "DELETED_FRIEND" });
+    });
   });
 
   const classes = useStyles();
@@ -53,21 +78,21 @@ const FriendProfile = () => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Fab variant="extended" aria-label="delete" color="primary">
+        <Fab variant="extended" aria-label="delete" color="primary" onClick={() => handleSubmit(id, username, avatar)}>
           <AddIcon />
           Message
         </Fab>
-        <Fab variant="extended" aria-label="delete" color="primary">
+        {/* <Fab variant="extended" aria-label="delete" color="primary">
           <KeyboardVoiceIcon />
           Voice Call
         </Fab>
         <Fab variant="extended" aria-label="delete" color="primary">
           <VideocamIcon />
           Video Call
-        </Fab>
-        <Fab variant="extended" aria-label="delete" color="secondary">
+        </Fab> */}
+        <Fab variant="extended" aria-label="delete" color="secondary" onClick={() => handleDelete(id)}>
           <HighlightOffIcon />
-          Delte
+          Delete
         </Fab>
       </CardActions>
     </Card>
