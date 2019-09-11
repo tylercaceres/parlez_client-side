@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ContactListItem from "./ContactListItems";
-import { ChatViewContext } from "../../Context";
+import { ChatViewContext, NtfContext } from "../../Context";
 
 // helper to shorten message length:
 const recentMessage = message => {
@@ -16,6 +16,7 @@ const recentMessage = message => {
 
 const ContactList = () => {
   const { masterState, dispatch } = useContext(ChatViewContext);
+  const { dispatchNtf } = useContext(NtfContext);
 
   const ContactListItems =
     masterState.chatrooms.length > 0
@@ -32,12 +33,14 @@ const ContactList = () => {
                 chatAvatar={chat.avatar}
                 selected={masterState.activeChat === chat.id}
                 recentMessage={recentMessageTime}
-                onClick={() =>
+                onClick={() => {
                   dispatch({
                     type: "ACTIVATE_CHAT",
                     id: chat.id
-                  })
-                }
+                  });
+                  dispatchNtf({ type: "CLEAR_NOTIF", id: chat.id });
+                  dispatchNtf({ type: "ACTIVATE_CHAT", id: chat.id });
+                }}
               />
             );
           }
