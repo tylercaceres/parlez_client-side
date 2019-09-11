@@ -18,7 +18,13 @@ import img4 from "../assets/img/dog4.png";
 import img5 from "../assets/img/dog5.png";
 
 import axios from "axios";
-import { sendUserId, loadInitialChatroomsData, loadInitialFriendsData, receiveMessage, socket } from "../server_api";
+import {
+  sendUserId,
+  loadInitialChatroomsData,
+  loadInitialFriendsData,
+  receiveMessage,
+  socket
+} from "../server_api";
 
 const HomePage = () => {
   const { masterState, dispatch } = useContext(ChatViewContext);
@@ -120,12 +126,16 @@ const HomePage = () => {
         <Fragment>
           <SearchBar />
         </Fragment>
-        <Fragment>{masterState.friendsView ? <FriendList /> : <ContactList />}</Fragment>
+        <Fragment>
+          {masterState.friendsView ? <FriendList /> : <ContactList />}
+        </Fragment>
       </div>
 
       <div>
         <div className="chatBox">
-          {masterState.activeChat && masterState.chatrooms.length > 0 && !masterState.friendsView ? (
+          {masterState.activeChat &&
+          masterState.chatrooms.length > 0 &&
+          !masterState.friendsView ? (
             <>
               <div className="chatArea">
                 <MsgChatItemList />
