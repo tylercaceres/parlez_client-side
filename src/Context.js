@@ -101,6 +101,8 @@ let friendReducer = (state, action) => {
       return { ...state, friends: action.data };
     case "ADD_FRIEND":
       return { ...state, friends: action.data };
+    case "DELETED_FRIEND":
+      return { ...state, selectedFriend: null };
     default:
       throw new Error(`Unsupported action type: ${action.type}`);
   }

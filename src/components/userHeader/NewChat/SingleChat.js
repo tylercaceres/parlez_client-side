@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SingleFriendList = () => {
+const SingleFriendList = props => {
   const classes = useStyles();
 
   const { friendState } = useContext(FriendContext);

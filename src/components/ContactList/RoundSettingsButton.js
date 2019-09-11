@@ -45,9 +45,17 @@ const RoundSettingsButton = props => {
     console.log("CLICKED THIS ID:", id);
 
     if (option === "Leave Group") {
-      console.log("Leave Group");
+      socket.emit("leave chatroom", {
+        user_id: masterState.userId,
+        chatroom_id: id
+      });
+      setPopupElementGroup(false);
+    } else if (option === "Delete Chat") {
+      socket.emit("delete chatroom button", id);
+      setPopupElementGroup(false);
+    } else {
+      setPopupElementGroup(false);
     }
-    setPopupElementGroup(false);
   };
 
   const renderMenu = (

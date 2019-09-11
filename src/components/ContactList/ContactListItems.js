@@ -64,9 +64,10 @@ const ContactListItem = props => {
         <ThemeProvider theme={theme}>
           <CardHeader
             avatar={
-              <Badge badgeContent={11} color="secondary">
+              <>
+                <Badge badgeContent={11} color="secondary" />
                 <ChatAvatar avatar={props.chatAvatar} />
-              </Badge>
+              </>
             }
             title={<Typography varaiant="h1">{props.chatName}</Typography>}
             subheader={props.recentMessage}

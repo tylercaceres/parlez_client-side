@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CreateChat = () => {
+const CreateChat = props => {
   const [show, setShow] = useState(false);
   const [groupShow, setGroupShow] = useState(false);
 
