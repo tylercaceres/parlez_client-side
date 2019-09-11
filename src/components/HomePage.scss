@@ -1,8 +1,8 @@
 .layout {
   display: flex;
   flex-direction: row;
-  border: solid 1.5px black;
   height: 930px;
+  border: black solid 1.5px;
 }
 
 .userHeader {
@@ -21,8 +21,13 @@
   border-right: 1px black solid;
 }
 
-.chatHeader {
-  justify-content: flex-start;
+.chatAvatar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: black 1px solid;
+  padding: 2.5px;
+  padding-left: 30px;
 }
 
 .contacts {
@@ -38,13 +43,13 @@
   justify-content: flex-end;
   display: flex;
   flex-direction: column;
+  height: 670px;
 }
 
 .chatArea {
   justify-content: flex-start;
-
-  width: 72vmax;
-  height: 76vmax;
+  width: 100vh;
+  height: 100vh;
   overflow: auto;
 }
 
@@ -56,7 +61,7 @@
 .emptyChat {
   display: flex;
   flex-direction: row;
-  width: 1580px;
+  width: 150vh;
   height: 430px;
   padding-top: 500px;
   justify-content: center;

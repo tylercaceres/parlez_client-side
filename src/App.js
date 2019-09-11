@@ -4,10 +4,11 @@ import LoginPage from "../src/components/login/LoginPage";
 import HomePage from "../src/components/HomePage";
 import SignUpPage from "../src/components/signUp/SignUpPage";
 import history from "./history";
+import "./app.scss";
 
 const App = () => {
   return (
-    <div>
+    <div className="body">
       <Router history={history}>
         <Switch>
           <Route path="/signup" exact component={SignUpPage} />

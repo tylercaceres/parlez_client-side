@@ -198,7 +198,6 @@ const ProfileProvider = props => {
   return <ProfileContext.Provider value={{ profileState, dispatchProfile }}>{props.children}</ProfileContext.Provider>;
 };
 
-
 /********************************* NOTIFICATION CONTEXT ***********************************/
 
 const initialNtfState = {
@@ -233,7 +232,6 @@ const NtfProvider = props => {
   return <NtfContext.Provider value={{ ntfState, dispatchNtf }}>{props.children}</NtfContext.Provider>;
 };
 
-
 export {
   ChatViewContext,
   ChatViewProvider,
@@ -242,8 +240,7 @@ export {
   MsgContext,
   MsgProvider,
   NtfContext,
-  NtfProvider
+  NtfProvider,
   ProfileContext,
   ProfileProvider
-
 };
