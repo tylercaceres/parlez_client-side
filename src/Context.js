@@ -28,7 +28,9 @@ let masterReducer = (state, action) => {
       return { ...state, hover: null };
     case "ADD_MESSAGE":
       console.log("ADD MESSAGE HAS BEEN FIRED", state);
-      let matchChat = state.chatrooms.findIndex(chat => chat.id === action.data.id);
+      let matchChat = state.chatrooms.findIndex(
+        chat => chat.id === action.data.id
+      );
       if (matchChat != -1) {
         const temp = state.chatrooms.map(chatroom => {
           if (chatroom.id === action.data.id) {
@@ -61,8 +63,9 @@ let masterReducer = (state, action) => {
     case "UPDATE_DELETE_MESSAGE":
       const temp3 = state.chatrooms.map(chatroom => {
         if (chatroom.id === action.chatroom_id) {
-
-          let msgIndex = chatroom.messages.findIndex(msg => msg.id === action.message_id);
+          let msgIndex = chatroom.messages.findIndex(
+            msg => msg.id === action.message_id
+          );
           let newMsgArr = chatroom.messages;
           newMsgArr.splice(msgIndex, 1, action.message);
 
@@ -187,11 +190,46 @@ const MsgProvider = props => {
   );
 };
 
+/********************************* NEW PROFILE CONTEXT ***********************************/
+
+const initialProfileState = {
+  username: "",
+  avatar: "",
+  status: ""
+};
+
+let profileReducer = (state, action) => {
+  switch (action.type) {
+    case "UPDATED_USERNAME":
+      console.log("CHECKING CONTEXT PAGE", action.data);
+      return { ...state, username: action.data.username };
+    default:
+      throw new Error(`Unsupported action type: ${action.type}`);
+  }
+};
+
+const ProfileContext = React.createContext(initialProfileState);
+
+const ProfileProvider = props => {
+  const [profileState, dispatchProfile] = useReducer(
+    profileReducer,
+    initialProfileState
+  );
+
+  return (
+    <ProfileContext.Provider value={{ profileState, dispatchProfile }}>
+      {props.children}
+    </ProfileContext.Provider>
+  );
+};
+
 export {
   ChatViewContext,
   ChatViewProvider,
   FriendContext,
   FriendProvider,
   MsgContext,
-  MsgProvider
+  MsgProvider,
+  ProfileContext,
+  ProfileProvider
 };
