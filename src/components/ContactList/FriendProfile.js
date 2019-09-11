@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 });
 
 const FriendProfile = () => {
-  const { friendState } = useContext(FriendContext);
+  const { friendState, dispatchFriend } = useContext(FriendContext);
   const { masterState } = useContext(ChatViewContext);
 
   let id = "";
@@ -50,6 +50,17 @@ const FriendProfile = () => {
       avatar: friend_avatar
     });
   };
+
+  const handleDelete = friend_id => {
+    socket.emit("delete friend", friend_id);
+  };
+
+  useEffect(() => {
+    socket.on("friendlist data", data => {
+      dispatchFriend({ type: "LOAD_FRIENDS", data });
+      dispatchFriend({ type: "DELETED_FRIEND" });
+    });
+  });
 
   const classes = useStyles();
 
@@ -79,7 +90,7 @@ const FriendProfile = () => {
           <VideocamIcon />
           Video Call
         </Fab> */}
-        <Fab variant="extended" aria-label="delete" color="secondary">
+        <Fab variant="extended" aria-label="delete" color="secondary" onClick={() => handleDelete(id)}>
           <HighlightOffIcon />
           Delete
         </Fab>

@@ -26,20 +26,22 @@ const MsgChatItemList = ({ user }) => {
   }));
   const classes = useStyles();
 
-  const chatItems = activeChat.messages.map(msg => {
-    return (
-      <MsgChatItem
-        creatorId={msg.user_id}
-        creatorUsername={msg.username}
-        id={msg.id}
-        key={msg.id}
-        createdTimeStamp={msg.created_at}
-        deleted={msg.deleted}
-      >
-        {msg.content}
-      </MsgChatItem>
-    );
-  });
+  const chatItems =
+    activeChat.messages &&
+    activeChat.messages.map(msg => {
+      return (
+        <MsgChatItem
+          creatorId={msg.user_id}
+          creatorUsername={msg.username}
+          id={msg.id}
+          key={msg.id}
+          createdTimeStamp={msg.created_at}
+          deleted={msg.deleted}
+        >
+          {msg.content}
+        </MsgChatItem>
+      );
+    });
 
   return <>{chatItems}</>;
 };
