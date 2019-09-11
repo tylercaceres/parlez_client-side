@@ -7,10 +7,11 @@ import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import { ChatViewContext } from "../../Context";
+import { ChatViewContext, NtfContext } from "../../Context";
 
 const SearchBar = props => {
   const { masterState, dispatch } = useContext(ChatViewContext);
+  const { dispatchNtf } = useContext(NtfContext);
 
   let chatrooms = masterState.chatrooms;
 
@@ -42,10 +43,7 @@ const SearchBar = props => {
       <MenuItem selected={isHighlighted} component="div">
         <div>
           {parts.map(part => (
-            <span
-              key={part.text}
-              style={{ fontWeight: part.highlight ? 500 : 400 }}
-            >
+            <span key={part.text} style={{ fontWeight: part.highlight ? 500 : 400 }}>
               {part.text}
             </span>
           ))}
@@ -62,9 +60,7 @@ const SearchBar = props => {
     return inputLength === 0
       ? []
       : chatrooms.filter(chatroom => {
-          const keep =
-            count < 5 &&
-            chatroom.name.slice(0, inputLength).toLowerCase() === inputValue;
+          const keep = count < 5 && chatroom.name.slice(0, inputLength).toLowerCase() === inputValue;
 
           if (keep) {
             count += 1;
@@ -142,6 +138,8 @@ const SearchBar = props => {
       type: "ACTIVATE_CHAT",
       id: chat_id
     });
+    dispatchNtf({ type: "CLEAR_NOTIF", id: chat_id });
+    dispatchNtf({ type: "ACTIVATE_CHAT", id: chat_id });
   };
 
   return (

@@ -7,7 +7,7 @@ import ChatHeader from "./ContactList/ChatHeader";
 import MsgChatBox from "./chatArea/MsgChatBox";
 import MsgChatItemList from "./chatArea/MsgChatItemList";
 import "./HomePage.scss";
-import { ChatViewContext, FriendContext } from "../Context";
+import { ChatViewContext, FriendContext, NtfContext } from "../Context";
 import UserAvatar from "./userHeader/UserAvatar";
 import UserButton from "./userHeader/UserAddButton";
 import Divider from "@material-ui/core/Divider";
@@ -27,6 +27,7 @@ import {
 } from "../server_api";
 
 const HomePage = () => {
+  const { ntfState, dispatchNtf } = useContext(NtfContext);
   const { masterState, dispatch } = useContext(ChatViewContext);
   const { friendState, dispatchFriend } = useContext(FriendContext);
 
@@ -70,9 +71,8 @@ const HomePage = () => {
     });
 
     socket.on("new chatroom message", data => {
-      console.log("ADD_MESSAGE", data);
       dispatch({ type: "ADD_MESSAGE", data });
-      dispatch({ type: "ACTIVATE_CHAT", id: data.id });
+      dispatchNtf({ type: "SET_NOTIFICATION", id: data.id });
     });
 
     socket.on("to be disconnected", () => {
