@@ -62,11 +62,11 @@ const HomePage = () => {
         data
       });
     });
-    receiveMessage(data => {
-      dispatch({
-        type: "ADD_MESSAGE",
-        data
-      });
+
+    socket.on("new chatroom message", data => {
+      console.log("ADD_MESSAGE", data);
+      dispatch({ type: "ADD_MESSAGE", data });
+      dispatch({ type: "ACTIVATE_CHAT", id: data.id });
     });
 
     socket.on("to be disconnected", () => {
@@ -87,6 +87,7 @@ const HomePage = () => {
       let chatroom_id = data.chatroom;
       let message_id = data.message.id;
       let message = data.message;
+      console.log("DELETE OWNER MESSAGE", data);
       dispatch({
         type: "UPDATE_DELETE_MESSAGE",
         chatroom_id: chatroom_id,
