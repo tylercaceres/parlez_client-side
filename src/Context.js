@@ -22,10 +22,10 @@ let masterReducer = (state, action) => {
       return { ...state, friendsView: false, activeChat: action.id };
     case "ACTIVATE_SETTINGS":
       return { ...state, activeChat: null };
-    case "HOVER_ON":
-      return { ...state, hover: action.id };
-    case "HOVER_OFF":
-      return { ...state, hover: null };
+    // case "HOVER_ON":
+    //   return { ...state, hover: action.id };
+    // case "HOVER_OFF":
+    //   return { ...state, hover: null };
     case "ADD_MESSAGE":
       console.log("ADD MESSAGE HAS BEEN FIRED", state);
       let matchChat = state.chatrooms.findIndex(chat => chat.id === action.data.id);
@@ -166,4 +166,47 @@ const MsgProvider = props => {
   return <MsgContext.Provider value={{ msgState, dispatch }}>{props.children}</MsgContext.Provider>;
 };
 
-export { ChatViewContext, ChatViewProvider, FriendContext, FriendProvider, MsgContext, MsgProvider };
+/********************************* NOTIFICATION CONTEXT ***********************************/
+
+const initialNtfState = {
+  activeChat: null
+};
+
+let ntfReducer = (state, action) => {
+  switch (action.type) {
+    case "ACTIVATE_CHAT":
+      return { ...state, activeChat: action.id };
+    case "SET_NOTIFICATION":
+      console.log("action.id", action.id);
+      if (state.activeChat !== action.id) {
+        if (state[action.id]) {
+          return { ...state, [action.id]: state[action.id] + 1 };
+        } else {
+          return { ...state, [action.id]: 1 };
+        }
+      }
+    case "CLEAR_NOTIF":
+      return { ...state, [action.id]: null };
+    default:
+      throw new Error(`Unsupported action type: ${action.type}`);
+  }
+};
+
+const NtfContext = React.createContext(initialNtfState);
+
+const NtfProvider = props => {
+  const [ntfState, dispatchNtf] = useReducer(ntfReducer, initialNtfState);
+
+  return <NtfContext.Provider value={{ ntfState, dispatchNtf }}>{props.children}</NtfContext.Provider>;
+};
+
+export {
+  ChatViewContext,
+  ChatViewProvider,
+  FriendContext,
+  FriendProvider,
+  MsgContext,
+  MsgProvider,
+  NtfContext,
+  NtfProvider
+};

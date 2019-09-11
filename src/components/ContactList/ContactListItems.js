@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -8,7 +8,7 @@ import Badge from "@material-ui/core/Badge";
 import { Typography } from "@material-ui/core";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-import { ChatViewContext } from "../../Context";
+import { ChatViewContext, NtfContext } from "../../Context";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -51,7 +51,8 @@ const listStyle = {
 };
 
 const ContactListItem = props => {
-  const { masterState, dispatch } = useContext(ChatViewContext);
+  const { masterState } = useContext(ChatViewContext);
+  const { ntfState } = useContext(NtfContext);
   // console.log('CONTACT-LIST-ITEMS', masterState);
 
   const classes = useStyles();
@@ -65,7 +66,7 @@ const ContactListItem = props => {
           <CardHeader
             avatar={
               <>
-                <Badge badgeContent={11} color="secondary" />
+                <Badge badgeContent={ntfState[props.id]} color="secondary" />
                 <ChatAvatar avatar={props.chatAvatar} />
               </>
             }
