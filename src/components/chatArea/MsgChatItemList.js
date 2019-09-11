@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MsgChatItem from "./MsgChatItem";
 import { ChatViewContext } from "../../Context";
+import ScrollToBottom from "react-scroll-to-bottom";
+import { height } from "@material-ui/system";
 
 //helper to get active chatroom messages from chatrooms array:
 const getActiveChat = (id, chatArr) => {
