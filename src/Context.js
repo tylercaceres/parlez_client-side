@@ -28,9 +28,7 @@ let masterReducer = (state, action) => {
       return { ...state, hover: null };
     case "ADD_MESSAGE":
       console.log("ADD MESSAGE HAS BEEN FIRED", state);
-      let matchChat = state.chatrooms.findIndex(
-        chat => chat.id === action.data.id
-      );
+      let matchChat = state.chatrooms.findIndex(chat => chat.id === action.data.id);
       if (matchChat != -1) {
         const temp = state.chatrooms.map(chatroom => {
           if (chatroom.id === action.data.id) {
@@ -49,9 +47,7 @@ let masterReducer = (state, action) => {
     case "DELETE_MESSAGE":
       const temp2 = state.chatrooms.map(chatroom => {
         if (chatroom.id === action.chatroom_id) {
-          let msgIndex = chatroom.messages.findIndex(
-            msg => msg.id === action.message_id
-          );
+          let msgIndex = chatroom.messages.findIndex(msg => msg.id === action.message_id);
           let MsgArr = chatroom.messages;
           MsgArr.splice(msgIndex, 1);
           return { ...chatroom, messages: [...MsgArr] };
@@ -63,9 +59,7 @@ let masterReducer = (state, action) => {
     case "UPDATE_DELETE_MESSAGE":
       const temp3 = state.chatrooms.map(chatroom => {
         if (chatroom.id === action.chatroom_id) {
-          let msgIndex = chatroom.messages.findIndex(
-            msg => msg.id === action.message_id
-          );
+          let msgIndex = chatroom.messages.findIndex(msg => msg.id === action.message_id);
           let newMsgArr = chatroom.messages;
           newMsgArr.splice(msgIndex, 1, action.message);
 
@@ -77,9 +71,7 @@ let masterReducer = (state, action) => {
       return { ...state, chatrooms: temp3 };
     case "DELETE_CHATROOM":
       let tempChatrooms = state.chatrooms;
-      let chatIndex = tempChatrooms.findIndex(
-        chat => chat.id === action.chatroom_id
-      );
+      let chatIndex = tempChatrooms.findIndex(chat => chat.id === action.chatroom_id);
       tempChatrooms.splice(chatIndex, 1);
       return { ...state, chatrooms: tempChatrooms };
     default:
@@ -92,11 +84,7 @@ const ChatViewContext = React.createContext(initialMasterState);
 const ChatViewProvider = props => {
   const [masterState, dispatch] = useReducer(masterReducer, initialMasterState);
 
-  return (
-    <ChatViewContext.Provider value={{ masterState, dispatch }}>
-      {props.children}
-    </ChatViewContext.Provider>
-  );
+  return <ChatViewContext.Provider value={{ masterState, dispatch }}>{props.children}</ChatViewContext.Provider>;
 };
 
 /********************************* FRIENDS CONTEXT ***********************************/
@@ -124,16 +112,9 @@ let friendReducer = (state, action) => {
 const FriendContext = React.createContext(initialFriendState);
 
 const FriendProvider = props => {
-  const [friendState, dispatchFriend] = useReducer(
-    friendReducer,
-    initialFriendState
-  );
+  const [friendState, dispatchFriend] = useReducer(friendReducer, initialFriendState);
 
-  return (
-    <FriendContext.Provider value={{ friendState, dispatchFriend }}>
-      {props.children}
-    </FriendContext.Provider>
-  );
+  return <FriendContext.Provider value={{ friendState, dispatchFriend }}>{props.children}</FriendContext.Provider>;
 };
 
 /********************************* NEW MSG CONTEXT ***********************************/
@@ -183,11 +164,7 @@ const MsgContext = React.createContext(initialMsgState);
 const MsgProvider = props => {
   const [msgState, dispatch] = useReducer(msgReducer, initialMsgState);
 
-  return (
-    <MsgContext.Provider value={{ msgState, dispatch }}>
-      {props.children}
-    </MsgContext.Provider>
-  );
+  return <MsgContext.Provider value={{ msgState, dispatch }}>{props.children}</MsgContext.Provider>;
 };
 
 /********************************* NEW PROFILE CONTEXT ***********************************/
@@ -200,9 +177,14 @@ const initialProfileState = {
 
 let profileReducer = (state, action) => {
   switch (action.type) {
+    case "USER_INFO":
+      return { ...state, username: action.data.username, avatar: action.data.avatar, status: action.data.status };
     case "UPDATED_USERNAME":
-      console.log("CHECKING CONTEXT PAGE", action.data);
       return { ...state, username: action.data.username };
+    case "UPDATED_AVATAR":
+      return { ...state, avatar: action.data.avatar };
+    case "UPDATED_STATUS":
+      return { ...state, status: action.data.status };
     default:
       throw new Error(`Unsupported action type: ${action.type}`);
   }
@@ -211,16 +193,9 @@ let profileReducer = (state, action) => {
 const ProfileContext = React.createContext(initialProfileState);
 
 const ProfileProvider = props => {
-  const [profileState, dispatchProfile] = useReducer(
-    profileReducer,
-    initialProfileState
-  );
+  const [profileState, dispatchProfile] = useReducer(profileReducer, initialProfileState);
 
-  return (
-    <ProfileContext.Provider value={{ profileState, dispatchProfile }}>
-      {props.children}
-    </ProfileContext.Provider>
-  );
+  return <ProfileContext.Provider value={{ profileState, dispatchProfile }}>{props.children}</ProfileContext.Provider>;
 };
 
 export {

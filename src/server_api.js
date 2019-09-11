@@ -24,6 +24,13 @@ const loadInitialFriendsData = cb => {
   });
 };
 
+// const loadInitialUsersData = cb => {
+//   socket.on("initial user information", data => {
+//     console.log("USER DATA", data);
+//     cb(data);
+//   });
+// };
+
 // send newly generated message:
 const sendMessage = msg => {
   socket.emit("send message", msg);
