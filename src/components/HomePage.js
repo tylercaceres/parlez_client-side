@@ -7,7 +7,9 @@ import ChatHeader from "./ContactList/ChatHeader";
 import MsgChatBox from "./chatArea/MsgChatBox";
 import MsgChatItemList from "./chatArea/MsgChatItemList";
 import "./HomePage.scss";
-import { ChatViewContext, FriendContext, NtfContext } from "../Context";
+
+import { ChatViewContext, FriendContext, ProfileContext, NtfContext } from "../Context";
+
 import UserAvatar from "./userHeader/UserAvatar";
 import UserButton from "./userHeader/UserAddButton";
 import Divider from "@material-ui/core/Divider";
@@ -18,18 +20,13 @@ import img4 from "../assets/img/dog4.png";
 import img5 from "../assets/img/dog5.png";
 
 import axios from "axios";
-import {
-  sendUserId,
-  loadInitialChatroomsData,
-  loadInitialFriendsData,
-  receiveMessage,
-  socket
-} from "../server_api";
+import { sendUserId, loadInitialChatroomsData, loadInitialFriendsData, receiveMessage, socket } from "../server_api";
 
 const HomePage = () => {
   const { ntfState, dispatchNtf } = useContext(NtfContext);
   const { masterState, dispatch } = useContext(ChatViewContext);
   const { friendState, dispatchFriend } = useContext(FriendContext);
+  const { profileState, dispatchProfile } = useContext(ProfileContext);
 
   console.log("HOME_PG", masterState);
   console.log("FRIEND_STATE", friendState);
@@ -111,6 +108,14 @@ const HomePage = () => {
     });
   }, []);
 
+  socket.on("initial user information", data => {
+    console.log("USER DATA", data);
+    dispatchProfile({
+      type: "USER_INFO",
+      data
+    });
+  });
+
   return (
     <body className="layout">
       <div className="contactsArea">
@@ -126,16 +131,12 @@ const HomePage = () => {
         <Fragment>
           <SearchBar />
         </Fragment>
-        <Fragment>
-          {masterState.friendsView ? <FriendList /> : <ContactList />}
-        </Fragment>
+        <Fragment>{masterState.friendsView ? <FriendList /> : <ContactList />}</Fragment>
       </div>
 
       <div>
         <div className="chatBox">
-          {masterState.activeChat &&
-          masterState.chatrooms.length > 0 &&
-          !masterState.friendsView ? (
+          {masterState.activeChat && masterState.chatrooms.length > 0 && !masterState.friendsView ? (
             <>
               <div className="chatArea">
                 <MsgChatItemList />
@@ -149,7 +150,12 @@ const HomePage = () => {
           ) : (
             <div className="emptyChat">
               <fragment>
-                <img src={img1} alt="dog" />
+                <img
+                  src={
+                    "https://steamuserimages-a.akamaihd.net/ugc/946217391658278887/57B03EA0836175C55E79E2BE762CC857B893A139/"
+                  }
+                  alt="dog"
+                />
               </fragment>
               <fragment>
                 <img src={img2} alt="dog" />
