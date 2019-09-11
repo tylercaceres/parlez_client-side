@@ -38,7 +38,8 @@ const MsgChatBox = () => {
       display: "flex",
       alignItems: "center",
       margin: "0",
-      border: "1px red solid"
+      border: "1px black solid",
+      width: "83vw"
     },
     emoji: {
       padding: "1em"
