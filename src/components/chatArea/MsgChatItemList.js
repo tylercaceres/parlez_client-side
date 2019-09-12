@@ -51,6 +51,8 @@ const MsgChatItemList = ({ user }) => {
 
   let activeChat = getActiveChat(masterState.activeChat, masterState.chatrooms);
 
+  console.log("ACTIVE CHAAAAAAAT", activeChat);
+
   const useStyles = makeStyles(theme => ({
     card: {
       background: "pink",
@@ -60,7 +62,7 @@ const MsgChatItemList = ({ user }) => {
   const classes = useStyles();
 
   const chatItems =
-    activeChat.messages &&
+    activeChat &&
     activeChat.messages.map(msg => {
       return (
         <MsgChatItem
