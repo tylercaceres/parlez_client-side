@@ -41,8 +41,8 @@ const MsgChatItemList = ({ user }) => {
 
   const scrollFxn = () => {
     scroller.scrollTo("bottomAnchor", {
-      duration: 1500,
-      delay: 10,
+      duration: 0,
+      delay: 0,
       smooth: true,
       containerId: "chatAreaId",
       offset: 50
@@ -80,7 +80,7 @@ const MsgChatItemList = ({ user }) => {
     <>
       <div onClick={() => scrollFxn()}>Scroll To Bottom</div>
       {chatItems}
-      <div name="bottomAnchor"></div>
+      <span name="bottomAnchor"></span>
     </>
   );
 };
