@@ -33,16 +33,18 @@ const SingleFriendList = props => {
 
   const friend = friendState.friends.map(friend => {
     return (
-      <li onClick={() => handleSubmit(friend.id, friend.username, friend.avatar)}>
-        <img src={friend.avatar}></img>
-        {friend.username}
-      </li>
+      <div onClick={() => handleSubmit(friend.id, friend.username, friend.avatar)}>
+        <button>
+          <img src={friend.avatar} className="singleFriendIconSize"></img>
+          <p className="singleChatFriend">{friend.username}</p>
+        </button>
+      </div>
     );
   });
 
   return (
     <div className="addContainer">
-      <ul> {friend} </ul>
+      <> {friend} </>
     </div>
   );
 };

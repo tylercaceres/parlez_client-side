@@ -1,7 +1,7 @@
 .layout {
   display: flex;
   flex-direction: row;
-  height: 930px;
+  height: 98vh;
   border: black solid 1.5px;
 }
 
@@ -28,6 +28,7 @@
   border-bottom: black 1px solid;
   padding: 2.5px;
   padding-left: 30px;
+  padding-top: 30px;
 }
 
 .contacts {
@@ -43,7 +44,7 @@
   justify-content: flex-end;
   display: flex;
   flex-direction: column;
-  height: 770px;
+  height: 740px;
 }
 
 .chatArea {
@@ -65,4 +66,8 @@
   height: 430px;
   padding-top: 500px;
   justify-content: center;
+}
+
+.friendListBox {
+  overflow: scroll;
 }

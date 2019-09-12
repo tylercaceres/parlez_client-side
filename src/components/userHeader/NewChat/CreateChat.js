@@ -7,6 +7,8 @@ import { FriendContext } from "../../../Context";
 import SingleFriendList from "./SingleChat";
 import GroupFriendList from "./GroupChat";
 import "./CreateChat.scss";
+import SingleChat from "../../../../src/assets/img/singlechat.svg";
+import GroupChat from "../../../../src/assets/img/groupchat.svg";
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -45,8 +47,13 @@ const CreateChat = props => {
         )
       ) : (
         <div className="addContainer">
-          <Button onClick={handleSubmit}>+ Single Chat</Button>
-          <Button onClick={groupSubmit}>+ Group Chat</Button>
+          <Button onClick={handleSubmit} className="singleChatBox">
+            <img src={SingleChat} alt="pencil" className="singleIconSize" /> Single Chat
+          </Button>
+
+          <Button onClick={groupSubmit} className="groupChatBox">
+            <img src={GroupChat} alt="pencil" className="groupIconSize" /> Group Chat
+          </Button>
         </div>
       )}
     </>
