@@ -27,11 +27,6 @@ export default function TemporaryDrawer() {
     </div>
   );
 
-  // const handleClick = () => {
-  //   toggleDrawer("left", true);
-  //   socket.emit("fetch chatroom participants");
-  // };
-
   return (
     <div>
       <img

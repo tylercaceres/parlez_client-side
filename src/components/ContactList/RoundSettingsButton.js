@@ -97,14 +97,24 @@ const RoundSettingsButton = props => {
     </>
   );
 
+  const settingBtnStyle = {
+    zIndex: 1,
+    margin: "5px 0px 0px 170px",
+    padding: "0"
+  };
+
   return (
-    <div>
-      <IconButton onClick={props.chatType === "group" ? handleClickGroup : handleClickSingle} disabled={props.selected}>
+    <>
+      <IconButton
+        onClick={props.chatType === "group" ? handleClickGroup : handleClickSingle}
+        disabled={props.selected}
+        style={settingBtnStyle}
+      >
         <MoreVertIcon onClick={() => handleClick(props.chatId)} />
       </IconButton>
 
       {renderMenu}
-    </div>
+    </>
   );
 };
 

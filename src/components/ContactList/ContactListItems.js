@@ -12,6 +12,8 @@ import { ChatViewContext, NtfContext } from "../../Context";
 
 const useStyles = makeStyles(theme => ({
   card: {
+    borderRadius: 0,
+    maxHeight: 200,
     maxWidth: 500,
     "&:hover": {
       boxShadow: "0 4px 8px 0 grey"
@@ -48,7 +50,13 @@ const useStyles_two = makeStyles(theme => ({
 
 const listStyle = {
   listStyle: "none"
+  // display: "flex"
 };
+
+// const settingBtnStyle = {
+//   zIndex: 1,
+//   border: "solid black 2px"
+// };
 
 const ContactListItem = props => {
   const { masterState } = useContext(ChatViewContext);
@@ -60,8 +68,8 @@ const ContactListItem = props => {
 
   return (
     <li style={listStyle}>
-      <ChatSettingsButton chatType={props.chatType} chatId={props.id} />
       <Card onClick={props.onClick} className={props.selected ? classes_two.card : classes.card}>
+        <ChatSettingsButton chatType={props.chatType} chatId={props.id} />
         <ThemeProvider theme={theme}>
           <CardHeader
             avatar={
