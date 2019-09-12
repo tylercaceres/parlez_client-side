@@ -31,7 +31,6 @@ let masterReducer = (state, action) => {
     case "ACTIVATE_SETTINGS":
       return { ...state, activeChat: null };
     case "ADD_MESSAGE":
-      console.log("ADD MESSAGE HAS BEEN FIRED", state);
       let matchChat = state.chatrooms.findIndex(chat => chat.id === action.data.id);
       if (matchChat != -1) {
         const temp = state.chatrooms.map(chatroom => {
@@ -44,7 +43,6 @@ let masterReducer = (state, action) => {
             return { ...chatroom };
           }
         });
-        console.log("TEMP BEFORE SORT", temp);
         temp.sort((a, b) => {
           let keyA = new Date(a.messages[a.messages.length - 1].created_at);
           let keyB = new Date(b.messages[b.messages.length - 1].created_at);
@@ -52,7 +50,6 @@ let masterReducer = (state, action) => {
           if (keyA < keyB) return 1;
           return 0;
         });
-        console.log("TEMP AFTER SORT", temp);
         return { ...state, chatrooms: temp };
       } else {
         return { ...state, chatrooms: [action.data, ...state.chatrooms] };
@@ -77,11 +74,9 @@ let masterReducer = (state, action) => {
       });
       return { ...state, chatrooms: temp2 };
     case "UPDATE_DELETE_MESSAGE":
-      console.log("UPDATED MESSAGE", action);
       const temp3 = state.chatrooms.map(chatroom => {
         if (chatroom.id === action.chatroom_id) {
           let msgIndex = chatroom.messages.findIndex(msg => msg.id === action.message_id);
-          console.log("INDEX OF UPDATED MSG", msgIndex);
           let newMsgArr = chatroom.messages;
           if (msgIndex !== -1) {
             newMsgArr.splice(msgIndex, 1, action.message);
@@ -104,6 +99,25 @@ let masterReducer = (state, action) => {
       let chatIndex = tempChatrooms.findIndex(chat => chat.id === action.chatroom_id);
       tempChatrooms.splice(chatIndex, 1);
       return { ...state, chatrooms: tempChatrooms };
+
+    case "UPDATE_CHATROOM":
+      // let selectedChatIndex = state.chatrooms.findIndex(chat => chat.id === state.activeChat);
+      const temp4 = state.chatrooms.map(chatroom => {
+        if (chatroom.id === state.activeChat) {
+          return { ...chatroom, name: action.data.name, avatar: action.data.avatar };
+        } else {
+          return { ...chatroom };
+        }
+      });
+      temp4.sort((a, b) => {
+        let keyA = new Date(a.messages[a.messages.length - 1].created_at);
+        let keyB = new Date(b.messages[b.messages.length - 1].created_at);
+        if (keyA > keyB) return -1;
+        if (keyA < keyB) return 1;
+        return 0;
+      });
+      return { ...state, chatrooms: temp4 };
+
     default:
       throw new Error(`Unsupported action type: ${action.type}`);
   }

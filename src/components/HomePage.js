@@ -8,6 +8,7 @@ import MsgChatBox from "./chatArea/MsgChatBox";
 import MsgChatItemList from "./chatArea/MsgChatItemList";
 import ChatAvatar from "./chatHeader/ChatAvatar";
 import ChatName from "./chatHeader/ChatName";
+import history from "../history";
 import "./HomePage.scss";
 
 import { ChatViewContext, FriendContext, ProfileContext, NtfContext } from "../Context";
@@ -55,6 +56,8 @@ const HomePage = () => {
             });
           });
           sendUserId(res.data.user_id);
+        } else {
+          history.push("/login");
         }
       })
       .catch(err => console.log("error:", err));
