@@ -137,11 +137,11 @@ const HomePage = () => {
       </div>
 
       <div className="chatContainer">
-        <div className="chatAvatar">
-          <ChatAvatar />
-          <ChatName />
-        </div>
         <div className="chatBox">
+          <div className="chatAvatar">
+            <ChatAvatar />
+            <ChatName />
+          </div>
           {masterState.activeChat && masterState.chatrooms.length > 0 && !masterState.friendsView ? (
             <>
               <div className="chatArea">

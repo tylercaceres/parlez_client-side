@@ -1,25 +1,59 @@
-import React, { useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import pic from "../../../src/assets/img/Image-1.png";
-import "./ChatAvatar.scss";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
 
-const useStyles = makeStyles(theme => ({
-  button: {
-    margin: theme.spacing(1),
-    size: "large"
+const useStyles = makeStyles({
+  list: {
+    width: 250
+  },
+  fullList: {
+    width: "auto"
   }
-}));
+});
 
-const ChatAvatar = props => {
+export default function TemporaryDrawer() {
   const classes = useStyles();
-  const [newAvatar, setNewAvatar] = useState(pic);
+  const [state, setState] = React.useState({
+    left: false
+  });
+
+  const toggleDrawer = (side, open) => event => {
+    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
+      return;
+    }
+
+    setState({ ...state, [side]: open });
+  };
+
+  const sideList = side => (
+    <div
+      className={classes.list}
+      role="presentation"
+      onClick={toggleDrawer(side, false)}
+      onKeyDown={toggleDrawer(side, false)}
+    >
+      <h1> HELLO</h1>
+    </div>
+  );
+
+  const fullList = side => (
+    <div
+      className={classes.fullList}
+      role="presentation"
+      onClick={toggleDrawer(side, false)}
+      onKeyDown={toggleDrawer(side, false)}
+    >
+      <h1>HELLO</h1>
+    </div>
+  );
 
   return (
-    <>
-      <img alt="Remy Sharp" src={newAvatar} className="bigAvatar" onClick={console.log("hi")} />
-    </>
-  );
-};
+    <div>
+      <button onClick={toggleDrawer("left", true)}>Open Left</button>
 
-export default ChatAvatar;
+      <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
+        {sideList("left")}
+      </Drawer>
+    </div>
+  );
+}
