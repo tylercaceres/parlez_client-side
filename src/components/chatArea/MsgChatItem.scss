@@ -1,8 +1,11 @@
 .outer-box {
   display: flex;
+  margin: 0em;
+  padding: 0em;
+  font-family: "Roboto", sans-serif;
+
   // scroll-behavior: auto;
   // overflow: auto;
-
   &--mine {
     justify-content: flex-end;
   }
@@ -12,16 +15,45 @@
   }
 
   &--bot {
-    padding: 0px 0px 0px 0px;
     justify-content: center;
   }
 
   .inner-box {
+    position: relative;
+    border-radius: 0.4em;
     max-width: 75%;
     min-width: 25%;
     padding: 0.2em 0.2em;
-    margin: 0.25em 0.25em;
-    border: 2px solid black;
+    margin: 0.1em 0.1em;
+    color: black;
+
+    &--mine:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 0;
+      height: 0;
+      border: 1.031em solid transparent;
+      border-right-color: rgba(21, 204, 61, 0.5);
+      border-left: 0;
+      margin-top: -1.031em;
+      margin-left: -1.031em;
+    }
+
+    &--theirs:after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 50%;
+      width: 0;
+      height: 0;
+      border: 1.031em solid transparent;
+      border-left-color: rgba(255, 5, 205, 0.5);
+      border-right: 0;
+      margin-top: -1.031em;
+      margin-right: -1.031em;
+    }
 
     &--mine {
       border-radius: 0.75em;
@@ -56,11 +88,11 @@
       justify-content: space-between;
 
       &--mine {
-        color: red;
+        color: white;
       }
 
       &--theirs {
-        color: purple;
+        color: white;
       }
 
       &--bot {

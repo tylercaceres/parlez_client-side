@@ -15,19 +15,19 @@ const MsgChatItem = ({ createdTimeStamp, creatorId, children, deleted, id, creat
 
   const outerBoxClass = classnames("outer-box", {
     "outer-box--mine": userId === creatorId,
-    "outer-box--theirs": userId !== creatorId && userId !== 0,
+    "outer-box--theirs": userId !== creatorId && creatorId !== 0,
     "outer-box--bot": creatorId === 0
   });
 
   const innerBoxClass = classnames("inner-box", {
     "inner-box--mine": userId === creatorId,
-    "inner-box--theirs": userId !== creatorId && userId !== 0,
+    "inner-box--theirs": userId !== creatorId && creatorId !== 0,
     "inner-box--bot": creatorId === 0
   });
 
   const headerBoxClass = classnames("header-box", {
     "header-box--mine": userId === creatorId,
-    "header-box--theirs": userId !== creatorId && userId !== 0,
+    "header-box--theirs": userId !== creatorId && creatorId !== 0,
     "header-box--bot": creatorId === 0
   });
 
@@ -54,7 +54,6 @@ const MsgChatItem = ({ createdTimeStamp, creatorId, children, deleted, id, creat
         <div className="footer-box">
           <span className="time-stamp">
             <Moment format="DD MMM YYYY HH:mm:ss">{createdTimeStamp}</Moment>
-            {/* <Moment fromNow>{createdTimeStamp}</Moment> */}
           </span>
         </div>
       </div>
