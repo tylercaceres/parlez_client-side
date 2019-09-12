@@ -156,7 +156,7 @@ const HomePage = () => {
             <FriendProfile />
           ) : (
             <div className="emptyChat">
-              <fragment className="emptyChatImgBox">
+              <Fragment className="emptyChatImgBox">
                 <img
                   src={
                     "https://4.bp.blogspot.com/-8cTk5eTBXoU/Wzm1yo66orI/AAAAAAAiUxI/jJ0cU6ToKXYSZ8yWZVu4XGNucH_Hm4XzgCLcBGAs/s1600/AW1297298_04.gif"
@@ -164,7 +164,7 @@ const HomePage = () => {
                   alt="dog"
                   className="emptyChatImg"
                 />
-              </fragment>
+              </Fragment>
             </div>
           )}
         </div>
