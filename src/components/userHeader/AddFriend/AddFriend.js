@@ -5,6 +5,9 @@ import "./AddFriend.scss";
 import Button from "@material-ui/core/Button";
 import { socket } from "../../../server_api";
 import { FriendContext } from "../../../Context";
+import pencil from "../../../../src/assets/img/pencil.svg";
+import human from "../../../../src/assets/img/human.svg";
+import email from "../../../../src/assets/img/email.svg";
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -69,17 +72,27 @@ const AddFriend = () => {
         onChange={onChangeEmail}
         value={addEmail}
       />
-      <Button onClick={handleSubmit}>Button</Button>
+
+      <Button variant="contained" color="primary" onClick={handleSubmit}>
+        Search
+      </Button>
       {showFriends.username && (
-        <div>
-          showing friends over here
-          <ul>
-            <li>{showFriends.username}</li>
-            <li>{showFriends.email}</li>
-            <li> {showFriends.avatar}</li>
-            <li> {showFriends.status}</li>
-            <button onClick={handleFriendSubmit}>button here </button>
-          </ul>
+        <div className="foundFriendBox">
+          <div>
+            <img src={showFriends.avatar} alt={showFriends.username} className="foundFriendAvatar" />
+          </div>
+          <p className="resultLine">
+            <img src={human} alt="pencil" className="iconSize" />: {showFriends.username}
+          </p>
+          <p className="resultLine">
+            <img src={email} alt="pencil" className="iconSize" />: {showFriends.email}
+          </p>
+          <p className="resultLine">
+            <img src={pencil} alt="pencil" className="iconSize" />: {showFriends.status}
+          </p>
+          <Button variant="contained" color="primary" onClick={handleFriendSubmit}>
+            Add
+          </Button>
         </div>
       )}
     </div>
