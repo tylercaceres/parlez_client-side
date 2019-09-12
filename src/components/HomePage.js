@@ -42,7 +42,7 @@ const HomePage = () => {
       })
       .then(res => {
         console.log("res", res);
-        if (res.data.logged_in && masterState.isLoggedIn === false) {
+        if (res.data.logged_in) {
           dispatch({
             type: "SIGNUP",
             id: res.data.user_id,
@@ -57,6 +57,8 @@ const HomePage = () => {
           });
           sendUserId(res.data.user_id);
         } else {
+          console.log(" AM HERE POTATO", res);
+          console.log(" AM HERE POTATO", masterState);
           history.push("/login");
         }
       })
