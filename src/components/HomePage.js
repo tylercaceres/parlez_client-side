@@ -153,14 +153,14 @@ const HomePage = () => {
             <FriendProfile />
           ) : (
             <div className="emptyChat">
-              <fragment>
+              {/* <fragment>
                 <img
                   src={
                     "https://steamuserimages-a.akamaihd.net/ugc/946217391658278887/57B03EA0836175C55E79E2BE762CC857B893A139/"
                   }
                   alt="dog"
                 />
-              </fragment>
+              </fragment> */}
               <fragment>
                 <img src={img2} alt="dog" />
               </fragment>
