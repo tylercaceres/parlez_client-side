@@ -44,11 +44,13 @@ let masterReducer = (state, action) => {
           }
         });
         temp.sort((a, b) => {
-          let keyA = new Date(a.messages[a.messages.length - 1].created_at);
-          let keyB = new Date(b.messages[b.messages.length - 1].created_at);
-          if (keyA > keyB) return -1;
-          if (keyA < keyB) return 1;
-          return 0;
+          if (a.messages.length > 0 && b.messages.length > 0) {
+            let keyA = new Date(a.messages[a.messages.length - 1].created_at);
+            let keyB = new Date(b.messages[b.messages.length - 1].created_at);
+            if (keyA > keyB) return -1;
+            if (keyA < keyB) return 1;
+            return 0;
+          }
         });
         return { ...state, chatrooms: temp };
       } else {
@@ -56,7 +58,7 @@ let masterReducer = (state, action) => {
       }
     case "DELETE_MESSAGE":
       const temp2 = state.chatrooms.map(chatroom => {
-        if (chatroom.id === action.chatroom_id) {
+        if (chatroom.id === action.chatroom_id && chatroom.messages.length > 0) {
           let msgIndex = chatroom.messages.findIndex(msg => msg.id === action.message_id);
           let MsgArr = chatroom.messages;
           MsgArr.splice(msgIndex, 1);
@@ -66,11 +68,13 @@ let masterReducer = (state, action) => {
         }
       });
       temp2.sort((a, b) => {
-        let keyA = new Date(a.messages[a.messages.length - 1].created_at);
-        let keyB = new Date(b.messages[b.messages.length - 1].created_at);
-        if (keyA > keyB) return -1;
-        if (keyA < keyB) return 1;
-        return 0;
+        if (a.messages.length > 0 && b.messages.length > 0) {
+          let keyA = new Date(a.messages[a.messages.length - 1].created_at);
+          let keyB = new Date(b.messages[b.messages.length - 1].created_at);
+          if (keyA > keyB) return -1;
+          if (keyA < keyB) return 1;
+          return 0;
+        }
       });
       return { ...state, chatrooms: temp2 };
     case "UPDATE_DELETE_MESSAGE":
@@ -110,11 +114,13 @@ let masterReducer = (state, action) => {
         }
       });
       temp4.sort((a, b) => {
-        let keyA = new Date(a.messages[a.messages.length - 1].created_at);
-        let keyB = new Date(b.messages[b.messages.length - 1].created_at);
-        if (keyA > keyB) return -1;
-        if (keyA < keyB) return 1;
-        return 0;
+        if (a.messages.length > 0 && b.messages.length > 0) {
+          let keyA = new Date(a.messages[a.messages.length - 1].created_at);
+          let keyB = new Date(b.messages[b.messages.length - 1].created_at);
+          if (keyA > keyB) return -1;
+          if (keyA < keyB) return 1;
+          return 0;
+        }
       });
       return { ...state, chatrooms: temp4 };
 
