@@ -25,7 +25,19 @@
 .groupCheckBoxForm {
   display: flex;
   flex-direction: row;
+  max-height: 500px;
+  max-width: 500px;
   overflow: scroll;
+
+  input[type="checkbox"] {
+    justify-content: flex-start;
+    border-radius: 3px;
+  }
+
+  img {
+    max-width: 50px;
+    justify-content: flex-end;
+  }
 }
 
 .singleIconSize {
