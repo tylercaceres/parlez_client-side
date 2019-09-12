@@ -20,7 +20,7 @@ import img2 from "../assets/img/dog2.png";
 import img3 from "../assets/img/dog3.png";
 import img4 from "../assets/img/dog4.png";
 import img5 from "../assets/img/dog5.png";
-import Header from "../components/chatHeader/ChatNameContainer";
+// import Header from "../components/chatHeader/ChatNameContainer";
 
 import axios from "axios";
 import { sendUserId, loadInitialChatroomsData, loadInitialFriendsData, receiveMessage, socket } from "../server_api";
