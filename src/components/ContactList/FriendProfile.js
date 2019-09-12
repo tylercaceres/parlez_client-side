@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -11,17 +10,10 @@ import AddIcon from "@material-ui/icons/Add";
 import KeyboardVoiceIcon from "@material-ui/icons/KeyboardVoice";
 import VideocamIcon from "@material-ui/icons/Videocam";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import "./FriendProfile.scss";
 
 import { FriendContext, ChatViewContext } from "../../Context";
 import { socket } from "../../server_api";
-
-const useStyles = makeStyles({
-  card: {
-    width: "72.4vmax",
-    height: "80vmax",
-    backgroundColor: "#c2d6d6"
-  }
-});
 
 const FriendProfile = () => {
   const { friendState, dispatchFriend } = useContext(FriendContext);
@@ -62,12 +54,10 @@ const FriendProfile = () => {
     });
   });
 
-  const classes = useStyles();
-
   return (
-    <Card className={classes.card}>
-      <CardActionArea>
-        <CardMedia component="img" alt={username} height="300" src={avatar} />
+    <Card className="friendCardContainer">
+      <CardActionArea className="friendProfileContainer">
+        <CardMedia component="img" alt={username} height="300" src={avatar} className="friendProfileContainerImg" />
         <CardContent>
           <Typography gutterBottom variant="h4" component="h2">
             {username}
@@ -76,13 +66,17 @@ const FriendProfile = () => {
             {status}
           </Typography>
         </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Fab variant="extended" aria-label="delete" color="primary" onClick={() => handleSubmit(id, username, avatar)}>
-          <AddIcon />
-          Message
-        </Fab>
-        {/* <Fab variant="extended" aria-label="delete" color="primary">
+        <CardActions>
+          <Fab
+            variant="extended"
+            aria-label="delete"
+            color="primary"
+            onClick={() => handleSubmit(id, username, avatar)}
+          >
+            <AddIcon />
+            Message
+          </Fab>
+          {/* <Fab variant="extended" aria-label="delete" color="primary">
           <KeyboardVoiceIcon />
           Voice Call
         </Fab>
@@ -90,11 +84,12 @@ const FriendProfile = () => {
           <VideocamIcon />
           Video Call
         </Fab> */}
-        <Fab variant="extended" aria-label="delete" color="secondary" onClick={() => handleDelete(id)}>
-          <HighlightOffIcon />
-          Delete
-        </Fab>
-      </CardActions>
+          <Fab variant="extended" aria-label="delete" color="secondary" onClick={() => handleDelete(id)}>
+            <HighlightOffIcon />
+            Delete
+          </Fab>
+        </CardActions>
+      </CardActionArea>
     </Card>
   );
 };

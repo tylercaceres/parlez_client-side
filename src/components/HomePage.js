@@ -153,25 +153,14 @@ const HomePage = () => {
             <FriendProfile />
           ) : (
             <div className="emptyChat">
-              <fragment>
+              <fragment className="emptyChatImgBox">
                 <img
                   src={
-                    "https://steamuserimages-a.akamaihd.net/ugc/946217391658278887/57B03EA0836175C55E79E2BE762CC857B893A139/"
+                    "https://4.bp.blogspot.com/-8cTk5eTBXoU/Wzm1yo66orI/AAAAAAAiUxI/jJ0cU6ToKXYSZ8yWZVu4XGNucH_Hm4XzgCLcBGAs/s1600/AW1297298_04.gif"
                   }
                   alt="dog"
+                  className="emptyChatImg"
                 />
-              </fragment>
-              <fragment>
-                <img src={img2} alt="dog" />
-              </fragment>
-              <fragment>
-                <img src={img3} alt="dog" />
-              </fragment>
-              <fragment>
-                <img src={img4} alt="dog" />
-              </fragment>
-              <fragment>
-                <img src={img5} alt="dog" />
               </fragment>
             </div>
           )}
