@@ -53,6 +53,7 @@ const AddFriend = () => {
 
   useEffect(() => {
     socket.on("found friend", data => {
+      console.log("WHAT IS THE DATA", data);
       setShowFriends(data);
     });
     socket.on("friendlist data", data => {
@@ -79,7 +80,12 @@ const AddFriend = () => {
       {showFriends.username && (
         <div className="foundFriendBox">
           <div>
-            <img src={showFriends.avatar} alt={showFriends.username} className="foundFriendAvatar" />
+            <img
+              style={{ height: "15em", width: "15em" }}
+              src={showFriends.avatar}
+              alt={showFriends.username}
+              className="foundFriendAvatar"
+            />
           </div>
           <p className="resultLine">
             <img src={human} alt="pencil" className="iconSize" />: {showFriends.username}

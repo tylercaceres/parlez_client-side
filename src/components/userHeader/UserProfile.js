@@ -77,7 +77,7 @@ const SideList = side => {
     <div className="sideDrawerBox" role="presentation">
       <div>
         <Grid container justify="center" alignItems="center" className="testGrid">
-          <img alt="anchen" src={profileState.avatar} className="bigAvatarBox" />
+          <img style={{ height: "15em", width: "15em" }} alt="profile avatar" src={profileState.avatar} className="bigAvatarBox" />
         </Grid>
       </div>
       <div className="profileInfoBox">
@@ -98,11 +98,11 @@ const SideList = side => {
             <EditIcon />
           </button>
         </div>
-        <h5 className="profileName">Change Avatar</h5>
+        <h5 className="profileName">{profileState.avatar}</h5>
         <div className="editProfileContent">
           <TextField
             id="standard-number"
-            label="URL"
+            label="Edit Avatar URL"
             value={changeAvatar}
             onChange={onChangeAvatar}
             className={classes.textField}
@@ -116,11 +116,11 @@ const SideList = side => {
           </button>
         </div>
 
-        <h5 className="profileName">Update Status</h5>
+        <h5 className="profileName">{profileState.status}</h5>
         <div className="editProfileContent">
           <TextField
             id="standard-number"
-            label="Status"
+            label="Edit Status"
             value={changeStatus}
             onChange={onChangeStatus}
             className={classes.textField}
