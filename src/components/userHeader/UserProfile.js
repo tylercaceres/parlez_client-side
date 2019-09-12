@@ -6,6 +6,8 @@ import Grid from "@material-ui/core/Grid";
 import EditIcon from "@material-ui/icons/Edit";
 import { socket } from "../../server_api";
 import { ProfileContext, ChatViewContext } from "../../Context";
+import axios from "axios";
+import history from "../../history";
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -73,11 +75,27 @@ const SideList = side => {
     });
   };
 
+  const handleLogout = () => {
+    axios
+      .get("http://localhost:3003/auth/logout", { withCredentials: true })
+      .then(res => {
+        if (res.data.msg === "You have been logged out.") {
+          history.push("/login");
+        }
+      })
+      .catch(err => console.log(err));
+  };
+
   return (
     <div className="sideDrawerBox" role="presentation">
       <div>
         <Grid container justify="center" alignItems="center" className="testGrid">
-          <img style={{ height: "15em", width: "15em" }} alt="profile avatar" src={profileState.avatar} className="bigAvatarBox" />
+          <img
+            style={{ height: "15em", width: "15em" }}
+            alt="profile avatar"
+            src={profileState.avatar}
+            className="bigAvatarBox"
+          />
         </Grid>
       </div>
       <div className="profileInfoBox">
@@ -133,6 +151,7 @@ const SideList = side => {
             <EditIcon className="editBtnIcon" />
           </button>
         </div>
+        <button onClick={handleLogout}>Logout</button>
       </div>
     </div>
   );

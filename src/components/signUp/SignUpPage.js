@@ -103,7 +103,7 @@ const SignUpPage = () => {
               <Grid item>
                 <TextField
                   id="input-with-icon-grid"
-                  label="Your Name"
+                  label="Username"
                   name="name"
                   type="text"
                   value={name}
@@ -118,7 +118,7 @@ const SignUpPage = () => {
               <Grid item>
                 <TextField
                   id="input-with-icon-grid"
-                  label="Your Email"
+                  label="Email"
                   name="email"
                   type="text"
                   value={email}

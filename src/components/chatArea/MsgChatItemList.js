@@ -80,7 +80,6 @@ const MsgChatItemList = ({ user }) => {
 
   return (
     <>
-      <div onClick={() => scrollFxn()}>Scroll To Bottom</div>
       {chatItems}
       <span name="bottomAnchor"></span>
     </>
