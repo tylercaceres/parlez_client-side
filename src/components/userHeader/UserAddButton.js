@@ -68,20 +68,10 @@ export default function SimpleMenu() {
 
   return (
     <div>
-      <Button
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        onMouseOver={handleClick}
-      >
+      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
         <img src={AddButton} className="addButton" />
       </Button>
-      <Menu
-        id="simple-menu"
-        anchorEl={addButton}
-        keepMounted
-        open={Boolean(addButton)}
-        onClose={handleClose}
-      >
+      <Menu id="simple-menu" anchorEl={addButton} keepMounted open={Boolean(addButton)} onClose={handleClose}>
         <MenuItem onClick={handleModalOpen} onClose={handleModalClose}>
           Add New Friends
         </MenuItem>
