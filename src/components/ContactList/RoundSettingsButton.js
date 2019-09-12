@@ -17,11 +17,11 @@ const RoundSettingsButton = props => {
   const openSingle = Boolean(popupElementSingle); // sets popupElement to true
   const openGroup = Boolean(popupElementGroup);
 
-  const handleClick = id => {
-    console.log("Clicked with id", id);
-    dispatch({ type: "ACTIVATE_SETTINGS" });
-    console.log("check clicked", masterState);
-  };
+  // const handleClick = id => {
+  //   console.log("Clicked with id", id);
+  //   dispatch({ type: "ACTIVATE_SETTINGS" });
+  //   console.log("check clicked", masterState);
+  // };
 
   const handleClickSingle = event => {
     setPopupElementSingle(event.currentTarget);
@@ -110,7 +110,7 @@ const RoundSettingsButton = props => {
         disabled={props.selected}
         style={settingBtnStyle}
       >
-        <MoreVertIcon onClick={() => handleClick(props.chatId)} />
+        <MoreVertIcon />
       </IconButton>
 
       {renderMenu}

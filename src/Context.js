@@ -28,8 +28,8 @@ let masterReducer = (state, action) => {
       return { ...state, friendsView: true };
     case "ACTIVATE_CHAT":
       return { ...state, friendsView: false, activeChat: action.id };
-    case "ACTIVATE_SETTINGS":
-      return { ...state, activeChat: null };
+    // case "ACTIVATE_SETTINGS":
+    //   return { ...state, activeChat: null };
     case "ADD_MESSAGE":
       let matchChat = state.chatrooms.findIndex(chat => chat.id === action.data.id);
       if (matchChat != -1) {
@@ -101,7 +101,9 @@ let masterReducer = (state, action) => {
     case "DELETE_CHATROOM":
       let tempChatrooms = state.chatrooms;
       let chatIndex = tempChatrooms.findIndex(chat => chat.id === action.chatroom_id);
-      tempChatrooms.splice(chatIndex, 1);
+      if (chatIndex !== -1) {
+        tempChatrooms.splice(chatIndex, 1);
+      }
       return { ...state, chatrooms: tempChatrooms };
 
     case "UPDATE_CHATROOM":
