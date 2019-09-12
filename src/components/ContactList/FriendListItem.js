@@ -8,10 +8,12 @@ const FriendListItem = props => {
   return (
     <li onClick={props.onClick}>
       <ListItem button>
-        <ListItemAvatar>
-          <ChatAvatar avatar={props.avatar} />
-        </ListItemAvatar>
-        <ListItemText primary={props.name} />
+        <div style={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+          <ListItemAvatar>
+            <ChatAvatar avatar={props.avatar} />
+          </ListItemAvatar>
+          <ListItemText primary={props.name} />
+        </div>
       </ListItem>
     </li>
   );

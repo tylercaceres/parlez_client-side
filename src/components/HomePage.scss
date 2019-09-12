@@ -17,7 +17,7 @@
   display: flex;
   justify-items: center;
   flex-direction: column;
-  width: 300px;
+  width: 100%;
   border-right: 1px black solid;
 }
 
@@ -70,6 +70,8 @@
 
 .friendListBox {
   overflow: scroll;
+  height: 100%;
+  width: 25vh;
 }
 
 .emptyChatImgBox {
