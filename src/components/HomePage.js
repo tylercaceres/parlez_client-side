@@ -144,7 +144,7 @@ const HomePage = () => {
         <div className="chatBox">
           {masterState.activeChat && masterState.chatrooms.length > 0 && !masterState.friendsView ? (
             <>
-              <div className="chatArea">
+              <div id="chatAreaId" className="chatArea">
                 <MsgChatItemList />
               </div>
             </>
