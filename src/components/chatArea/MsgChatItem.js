@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import classnames from "classnames";
 import { ChatViewContext } from "../../Context";
 import { socket } from "../../server_api";
+import Moment from "react-moment";
 
 import Delete from "@material-ui/icons/Delete";
 // import Edit from '@material-ui/icons/Edit';
@@ -46,15 +47,15 @@ const MsgChatItem = ({ createdTimeStamp, creatorId, children, deleted, id, creat
         <div className={headerBoxClass}>
           <span className="display-name">{creatorUsername}</span>
           <span className="display-icons">
-            {/* <Edit
-							className='edit-icon'
-							onClick={() => console.log('edit button clicked')}></Edit> */}
             <Delete className="delete-icon" onClick={() => handleDeleteClick(id, creatorId)}></Delete>
           </span>
         </div>
         <div className={contentBoxClass}>{children}</div>
         <div className="footer-box">
-          <span className="time-stamp">{createdTimeStamp}</span>
+          <span className="time-stamp">
+            <Moment format="DD MMM YYYY HH:mm:ss">{createdTimeStamp}</Moment>
+            {/* <Moment fromNow>{createdTimeStamp}</Moment> */}
+          </span>
         </div>
       </div>
     </div>
