@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 
 const handleSubmit = () => {};
 
-const GroupFriendList = () => {
+const GroupFriendList = props => {
   const classes = useStyles();
 
   const { friendState, dispatchFriend } = useContext(FriendContext);
@@ -33,7 +33,7 @@ const GroupFriendList = () => {
     socket.emit("create group chat", {
       type: "group",
       name: name,
-      creatorUserId: user_arr,
+      creatorUserId: masterState.userId,
       usersArr: friendlist,
       avatar: avatar
     });
