@@ -134,7 +134,7 @@ const HomePage = () => {
         <Fragment>
           <SearchBar />
         </Fragment>
-        <Fragment>{masterState.friendsView ? <FriendList /> : <ContactList />}</Fragment>
+        <div className="friendListBox">{masterState.friendsView ? <FriendList /> : <ContactList />}</div>
       </div>
 
       <div className="chatContainer">

@@ -8,34 +8,24 @@ import AddFriend from "./AddFriend/AddFriend";
 import AddButton from "../../assets/img/plus.png";
 import CreateChat from "../userHeader/NewChat/CreateChat";
 import "./UserAddButton.scss";
-
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`
-  };
-}
+import { height } from "@material-ui/system";
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    position: "absolute",
+    position: "fixed",
+    left: "40%",
+    top: "0px",
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3)
+    overflow: "scroll",
+    bottom: "0px",
+    height: "400px",
+    padding: "50px"
   }
 }));
 
 export default function SimpleMenu() {
-  const [modalStyle] = React.useState(getModalStyle);
   const classes = useStyles();
   const [addButton, setAddButton] = useState(false);
 
@@ -85,8 +75,9 @@ export default function SimpleMenu() {
         aria-describedby="simple-modal-description"
         open={modalShow}
         onClose={handleModalClose}
+        className="addFriendModal"
       >
-        <div style={modalStyle} className={classes.paper}>
+        <div className={classes.paper}>
           <AddFriend />
         </div>
       </Modal>
@@ -96,8 +87,9 @@ export default function SimpleMenu() {
         aria-describedby="simple-modal-description"
         open={chatModal}
         onClose={handleChatModalClose}
+        className="createChatModal"
       >
-        <div style={modalStyle} className={classes.paper}>
+        <div className={classes.paper}>
           <CreateChat />
         </div>
       </Modal>

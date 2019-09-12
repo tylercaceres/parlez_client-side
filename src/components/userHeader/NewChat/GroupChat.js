@@ -41,7 +41,7 @@ const GroupFriendList = () => {
 
   const friend = friendState.friends.map(friend => {
     return (
-      <>
+      <div className="groupCheckBoxForm">
         <input
           type="checkbox"
           value={friend.id}
@@ -50,22 +50,23 @@ const GroupFriendList = () => {
           }}
         />
         <img src={friend.avatar}></img>
-        {friend.username}
-      </>
+        <p>{friend.username}</p>
+      </div>
     );
   });
 
-  console.log("FRIENDLIST", friendlist);
-  console.log("GROUP CHAT NAME", name);
-
   return (
-    <div className="addContainer">
-      <form>
-        <input type="text" placeholder="Enter group name..." value={name} onChange={e => setName(e.target.value)} />
-        <input type="text" placeholder="Avatar URL..." value={avatar} onChange={e => setAvatar(e.target.value)} />
-        {friend}
-      </form>
-      <button onClick={handleGroupSubmit}>Create</button>
+    <div className="addGroupContainer">
+      <div className="addGroupContainerInside">
+        <form>
+          <input type="text" placeholder="Enter group name..." value={name} onChange={e => setName(e.target.value)} />
+          <input type="text" placeholder="Avatar URL..." value={avatar} onChange={e => setAvatar(e.target.value)} />
+          <div className="friendSection">{friend}</div>
+        </form>
+      </div>
+      <Button variant="contained" color="primary" onClick={handleGroupSubmit}>
+        Create
+      </Button>
     </div>
   );
 };
