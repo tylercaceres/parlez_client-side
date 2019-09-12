@@ -38,7 +38,8 @@ const MsgChatBox = () => {
       display: "flex",
       alignItems: "center",
       margin: "0",
-      border: "1px red solid"
+      border: "1px black solid",
+      width: "83vw"
     },
     emoji: {
       padding: "1em"
@@ -53,6 +54,12 @@ const MsgChatBox = () => {
     dispatch({ type: "DISPLAY_COUNT" });
     dispatch({ type: "CHECK_COUNT" });
   };
+
+  // const handleEnterKeyPress = event => {
+  //   if (event.key === "Enter") {
+  //     console.log("enter press here! ");
+  //   }
+  // };
 
   return (
     <Box className={classes.container}>

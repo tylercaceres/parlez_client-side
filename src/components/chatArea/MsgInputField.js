@@ -1,7 +1,9 @@
 import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import { MsgContext } from "../../Context";
+// import { MsgContext } from "../../Context";
+import { ChatViewContext, MsgContext } from "../../Context";
+import { sendMessage } from "../../server_api";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -22,7 +24,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MsgInputField = () => {
+  const { masterState } = useContext(ChatViewContext);
   const { msgState, dispatch } = useContext(MsgContext);
+
+  const message = {
+    userId: masterState.userId,
+    chatroomId: masterState.activeChat,
+    content: msgState.newMessage
+  };
 
   const classes = useStyles();
   // const [values, setValues] = useState("");
@@ -30,6 +39,7 @@ const MsgInputField = () => {
 
   const handleChange = event => {
     // setValues(event.target.value);
+
     dispatch({ type: "NEW_MESSAGE", data: event.target.value });
     dispatch({ type: "UPDATE_COUNT", data: event.target.value.length });
     dispatch({ type: "DISPLAY_COUNT" });
@@ -37,6 +47,14 @@ const MsgInputField = () => {
       dispatch({ type: "CHECK_COUNT" });
     }
     // setCharCount(`${event.target.value.length.toString()} characters`);
+  };
+
+  const handleEnterKeyPress = event => {
+    if (event.key === "Enter") {
+      console.log("enter press here! ");
+      sendMessage(message);
+      dispatch({ type: "MESSAGE_SENT" });
+    }
   };
 
   return (
@@ -49,6 +67,7 @@ const MsgInputField = () => {
       rows="4"
       value={msgState.newMessage}
       onChange={handleChange}
+      onKeyPress={handleEnterKeyPress}
       margin="normal"
       fullWidth={true}
       variant="outlined"

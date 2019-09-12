@@ -6,6 +6,8 @@ import SearchBar from "./ContactList/SearchBar";
 import ChatHeader from "./ContactList/ChatHeader";
 import MsgChatBox from "./chatArea/MsgChatBox";
 import MsgChatItemList from "./chatArea/MsgChatItemList";
+import ChatAvatar from "./chatHeader/ChatAvatar";
+import ChatName from "./chatHeader/ChatName";
 import "./HomePage.scss";
 
 import { ChatViewContext, FriendContext, ProfileContext, NtfContext } from "../Context";
@@ -135,15 +137,16 @@ const HomePage = () => {
         <Fragment>{masterState.friendsView ? <FriendList /> : <ContactList />}</Fragment>
       </div>
 
-      <div>
+      <div className="chatContainer">
         <div className="chatBox">
+          <div className="chatAvatar">
+            <ChatAvatar />
+            <ChatName />
+          </div>
           {masterState.activeChat && masterState.chatrooms.length > 0 && !masterState.friendsView ? (
             <>
               <div className="chatArea">
                 <MsgChatItemList />
-              </div>
-              <div className="chatInput">
-                <MsgChatBox />
               </div>
             </>
           ) : masterState.friendsView && friendState.selectedFriend ? (
@@ -172,6 +175,9 @@ const HomePage = () => {
               </fragment>
             </div>
           )}
+        </div>
+        <div className="chatInput">
+          <MsgChatBox />
         </div>
       </div>
     </body>

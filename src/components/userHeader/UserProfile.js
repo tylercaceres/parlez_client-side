@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import pic from "../../../src/assets/img/Image-1.png";
 import "./UserProfile.scss";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
