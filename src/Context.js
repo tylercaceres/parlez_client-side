@@ -13,7 +13,15 @@ let masterReducer = (state, action) => {
     case "SIGNUP":
       return { ...state, userId: action.id, isLoggedIn: action.data };
     case "LOAD_INITIAL_DATA":
-      return { ...state, chatrooms: action.data };
+      let chatroomData = action.data;
+      chatroomData.sort((a, b) => {
+        let keyA = new Date(a.messages[a.messages.length - 1].created_at);
+        let keyB = new Date(b.messages[b.messages.length - 1].created_at);
+        if (keyA > keyB) return -1;
+        if (keyA < keyB) return 1;
+        return 0;
+      });
+      return { ...state, chatrooms: chatroomData };
     case "CHAT_VIEW":
       return { ...state, friendsView: false };
     case "FRIENDS_VIEW":
@@ -22,10 +30,6 @@ let masterReducer = (state, action) => {
       return { ...state, friendsView: false, activeChat: action.id };
     case "ACTIVATE_SETTINGS":
       return { ...state, activeChat: null };
-    // case "HOVER_ON":
-    //   return { ...state, hover: action.id };
-    // case "HOVER_OFF":
-    //   return { ...state, hover: null };
     case "ADD_MESSAGE":
       console.log("ADD MESSAGE HAS BEEN FIRED", state);
       let matchChat = state.chatrooms.findIndex(chat => chat.id === action.data.id);
@@ -40,9 +44,18 @@ let masterReducer = (state, action) => {
             return { ...chatroom };
           }
         });
+        console.log("TEMP BEFORE SORT", temp);
+        temp.sort((a, b) => {
+          let keyA = new Date(a.messages[a.messages.length - 1].created_at);
+          let keyB = new Date(b.messages[b.messages.length - 1].created_at);
+          if (keyA > keyB) return -1;
+          if (keyA < keyB) return 1;
+          return 0;
+        });
+        console.log("TEMP AFTER SORT", temp);
         return { ...state, chatrooms: temp };
       } else {
-        return { ...state, chatrooms: [...state.chatrooms, action.data] };
+        return { ...state, chatrooms: [action.data, ...state.chatrooms] };
       }
     case "DELETE_MESSAGE":
       const temp2 = state.chatrooms.map(chatroom => {
@@ -55,18 +68,35 @@ let masterReducer = (state, action) => {
           return { ...chatroom };
         }
       });
+      temp2.sort((a, b) => {
+        let keyA = new Date(a.messages[a.messages.length - 1].created_at);
+        let keyB = new Date(b.messages[b.messages.length - 1].created_at);
+        if (keyA > keyB) return -1;
+        if (keyA < keyB) return 1;
+        return 0;
+      });
       return { ...state, chatrooms: temp2 };
     case "UPDATE_DELETE_MESSAGE":
+      console.log("UPDATED MESSAGE", action);
       const temp3 = state.chatrooms.map(chatroom => {
         if (chatroom.id === action.chatroom_id) {
           let msgIndex = chatroom.messages.findIndex(msg => msg.id === action.message_id);
+          console.log("INDEX OF UPDATED MSG", msgIndex);
           let newMsgArr = chatroom.messages;
-          newMsgArr.splice(msgIndex, 1, action.message);
-
+          if (msgIndex !== -1) {
+            newMsgArr.splice(msgIndex, 1, action.message);
+          }
           return { ...chatroom, messages: [...newMsgArr] };
         } else {
           return { ...chatroom };
         }
+      });
+      temp3.sort((a, b) => {
+        let keyA = new Date(a.messages[a.messages.length - 1].created_at);
+        let keyB = new Date(b.messages[b.messages.length - 1].created_at);
+        if (keyA > keyB) return -1;
+        if (keyA < keyB) return 1;
+        return 0;
       });
       return { ...state, chatrooms: temp3 };
     case "DELETE_CHATROOM":

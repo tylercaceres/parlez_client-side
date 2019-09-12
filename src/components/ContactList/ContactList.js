@@ -22,7 +22,7 @@ const ContactList = () => {
     masterState.chatrooms.length > 0
       ? masterState.chatrooms.map(chat => {
           if (chat.messages.length > 0) {
-            let recentMessageTime = `${recentMessage(chat.messages[0].content)}
+            let recentMessageTime = `${recentMessage(chat.messages[chat.messages.length - 1].content)}
           ${chat.messages[0].created_at}`;
             return (
               <ContactListItem
