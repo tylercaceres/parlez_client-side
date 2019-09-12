@@ -115,7 +115,7 @@ const ChatProfile = () => {
     <div className="sideDrawerBox" role="presentation">
       <div>
         <Grid container justify="center" alignItems="center" className="testGrid">
-          <img alt="friends avatar" src={selectedChat ? selectedChat.avatar : null} className="bigAvatarBox" />
+          <img style={{height:'15em',width:'15em'}} alt="friends avatar" src={selectedChat ? selectedChat.avatar : null} className="bigAvatarBox" />
         </Grid>
       </div>
       <div className="profileInfoBox">

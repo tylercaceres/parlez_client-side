@@ -19,6 +19,7 @@ const FriendList = () => {
         <FriendListItem
           key={friend.id}
           id={friend.id}
+          email={friend.email}
           name={friend.username}
           avatar={friend.avatar}
           onClick={() => handleClick(friend.id)}
