@@ -155,7 +155,7 @@ const ChatProfile = () => {
             <EditIcon />
           </button>
         </div>
-        {selectedChat.type === "group" ? (
+        {selectedChat && selectedChat.type === "group" ? (
           <div className="ChatProfileDrawerBtns">
             <div>
               <h3>Members</h3>

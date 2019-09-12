@@ -142,10 +142,13 @@ const HomePage = () => {
 
       <div className="chatContainer">
         <div className="chatBox">
-          <div className="chatAvatar">
-            <ChatAvatar />
-            <ChatName />
-          </div>
+          {masterState.activeChat ? (
+            <div className="chatAvatar">
+              <ChatAvatar />
+              <ChatName />
+            </div>
+          ) : null}
+
           {masterState.activeChat && masterState.chatrooms.length > 0 && !masterState.friendsView ? (
             <>
               <div id="chatAreaId" className="chatArea">
@@ -168,9 +171,11 @@ const HomePage = () => {
             </div>
           )}
         </div>
-        <div className="chatInput">
-          <MsgChatBox />
-        </div>
+        {masterState.activeChat ? (
+          <div className="chatInput">
+            <MsgChatBox />
+          </div>
+        ) : null}
       </div>
     </body>
   );
