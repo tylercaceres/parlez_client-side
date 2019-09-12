@@ -144,6 +144,8 @@ let msgReducer = (state, action) => {
       };
     case "CHECK_COUNT":
       return { ...state, msgBtnStatus: !true };
+    case "MESSAGE_RESET":
+      return { ...state, newMessage: "" };
     case "UPDATE_COUNT":
       return {
         ...state,

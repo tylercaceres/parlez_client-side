@@ -54,6 +54,7 @@ const MsgInputField = () => {
       console.log("enter press here! ");
       sendMessage(message);
       dispatch({ type: "MESSAGE_SENT" });
+      // dispatch({ type: "MESSAGE_RESET" });
     }
   };
 
@@ -67,7 +68,7 @@ const MsgInputField = () => {
       rows="4"
       value={msgState.newMessage}
       onChange={handleChange}
-      onKeyPress={handleEnterKeyPress}
+      onKeyUp={handleEnterKeyPress}
       margin="normal"
       fullWidth={true}
       variant="outlined"

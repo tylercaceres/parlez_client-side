@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MsgChatItem from "./MsgChatItem";
 import { ChatViewContext } from "../../Context";
-import ScrollToBottom from "react-scroll-to-bottom";
+
 import { height } from "@material-ui/system";
+
+import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from "react-scroll";
 
 //helper to get active chatroom messages from chatrooms array:
 const getActiveChat = (id, chatArr) => {
@@ -16,8 +18,37 @@ const getActiveChat = (id, chatArr) => {
 };
 
 const MsgChatItemList = ({ user }) => {
-  const { masterState } = useContext(ChatViewContext);
+  const { masterState, dispatch } = useContext(ChatViewContext);
+
   console.log(masterState);
+
+  useEffect(() => {
+    Events.scrollEvent.register("begin", function() {
+      console.log("begin", arguments);
+    });
+
+    Events.scrollEvent.register("end", function() {
+      console.log("end", arguments);
+    });
+
+    scrollFxn();
+
+    return () => {
+      Events.scrollEvent.remove("begin");
+      Events.scrollEvent.remove("end");
+    };
+  }, [masterState.chatrooms]);
+
+  const scrollFxn = () => {
+    scroller.scrollTo("bottomAnchor", {
+      duration: 0,
+      delay: 0,
+      smooth: true,
+      containerId: "chatAreaId",
+      offset: 50
+    });
+  };
+
   let activeChat = getActiveChat(masterState.activeChat, masterState.chatrooms);
 
   const useStyles = makeStyles(theme => ({
@@ -45,7 +76,13 @@ const MsgChatItemList = ({ user }) => {
       );
     });
 
-  return <>{chatItems}</>;
+  return (
+    <>
+      <div onClick={() => scrollFxn()}>Scroll To Bottom</div>
+      {chatItems}
+      <span name="bottomAnchor"></span>
+    </>
+  );
 };
 
 export default MsgChatItemList;
