@@ -1,68 +1,91 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Parlez - Let's Talk
+Lighthouse Labs Final project
+#### real time messaging application using socket IO
 
-## Available Scripts
+### Light House Lab Final Project
 
-In the project directory, you can run:
+### [Client Side github repo](https://github.com/tylercaceres/parlez_client-side)
 
-### `npm start`
+### [Server Side github repo](https://github.com/tylercaceres/parlez_server-side)
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+# Tech Stack
 
-### `npm test`
+### Testing
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Storybook
+- Postico
 
-### `npm run build`
+### Front End
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Material-UI
+- React
+- Socket.IO
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### Back End
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Express
+- PostgreSQL
+- Socket.IO
 
-### `npm run eject`
+## Final Product
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+`signup page`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+!["signup page"](./docs/signup_page.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+`login page`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+!["login page"](./docs/login_page.png)
 
-## Learn More
+`add chat`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+!["add chat"](./docs/add_chat.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`add friends`
 
-### Code Splitting
+!["add chat"](./docs/add_friend.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+`automated bot messages`
 
-### Analyzing the Bundle Size
+- used joined chatroom
+- user left chatroom
+- user created chatroom
+- reopen chatroom
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+!["automated bot message"](./docs/automated_bot_message.png)
 
-### Making a Progressive Web App
+`chat example`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+!["chat example"](./docs/chat_example.png)
 
-### Advanced Configuration
+`messages`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+!["messages"](./docs/messages.png)
 
-### Deployment
+`deleted message`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+### note: person on the left deleted a message they owned. Person on the right no longer sees the content of the message.
 
-### `npm run build` fails to minify
+!["deleted message"](./docs/deleted_message.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+`edit profile`
+
+!["edit profile"](./docs/edit_profile.png)
+
+`friend selected`
+
+!["friend seleced"](./docs/friend_selected.png)
+
+`add friend / create new chat options`
+
+!["add button - show add friend and chat"](./docs/plus_button.png)
+
+`storybook - component testing`
+
+!["storybook"](./docs/storybook.png)
+
+`Entity Relationship Diagram`
+
+!["ERD"](./docs/erd.png)
